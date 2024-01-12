@@ -1,11 +1,21 @@
 package com.phantom.banguminote
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.phantom.banguminote.base.BaseActivity
+import com.phantom.banguminote.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    override fun inflateViewBinding(): ActivityMainBinding =
+        ActivityMainBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding.run {
+            bottomNavigation.setupWithNavController(findNavController(R.id.navHostFragment))
+        }
     }
+
 }

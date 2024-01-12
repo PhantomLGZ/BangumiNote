@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">BangumiNote</string>
+    <string name="app_name">Bangumi Note</string>
+
+    <string name="fragment_front">Front</string>
+    <string name="fragment_home">Home</string>
+    <string name="fragment_me">Me</string>
+
+    <string name="anime_rating_score">Score</string>
+    <string name="anime_rating_total">Total</string>
+
 </resources>

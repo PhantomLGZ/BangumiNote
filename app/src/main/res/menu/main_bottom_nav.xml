@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@id/nav_fragment_front"
+        android:icon="@drawable/round_deck_50"
+        android:title="@string/fragment_front" />
+    <item
+        android:id="@id/nav_fragment_home"
+        android:icon="@drawable/round_home_50"
+        android:title="@string/fragment_home" />
+    <item
+        android:id="@id/nav_fragment_me"
+        android:icon="@drawable/round_person_50"
+        android:title="@string/fragment_me" />
+
+</menu>

@@ -1,15 +1,11 @@
-package name.phantom.animenotes.base
+package com.phantom.banguminote.base
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 
-/**
- * @description
- * @author Phantom
- * @since 2022/5/16
- */
+
 abstract class BaseActivity<T : ViewBinding>() : AppCompatActivity() {
 
     lateinit var binding: T

@@ -2,7 +2,7 @@ package com.phantom.banguminote.base.http
 
 
 sealed class ViewModelResult<out T : Any> {
-    data class Success<out T : Any>(val data: T) : ViewModelResult<T>()
+    data class Success<T : Any>(val data: T?) : ViewModelResult<T>()
     data class Error(val exception: Exception) :
         ViewModelResult<Nothing>()
 
