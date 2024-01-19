@@ -7,7 +7,6 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import com.phantom.banguminote.R
-import com.phantom.banguminote.authorization.data.AuthorizationReq
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.databinding.FragmentMeBinding
 
@@ -36,8 +35,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     private val onClickListener = OnClickListener {
         when (it.id) {
             R.id.btTest -> {
-                viewModel?.authorize(AuthorizationReq())
-                println("test")
+//                viewModel?.authorize(AuthorizationReq())
             }
         }
     }

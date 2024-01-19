@@ -1,5 +1,6 @@
 package com.phantom.banguminote.front.calendar
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.phantom.banguminote.databinding.FragmentCalendarBinding
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
     private var viewModel: CalendarViewModel? = null
+    private lateinit var viewPageAdapter: BaseViewPagerAdapter
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -22,6 +24,31 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
         FragmentCalendarBinding.inflate(inflater, container, false)
 
     override fun init() {
+        viewPageAdapter = BaseViewPagerAdapter(childFragmentManager, lifecycle).also { adapter ->
+            adapter.fragmentData = mutableListOf(
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 7) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 1) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 2) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 3) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 4) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 5) }
+                }),
+                Pair("", CalendarAnimeListFragment().also { f ->
+                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 6) }
+                }),
+            )
+        }
         viewModel = ViewModelProvider(this)[CalendarViewModel::class.java]
         viewModel?.apply {
             error.observe(viewLifecycleOwner) { showToast(it.message) }
@@ -31,7 +58,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
         }
         binding?.apply {
             viewPage.also {
-                it.adapter = CalendarViewPagerAdapter(childFragmentManager, lifecycle)
+                it.adapter = viewPageAdapter
             }
             TabLayoutMediator(tabLayout, viewPage) { tab, pos ->
                 tab.customView = getTabView(pos)
@@ -48,47 +75,35 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
             .also {
                 it.findViewById<ConstraintLayout>(R.id.layout).setBackgroundResource(
                     when (pos) {
-                        0 -> R.drawable.color_week_sunday
-                        1 -> R.drawable.color_week_monday
-                        2 -> R.drawable.color_week_tuesday
-                        3 -> R.drawable.color_week_wednesday
-                        4 -> R.drawable.color_week_thursday
-                        5 -> R.drawable.color_week_friday
-                        6 -> R.drawable.color_week_saturday
-                        else -> R.drawable.color_nav_item
+                        0 -> R.color.color_week_sunday
+                        1 -> R.color.color_week_monday
+                        2 -> R.color.color_week_tuesday
+                        3 -> R.color.color_week_wednesday
+                        4 -> R.color.color_week_thursday
+                        5 -> R.color.color_week_friday
+                        6 -> R.color.color_week_saturday
+                        else -> R.color.color_nav_item
                     }
                 )
-                it.findViewById<TextView>(R.id.tvCh).text = when (pos) {
-                    0 -> "星期日"
-                    1 -> "星期一"
-                    2 -> "星期二"
-                    3 -> "星期三"
-                    4 -> "星期四"
-                    5 -> "星期五"
-                    6 -> "星期六"
-                    else -> "未知"
-                }
-                it.findViewById<TextView>(R.id.tvEn).text = when (pos) {
-                    0 -> "Sun"
-                    1 -> "Mon"
-                    2 -> "Tue"
-                    3 -> "Wed"
-                    4 -> "Thu"
-                    5 -> "Fri"
-                    6 -> "Sat"
-                    else -> "Unknown"
-                }
-                it.findViewById<TextView>(R.id.tvJa).text = when (pos) {
-                    0 -> "日"
-                    1 -> "月"
-                    2 -> "火"
-                    3 -> "水"
-                    4 -> "木"
-                    5 -> "金"
-                    6 -> "土"
-                    else -> "未知"
-                }
+                it.findViewById<TextView>(R.id.tvCh).text = weekDay.getOrNull(pos)?.cn ?: "未知"
+                it.findViewById<TextView>(R.id.tvEn).text = weekDay.getOrNull(pos)?.en ?: "Unknown"
+                it.findViewById<TextView>(R.id.tvJa).text = weekDay.getOrNull(pos)?.ja ?: "未"
             }
     }
+
+    companion object {
+        const val KEY_DAY = "Day"
+
+        val weekDay = listOf(
+            WeekDayInfo("Sun", "星期日", "日", 7),
+            WeekDayInfo("Mon", "星期一", "月", 1),
+            WeekDayInfo("Tue", "星期二", "火", 2),
+            WeekDayInfo("Wed", "星期三", "水", 3),
+            WeekDayInfo("Thu", "星期四", "木", 4),
+            WeekDayInfo("Fri", "星期五", "金", 5),
+            WeekDayInfo("Sat", "星期六", "土", 6),
+        )
+    }
+
 }
 

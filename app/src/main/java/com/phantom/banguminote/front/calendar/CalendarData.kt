@@ -1,5 +1,9 @@
 package com.phantom.banguminote.front.calendar
 
+import com.phantom.banguminote.data.CollectionData
+import com.phantom.banguminote.data.ImageData
+import com.phantom.banguminote.data.RatingData
+
 data class CalendarRes(
     val weekday: WeekDayInfo,
     val items: List<AnimeItemInfo>
@@ -21,32 +25,10 @@ data class AnimeItemInfo(
     val summary: String,
     val air_date: String,
     val air_weekday: Int,
-    val images: ImageInfo?,
+    val images: ImageData?,
     val eps: Int?,
     val eps_count: Int?,
-    val rating: RatingInfo?,
+    val rating: RatingData?,
     val rank: Int,
-    val collection: CollectionInfo
-)
-
-data class ImageInfo(
-    val large: String?,
-    val common: String?,
-    val medium: String?,
-    val small: String?,
-    val grid: String?
-)
-
-data class RatingInfo(
-    val total: Int,
-    val count: Map<String, Int>,
-    val score: Double?
-)
-
-data class CollectionInfo(
-    val wish: Int?,
-    val collect: Int?,
-    val doing: Int?,
-    val on_hold: Int?,
-    val dropped: Int?
+    val collection: CollectionData
 )

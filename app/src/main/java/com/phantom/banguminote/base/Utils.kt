@@ -12,6 +12,7 @@ fun Float.spToPx(context: Context?): Float =
         )
     } ?: 0f
 
+fun String.checkHttps(): String = this.replace("http:", "https:")
 
 /**
  * copy from hutool

@@ -3,34 +3,43 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="theme_color">#FFFF8E99</color>
+
+    <color name="text_theme">@color/theme_color</color>
+
     <color name="text_light">#FFFFFFFF</color>
-    <color name="text_translucent_light">#88FFFFFF</color>
+    <color name="text_translucent_light">#66FFFFFF</color>
 
     <color name="text_dark">#FF000000</color>
     <color name="text_dark2">#FF222222</color>
-    <color name="text_gray_dark">#FF888888</color>
+    <color name="text_gray_dark">#FF666666</color>
+    <color name="text_gray_dark2">#FF888888</color>
 
-    <color name="item_selected">#FFff8E99</color>
-    <color name="item_not_selected">#FF111111</color>
+    <color name="item_selected">@color/theme_color</color>
+    <color name="item_not_selected">#FF222222</color>
 
+    <color name="theme_background">@color/theme_color</color>
+    <color name="theme_background_light">#FFFDD0D5</color>
     <color name="background">#FFE3E3E3</color>
-    <color name="contentBackground">#FFFFFFFF</color>
-    <color name="translucent">#00000000</color>
+    <color name="content_background">#FFFFFFFF</color>
+    <color name="content_background_translucent">#AAFFFFFF</color>
+    <color name="background_dark_translucent">#AA000000</color>
 
     <color name="rating_bar_color">#FF06B5FF</color>
+    <color name="rating_star_color">#FFF9A24D</color>
 
     <color name="sunday_background">#FFFF0F00</color>
-    <color name="sunday_background_unselected">#88FF0F00</color>
+    <color name="sunday_background_unselected">#FFFF8981</color>
     <color name="monday_background">#FFFF6600</color>
-    <color name="monday_background_unselected">#88FF6600</color>
+    <color name="monday_background_unselected">#FFFFB584</color>
     <color name="tuesday_background">#FFFF9E01</color>
-    <color name="tuesday_background_unselected">#88FF9E01</color>
+    <color name="tuesday_background_unselected">#FFFFCE7F</color>
     <color name="wednesday_background">#FFB0DE09</color>
-    <color name="wednesday_background_unselected">#88B0DE09</color>
+    <color name="wednesday_background_unselected">#FFCBE377</color>
     <color name="thursday_background">#FF55BB22</color>
-    <color name="thursday_background_unselected">#8855BB22</color>
+    <color name="thursday_background_unselected">#FF89BF6E</color>
     <color name="friday_background">#FF0085C8</color>
-    <color name="friday_background_unselected">#880085C8</color>
+    <color name="friday_background_unselected">#FF68AACC</color>
     <color name="saturday_background">#FF0455A6</color>
-    <color name="saturday_background_unselected">#880455A6</color>
+    <color name="saturday_background_unselected">#FF507AA3</color>
 </resources>

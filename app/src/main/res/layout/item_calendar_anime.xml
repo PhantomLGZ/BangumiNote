@@ -4,13 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/contentBackground"
+    android:clipToPadding="false"
+    android:background="@color/content_background"
+    android:foreground="?android:selectableItemBackground"
     android:padding="4dp">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCover"
         android:layout_width="80dp"
         android:layout_height="112dp"
+        android:elevation="4dp"
+        android:foreground="?android:selectableItemBackground"
+        android:background="@color/content_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
@@ -19,15 +24,15 @@
         android:id="@+id/tvTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="2dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:maxLines="2"
         android:textAlignment="textStart"
         android:textColor="@color/text_dark"
         android:textSize="20sp"
         app:layout_constraintHorizontal_weight="5"
         app:layout_constraintLeft_toRightOf="@id/ivCover"
-        app:layout_constraintRight_toLeftOf="@id/llScore"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/ivCover"
         tools:text="标题" />
 
@@ -35,7 +40,7 @@
         android:id="@+id/tvOriTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="2"
+        android:maxLines="1"
         android:textAlignment="textStart"
         android:textColor="@color/text_gray_dark"
         android:textSize="14sp"
@@ -48,39 +53,52 @@
         android:id="@+id/tvAirDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:maxLines="1"
         android:textAlignment="textStart"
-        android:textColor="@color/text_dark2"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@id/ivCover"
+        android:textColor="@color/text_gray_dark2"
+        android:textSize="12sp"
         app:layout_constraintLeft_toLeftOf="@id/tvTitle"
         app:layout_constraintRight_toRightOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvOriTitle"
         tools:text="日期" />
 
-    <LinearLayout
-        android:id="@+id/llScore"
-        android:layout_width="0dp"
-        android:layout_height="112dp"
-        android:orientation="vertical"
-        app:layout_constraintHorizontal_weight="3"
-        app:layout_constraintLeft_toRightOf="@id/tvTitle"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:secondaryProgressTint="@android:color/transparent"
+        android:progressTint="@color/rating_star_color"
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@id/ivCover"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        tools:rating="2.75" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvScore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/rating_bar_color"
-            android:textSize="16sp"
-            tools:text="7.6 | 123" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:textColor="@color/rating_star_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+        app:layout_constraintStart_toEndOf="@id/ratingBar"
+        app:layout_constraintTop_toTopOf="@id/ratingBar"
+        tools:text="5.5" />
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/bcScore"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvRatingTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/text_gray_dark2"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/tvScore"
+        app:layout_constraintStart_toEndOf="@id/tvScore"
+        tools:text="(156人评分)" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

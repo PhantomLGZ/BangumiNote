@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">Bangumi Note</string>
+    <string name="app_name">Bangumi笔记</string>
 
-    <string name="fragment_front">Front</string>
-    <string name="fragment_home">Home</string>
-    <string name="fragment_me">Me</string>
+    <string name="fragment_front">首页</string>
+    <string name="fragment_home">主页</string>
+    <string name="fragment_me">我的</string>
 
-    <string name="anime_rating_score">Score</string>
-    <string name="anime_rating_total">Total</string>
+    <string name="activity_subject">栏目</string>
+
+    <string name="anime_rating_total">%d人评分</string>
+    
+    <string name="basic_information">基本信息</string>
 
 </resources>

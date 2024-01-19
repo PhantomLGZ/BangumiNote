@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/nav_fragment_front"
+        android:id="@id/nav_fragment_calendar"
         android:icon="@drawable/round_deck_50"
         android:title="@string/fragment_front" />
     <item

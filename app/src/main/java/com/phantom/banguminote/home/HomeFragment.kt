@@ -17,7 +17,8 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.apply {
-
+            cardView.setOnClickListener {
+            }
         }
     }
 }

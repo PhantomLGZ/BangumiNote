@@ -8,6 +8,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:elevation="4dp"
         app:tabMinWidth="200dp"
         app:tabPaddingStart="0dp"
         app:tabPaddingEnd="0dp"

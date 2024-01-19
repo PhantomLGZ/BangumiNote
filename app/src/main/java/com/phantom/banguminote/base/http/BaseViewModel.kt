@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.phantom.banguminote.data.HttpErrorData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -13,6 +14,7 @@ import java.io.IOException
 abstract class BaseViewModel : ViewModel() {
 
     val error = MutableLiveData<Exception>()
+    val httpError = MutableLiveData<HttpErrorData>()
 
     fun <REQ : Any, DATA : Any> requestWithCoroutine(
         req: REQ,
@@ -27,10 +29,11 @@ abstract class BaseViewModel : ViewModel() {
             withContext(Dispatchers.Main) {
                 when (result) {
                     is ViewModelResult.Success -> {
-                        val data = result.data
-                        mutableLiveData.postValue(data)
+                        mutableLiveData.postValue(result.data)
                     }
-
+                    is ViewModelResult.HttpError -> {
+                        httpError.postValue(result.data)
+                    }
                     is ViewModelResult.Error -> {
                         Log.e("Net", result.exception.stackTraceToString())
                         errorLiveData.postValue(result.exception)
@@ -53,6 +56,10 @@ abstract class BaseViewModel : ViewModel() {
         return if (res.isSuccessful)
             ViewModelResult.Success(res.body())
         else
-            ViewModelResult.Error(IOException("code:${res.code()} msg:${res.message()}"))
+            try {
+                ViewModelResult.HttpError(RetrofitHelper.errorGson.fromJson(res.errorBody()?.string(), HttpErrorData::class.java))
+            } catch (e : Exception) {
+                ViewModelResult.Error(IOException("code:${res.code()} msg:${res.message()}"))
+            }
     }
 }

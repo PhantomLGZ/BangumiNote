@@ -10,7 +10,8 @@ import com.phantom.banguminote.base.http.toMap
 
 class MeViewModel : BaseViewModel() {
 
-    private val authorizationHttpServer = getAuthorizationHttpServer(IAuthorizationHttpServer::class.java)
+    private val authorizationHttpServer =
+        getAuthorizationHttpServer(IAuthorizationHttpServer::class.java)
 
     val authorizeRes = MutableLiveData<AuthorizationRes>()
 

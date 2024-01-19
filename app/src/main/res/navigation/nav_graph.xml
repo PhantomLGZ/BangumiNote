@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_fragment_front"
-        android:name="com.phantom.banguminote.front.calendar.CalendarFragment"
+        android:name="com.phantom.banguminote.front.FrontFragment"
         android:label="@string/fragment_front"
         tools:layout="@layout/fragment_front">
         <!--<action
@@ -30,12 +30,30 @@
         android:id="@+id/nav_fragment_me"
         android:name="com.phantom.banguminote.me.MeFragment"
         android:label="@string/fragment_me"
-        tools:layout="@layout/fragment_me" />
+        tools:layout="@layout/fragment_me">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_fragment_calendar"
+        android:name="com.phantom.banguminote.front.calendar.CalendarFragment"
+        android:label="临时首页"
+        tools:layout="@layout/fragment_calendar">
+
+        <action
+            android:id="@+id/action_nav_to_activity_subject"
+            app:destination="@id/nav_activity_subject"/>
+
+    </fragment>
 
     <!--<activity
         android:id="@+id/nav_activity_anime_detail"
         android:name="name.phantom.animenotes.list.WorkDetailActivity"
         android:label="@string/activity_anime_detail">
     </activity>-->
+    <activity
+        android:id="@+id/nav_activity_subject"
+        android:name="com.phantom.banguminote.subject.SubjectActivity"
+        android:label="@string/activity_subject" />
 
 </navigation>
