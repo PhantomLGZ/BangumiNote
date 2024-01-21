@@ -1,4 +1,4 @@
-package com.phantom.banguminote.subject
+package com.phantom.banguminote.subject.info
 
 import android.content.Context
 import android.view.ViewGroup

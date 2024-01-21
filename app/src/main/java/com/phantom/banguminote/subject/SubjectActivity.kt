@@ -11,6 +11,9 @@ import com.phantom.banguminote.base.BaseActivity
 import com.phantom.banguminote.data.HttpErrorData
 import com.phantom.banguminote.databinding.ActivitySubjectBinding
 import com.phantom.banguminote.front.calendar.BaseViewPagerAdapter
+import com.phantom.banguminote.subject.collection.SubjectCollectionFragment
+import com.phantom.banguminote.subject.info.SubjectInfoFragment
+import com.phantom.banguminote.subject.summary.SubjectSummaryFragment
 
 
 class SubjectActivity : BaseActivity<ActivitySubjectBinding>() {
@@ -62,13 +65,11 @@ class SubjectActivity : BaseActivity<ActivitySubjectBinding>() {
             Glide.with(this)
                 .load(data.images?.large)
                 .into(it.ivCover)
-            viewPageAdapter.fragmentData.add(
-                Pair(
-                    getString(R.string.basic_information),
-                    SubjectInfoFragment()
-                )
+            viewPageAdapter.addFragment(
+                Pair(getString(R.string.subject_basic_information), SubjectInfoFragment()),
+                Pair(getString(R.string.subject_summary), SubjectSummaryFragment()),
+                Pair(getString(R.string.subject_collection), SubjectCollectionFragment()),
             )
-            viewPageAdapter.notifyDataSetChanged()
         }
     }
 

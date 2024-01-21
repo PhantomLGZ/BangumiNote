@@ -3,15 +3,14 @@ package com.phantom.banguminote.front.calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
+import com.phantom.banguminote.TransparentDividerItemDecoration
 import com.phantom.banguminote.ImageDialogFragment
 import com.phantom.banguminote.ImageDialogFragment.Companion.KEY_IMAGE_URL
 import com.phantom.banguminote.R
@@ -60,17 +59,7 @@ class CalendarAnimeListFragment :
             }
             recyclerView.also {
                 it.layoutManager = LinearLayoutManager(context)
-                it.addItemDecoration(
-                    DividerItemDecoration(
-                        context,
-                        DividerItemDecoration.VERTICAL
-                    ).also { drivider ->
-                        context?.let { c ->
-                            ContextCompat.getDrawable(c, R.drawable.default_drivider)
-                        }?.also { d ->
-                            drivider.setDrawable(d)
-                        }
-                    })
+                it.addItemDecoration(TransparentDividerItemDecoration(requireContext()))
                 it.adapter = helper.adapter
             }
         }

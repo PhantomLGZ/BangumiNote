@@ -26,11 +26,10 @@ class CalendarAnimeAdapter : BaseQuickAdapter<AnimeItemInfo, QuickViewHolder>() 
                 it.setText(R.id.tvAirDate, i.air_date)
                 it.getView<AppCompatRatingBar>(R.id.ratingBar).rating =
                     ((i.rating?.score ?: 0.0) / 2.0).toFloat()
-                it.setText(R.id.tvScore, (i.rating?.score ?: 0.0).toString())
                 it.setText(R.id.tvScore, "%.1f".format(i.rating?.score ?: 0.0))
                 it.setText(
                     R.id.tvRatingTotal,
-                    "(${context.getString(R.string.anime_rating_total, i.rating?.total ?: 0)})"
+                    "(${context.getString(R.string.subject_rating_total, i.rating?.total ?: 0)})"
                 )
             }
         }

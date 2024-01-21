@@ -1,29 +1,32 @@
-package com.phantom.banguminote.subject
+package com.phantom.banguminote.subject.info
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.phantom.banguminote.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.data.InfoData
 import com.phantom.banguminote.data.InfoDataType
 import com.phantom.banguminote.data.InfoValueData
-import com.phantom.banguminote.databinding.FragmentInfoListBinding
+import com.phantom.banguminote.databinding.FragmentSubjectInfoBinding
+import com.phantom.banguminote.subject.SubjectViewModel
 
-class SubjectInfoFragment : BaseFragment<FragmentInfoListBinding>() {
+class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
 
     private var viewModel: SubjectViewModel? = null
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): FragmentInfoListBinding =
-        FragmentInfoListBinding.inflate(inflater, container, false)
+    ): FragmentSubjectInfoBinding =
+        FragmentSubjectInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
         viewModel = activity?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
         viewModel?.subjectRes?.value?.infobox?.also {
             binding?.recyclerView?.also { rv ->
+                rv.addItemDecoration(TransparentDividerItemDecoration(requireContext()))
                 rv.layoutManager = LinearLayoutManager(context)
                 rv.adapter = SubjectInfoAdapter().also { a ->
                     it.forEach { item ->

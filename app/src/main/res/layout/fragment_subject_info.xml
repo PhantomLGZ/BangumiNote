@@ -9,7 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background"
-        tools:listitem="@layout/item_info"
-        tools:itemCount="3"/>
+        tools:itemCount="3"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:listitem="@layout/item_info" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

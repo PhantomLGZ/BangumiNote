@@ -10,4 +10,19 @@
     </style>
 
     <style name="Theme.BangumiNote" parent="Base.Theme.BangumiNote" />
+
+    <style name="CollectionLabel">
+        <item name="android:padding">8dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="CollectionCount">
+        <item name="android:padding">4dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/text_dark2</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>

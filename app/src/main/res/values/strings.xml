@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Bangumi笔记</string>
+    <string name="app_name">追番笔记</string>
 
     <string name="fragment_front">首页</string>
     <string name="fragment_home">主页</string>
@@ -7,8 +7,22 @@
 
     <string name="activity_subject">栏目</string>
 
-    <string name="anime_rating_total">%d人评分</string>
+    <string name="subject_rating_score">%.1f</string>
+    <string name="subject_rating_total">%d人评分</string>
     
-    <string name="basic_information">基本信息</string>
+    <string name="subject_basic_information">基本信息</string>
+    <string name="subject_summary">简介</string>
+    <string name="subject_collection">收藏</string>
+
+    <string name="collection_wish">想%s</string>
+    <string name="collection_doing">在%s</string>
+    <string name="collection_collect">%s过</string>
+    <string name="collection_on_hold">搁置</string>
+    <string name="collection_dropped">抛弃</string>
+
+    <string name="collection_watch">看</string>
+    <string name="collection_read">读</string>
+    <string name="collection_listen">听</string>
+    <string name="collection_play">玩</string>
 
 </resources>

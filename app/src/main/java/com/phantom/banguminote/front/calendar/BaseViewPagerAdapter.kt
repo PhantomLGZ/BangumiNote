@@ -1,5 +1,6 @@
 package com.phantom.banguminote.front.calendar
 
+import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -14,6 +15,12 @@ class BaseViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment =
         fragmentData[position].second
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addFragment(vararg fragments: Pair<String, Fragment>) {
+        fragmentData.addAll(fragments)
+        notifyDataSetChanged()
+    }
 
     fun getTitle(pos: Int): String = fragmentData[pos].first
 }

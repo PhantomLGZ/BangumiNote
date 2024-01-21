@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.databinding.FragmentCalendarBinding
+import java.util.Calendar
 
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
@@ -63,6 +64,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
             TabLayoutMediator(tabLayout, viewPage) { tab, pos ->
                 tab.customView = getTabView(pos)
             }.attach()
+            tabLayout.getTabAt(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1)?.select()
         }
     }
 
