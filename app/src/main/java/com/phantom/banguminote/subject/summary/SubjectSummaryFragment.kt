@@ -10,8 +10,10 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
+import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.data.TagsData
 import com.phantom.banguminote.databinding.FragmentSubjectSummaryBinding
+import com.phantom.banguminote.subject.SubjectData
 import com.phantom.banguminote.subject.SubjectViewModel
 
 class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
@@ -26,25 +28,29 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
     override fun init() {
         viewModel = activity?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
-        viewModel?.subjectRes?.value?.also { data ->
-            binding?.also { b ->
-                b.tvSummary.text = data.summary
-                b.recyclerView.also { rv ->
-                    rv.layoutManager = FlexboxLayoutManager(context).also {
-                        it.justifyContent = JustifyContent.SPACE_AROUND
-                    }
-                    rv.addItemDecoration(FlexboxItemDecoration(context).also {
-                        it.setDrawable(
-                            AppCompatResources.getDrawable(
-                                requireContext(),
-                                R.drawable.flexbox_divider
-                            )
+        viewModel?.subjectRes?.setDataOrObserve(viewLifecycleOwner) {
+            setData(it)
+        }
+    }
+
+    private fun setData(data: SubjectData) {
+        binding?.also { b ->
+            b.tvSummary.text = data.summary
+            b.recyclerView.also { rv ->
+                rv.layoutManager = FlexboxLayoutManager(context).also {
+                    it.justifyContent = JustifyContent.SPACE_AROUND
+                }
+                rv.addItemDecoration(FlexboxItemDecoration(context).also {
+                    it.setDrawable(
+                        AppCompatResources.getDrawable(
+                            requireContext(),
+                            R.drawable.flexbox_divider
                         )
-                    })
-                    rv.adapter = SubjectTagAdapter().also {
-                        it.setOnItemClickListener(onItemClickListener)
-                        it.submitList(data.tags)
-                    }
+                    )
+                })
+                rv.adapter = SubjectTagAdapter().also {
+                    it.setOnItemClickListener(onItemClickListener)
+                    it.submitList(data.tags)
                 }
             }
         }
@@ -52,6 +58,7 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
     private val onItemClickListener =
         BaseQuickAdapter.OnItemClickListener<TagsData> { adapter, view, position ->
+            // TODO
             println("TEST ${adapter.items[position].name}")
         }
 }

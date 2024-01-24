@@ -12,6 +12,15 @@ fun Float.spToPx(context: Context?): Float =
         )
     } ?: 0f
 
+fun Float.dpToPx(context: Context?): Float =
+    context?.let {
+        TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            this,
+            it.resources.displayMetrics
+        )
+    } ?: 0f
+
 fun String.checkHttps(): String = this.replace("http:", "https:")
 
 /**

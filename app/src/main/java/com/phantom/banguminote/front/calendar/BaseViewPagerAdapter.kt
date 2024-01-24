@@ -9,18 +9,31 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class BaseViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(manager, lifecycle) {
 
-    var fragmentData = mutableListOf<Pair<String, Fragment>>()
+    data class FragmentData(
+        val title: String = "",
+        val fragment: Fragment,
+    )
+
+    var fragmentData = mutableListOf<FragmentData>()
 
     override fun getItemCount(): Int = fragmentData.size
 
     override fun createFragment(position: Int): Fragment =
-        fragmentData[position].second
+        fragmentData[position].fragment
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addFragment(vararg fragments: Pair<String, Fragment>) {
-        fragmentData.addAll(fragments)
+    fun addFragments(vararg fragments: FragmentData) {
+        fragmentData.addAll(fragments.toList())
         notifyDataSetChanged()
     }
 
-    fun getTitle(pos: Int): String = fragmentData[pos].first
+    @SuppressLint("NotifyDataSetChanged")
+    fun remove(title: String) {
+        val pos = fragmentData.indexOfFirst { it.title == title }
+        fragmentData.removeAt(pos)
+        notifyItemRangeChanged(pos, fragmentData.size)
+        notifyDataSetChanged()
+    }
+
+    fun getTitle(pos: Int): String = fragmentData[pos].title
 }

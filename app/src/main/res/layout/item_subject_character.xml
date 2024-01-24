@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:selectableItemBackground"
+    app:cardBackgroundColor="@color/theme_background_light2"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="2dp"
+    app:contentPadding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/error_404" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRelation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_background_translucent"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="4dp"
+            android:textColor="@color/text_light"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/ivImage"
+            app:layout_constraintTop_toTopOf="@id/ivImage"
+            tools:text="测试" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/text_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/ivImage"
+            tools:text="测试" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvActor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/text_dark2"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="测试" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

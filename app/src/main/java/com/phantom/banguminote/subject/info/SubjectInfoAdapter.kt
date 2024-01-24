@@ -28,8 +28,8 @@ class SubjectInfoAdapter : BaseQuickAdapter<InfoData, QuickViewHolder>() {
                     it.setGone(R.id.singleLayout, false)
                     it.setGone(R.id.recyclerView, true)
                     it.setText(R.id.tvValue, item.actualValue?.value)
+                    it.setGone(R.id.btMore, item.persons.isNullOrEmpty())
                 }
-
                 InfoDataType.LIST -> {
                     it.setGone(R.id.singleLayout, true)
                     it.setGone(R.id.recyclerView, false)

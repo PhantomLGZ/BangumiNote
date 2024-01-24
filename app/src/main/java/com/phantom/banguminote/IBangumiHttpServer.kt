@@ -25,6 +25,6 @@ interface IBangumiHttpServer : IHttpServer {
     suspend fun subjectCharacters(@Path("subject_id") id: Int): Response<List<CharacterData>>
 
     @GET("v0/subjects/{subject_id}/subjects")
-    suspend fun subjectSubjects(@Path("subject_id") id: Int): Response<List<RelatedSubjectData>>
+    suspend fun subjectRelatedSubjects(@Path("subject_id") id: Int): Response<List<RelatedSubjectData>>
 
 }

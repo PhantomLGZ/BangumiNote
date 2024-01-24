@@ -13,6 +13,8 @@
     <string name="subject_basic_information">基本信息</string>
     <string name="subject_summary">简介</string>
     <string name="subject_collection">收藏</string>
+    <string name="subject_character">角色</string>
+    <string name="subject_related">相关</string>
 
     <string name="collection_wish">想%s</string>
     <string name="collection_doing">在%s</string>

@@ -20,6 +20,7 @@
     <color name="item_not_selected">#FF222222</color>
 
     <color name="theme_background">@color/theme_color</color>
+    <color name="theme_background_translucent">#AAFF8E99</color>
     <color name="theme_background_light">#FFFDD0D5</color>
     <color name="theme_background_light2">#FFFFEAEC</color>
     <color name="background">#FFE3E3E3</color>

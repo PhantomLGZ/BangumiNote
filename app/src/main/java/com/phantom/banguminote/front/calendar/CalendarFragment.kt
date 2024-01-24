@@ -27,25 +27,25 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
     override fun init() {
         viewPageAdapter = BaseViewPagerAdapter(childFragmentManager, lifecycle).also { adapter ->
             adapter.fragmentData = mutableListOf(
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 7) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 1) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 2) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 3) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 4) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 5) }
                 }),
-                Pair("", CalendarAnimeListFragment().also { f ->
+                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
                     f.arguments = Bundle().also { it.putInt(KEY_DAY, 6) }
                 }),
             )
