@@ -21,9 +21,12 @@ class BaseViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     override fun createFragment(position: Int): Fragment =
         fragmentData[position].fragment
 
+    override fun getItemId(position: Int): Long =
+        fragmentData[position].hashCode().toLong()
+
     @SuppressLint("NotifyDataSetChanged")
-    fun addFragments(vararg fragments: FragmentData) {
-        fragmentData.addAll(fragments.toList())
+    fun addFragments(fragments: List<FragmentData>) {
+        fragmentData.addAll(fragments)
         notifyDataSetChanged()
     }
 

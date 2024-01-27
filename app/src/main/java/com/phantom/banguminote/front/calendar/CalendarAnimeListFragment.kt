@@ -17,7 +17,7 @@ import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.databinding.FragmentCalendarAnimeListBinding
 import com.phantom.banguminote.front.calendar.CalendarFragment.Companion.KEY_DAY
-import com.phantom.banguminote.subject.SubjectActivity
+import com.phantom.banguminote.detail.subject.SubjectFragment
 
 class CalendarAnimeListFragment :
     BaseFragment<FragmentCalendarAnimeListBinding>() {
@@ -82,9 +82,10 @@ class CalendarAnimeListFragment :
 
     private val onItemClickListener =
         BaseQuickAdapter.OnItemClickListener<AnimeItemInfo> { adapter, view, position ->
-            findNavController().navigate(R.id.action_nav_to_activity_subject, Bundle().apply {
-                putInt(SubjectActivity.KEY_SUBJECT_ID, adapter.items[position].id)
-            })
+            findNavController().navigate(
+                R.id.action_nav_to_activity_subject,
+                SubjectFragment.createBundle(adapter.items[position].id)
+            )
         }
 
     private val onItemChildClickListener =

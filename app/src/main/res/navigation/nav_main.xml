@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_fragment_home">
+
+
+    <fragment
+        android:id="@+id/nav_fragment_front"
+        android:name="com.phantom.banguminote.front.FrontFragment"
+        android:label="@string/fragment_front"
+        tools:layout="@layout/fragment_front" />
+
+    <fragment
+        android:id="@+id/nav_fragment_home"
+        android:name="com.phantom.banguminote.home.HomeFragment"
+        android:label="@string/fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_fragment_me"
+        android:name="com.phantom.banguminote.me.MeFragment"
+        android:label="@string/fragment_me"
+        tools:layout="@layout/fragment_me" />
+
+    <fragment
+        android:id="@+id/nav_fragment_calendar"
+        android:name="com.phantom.banguminote.front.calendar.CalendarFragment"
+        android:label="临时首页"
+        tools:layout="@layout/fragment_calendar" />
+
+    <action
+        android:id="@+id/action_nav_to_activity_subject"
+        app:destination="@id/nav_activity_subject" />
+
+    <activity
+        android:id="@+id/nav_activity_subject"
+        android:name="com.phantom.banguminote.detail.subject.SubjectActivity"
+        android:label="@string/activity_subject" />
+
+</navigation>

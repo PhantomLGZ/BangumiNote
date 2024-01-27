@@ -8,7 +8,6 @@ data class InfoData(
     val key: String,
     val value: JsonElement?,
     var actualValue: InfoValueData?,
-    var persons: List<PersonData>?
 ) {
 
     companion object {

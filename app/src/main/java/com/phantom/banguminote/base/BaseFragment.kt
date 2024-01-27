@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-
 abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     var binding: T? = null

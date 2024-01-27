@@ -24,7 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".subject.SubjectActivity" />
+        <activity android:name=".detail.subject.SubjectActivity" />
+        <activity android:name=".detail.character.CharacterActivity" />
+        <activity android:name=".detail.person.PersonActivity" />
     </application>
 
 </manifest>

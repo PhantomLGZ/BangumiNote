@@ -6,15 +6,29 @@
     <string name="fragment_me">我的</string>
 
     <string name="activity_subject">栏目</string>
+    <string name="activity_character">角色</string>
+    <string name="activity_person">人物</string>
 
     <string name="subject_rating_score">%.1f</string>
     <string name="subject_rating_total">%d人评分</string>
-    
-    <string name="subject_basic_information">基本信息</string>
+
+    <string name="subject_info">信息</string>
     <string name="subject_summary">简介</string>
     <string name="subject_collection">收藏</string>
     <string name="subject_character">角色</string>
     <string name="subject_related">相关</string>
+
+    <string name="character_info">信息</string>
+    <string name="character_summary">简介</string>
+    <string name="character_related">相关</string>
+
+    <string name="person_info">信息</string>
+    <string name="person_summary">简介</string>
+    <string name="person_related">相关</string>
+    <string name="person_character">角色</string>
+
+    <string name="info_ori_name">原名</string>
+    <string name="info_person_hint">相关人物</string>
 
     <string name="collection_wish">想%s</string>
     <string name="collection_doing">在%s</string>

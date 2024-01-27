@@ -1,11 +1,17 @@
 package com.phantom.banguminote
 
 import com.phantom.banguminote.base.http.IHttpServer
-import com.phantom.banguminote.data.CharacterData
-import com.phantom.banguminote.data.PersonData
-import com.phantom.banguminote.data.RelatedSubjectData
+import com.phantom.banguminote.detail.character.data.CharacterData
+import com.phantom.banguminote.detail.character.data.CharacterPersonData
+import com.phantom.banguminote.detail.character.data.CharacterRelatedData
+import com.phantom.banguminote.detail.person.data.PersonCharacterData
+import com.phantom.banguminote.detail.person.data.PersonData
+import com.phantom.banguminote.detail.person.data.PersonRelatedData
+import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
+import com.phantom.banguminote.detail.subject.data.SubjectPersonData
+import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.front.calendar.CalendarRes
-import com.phantom.banguminote.subject.SubjectData
+import com.phantom.banguminote.detail.subject.data.SubjectData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,12 +25,30 @@ interface IBangumiHttpServer : IHttpServer {
     suspend fun subject(@Path("subject_id") id: Int): Response<SubjectData>
 
     @GET("v0/subjects/{subject_id}/persons")
-    suspend fun subjectPersons(@Path("subject_id") id: Int): Response<List<PersonData>>
+    suspend fun subjectPersons(@Path("subject_id") id: Int): Response<List<SubjectPersonData>>
 
     @GET("v0/subjects/{subject_id}/characters")
-    suspend fun subjectCharacters(@Path("subject_id") id: Int): Response<List<CharacterData>>
+    suspend fun subjectCharacters(@Path("subject_id") id: Int): Response<List<SubjectCharacterData>>
 
     @GET("v0/subjects/{subject_id}/subjects")
     suspend fun subjectRelatedSubjects(@Path("subject_id") id: Int): Response<List<RelatedSubjectData>>
+
+    @GET("v0/characters/{character_id}")
+    suspend fun character(@Path("character_id") id: Int): Response<CharacterData>
+
+    @GET("v0/characters/{character_id}/subjects")
+    suspend fun characterRelatedSubjects(@Path("character_id") id: Int): Response<List<CharacterRelatedData>>
+
+    @GET("v0/characters/{character_id}/persons")
+    suspend fun characterPersons(@Path("character_id") id: Int): Response<List<CharacterPersonData>>
+
+    @GET("v0/persons/{person_id}")
+    suspend fun person(@Path("person_id") id: Int): Response<PersonData>
+
+    @GET("v0/persons/{person_id}/subjects")
+    suspend fun personRelated(@Path("person_id") id: Int): Response<List<PersonRelatedData>>
+
+    @GET("v0/persons/{person_id}/characters")
+    suspend fun personCharacter(@Path("person_id") id: Int): Response<List<PersonCharacterData>>
 
 }
