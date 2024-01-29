@@ -1,4 +1,4 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.base
 
 import android.annotation.SuppressLint
 import androidx.fragment.app.Fragment

@@ -19,18 +19,19 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toStartOf="@id/btAdvance"
+            app:layout_constraintEnd_toStartOf="@id/tbAdvance"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:queryHint="@string/search_hint" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btAdvance"
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbAdvance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/theme_background"
-            android:text="@string/search_advance"
             android:textColor="@color/text_light"
+            android:textOff="@string/search_advance"
+            android:textOn="@string/search_advance_close"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/searchView"
@@ -195,8 +196,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:backgroundTint="@color/background"
                     android:layout_weight="1"
+                    android:backgroundTint="@color/background"
                     android:hint="@string/search_tag_hint" />
 
                 <androidx.appcompat.widget.AppCompatButton

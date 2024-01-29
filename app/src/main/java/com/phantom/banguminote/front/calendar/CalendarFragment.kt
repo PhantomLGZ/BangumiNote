@@ -1,6 +1,5 @@
 package com.phantom.banguminote.front.calendar
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import java.time.LocalDate
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
     private var viewModel: CalendarViewModel? = null
-    private lateinit var viewPageAdapter: BaseViewPagerAdapter
+    private lateinit var viewPageAdapter: CalendarViewPagerAdapter
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -25,33 +24,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
         FragmentCalendarBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewPageAdapter = BaseViewPagerAdapter(childFragmentManager, lifecycle).also { adapter ->
-            adapter.setFragments(
-                listOf(
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 7) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 1) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 2) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 3) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 4) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 5) }
-                    }),
-                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 6) }
-                    }),
-                )
-            )
-        }
+        viewPageAdapter = CalendarViewPagerAdapter(childFragmentManager, lifecycle)
         viewModel = ViewModelProvider(this)[CalendarViewModel::class.java]
         viewModel?.apply {
             error.observe(viewLifecycleOwner) { showToast(it.message) }
@@ -83,17 +56,19 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
     private fun getTabView(pos: Int): View {
         return LayoutInflater.from(context).inflate(R.layout.view_tab_week, binding?.root, false)
             .also {
-                it.findViewById<ConstraintLayout>(R.id.layout).setBackgroundResource(
-                    when (pos) {
-                        0 -> R.color.color_week_sunday
-                        1 -> R.color.color_week_monday
-                        2 -> R.color.color_week_tuesday
-                        3 -> R.color.color_week_wednesday
-                        4 -> R.color.color_week_thursday
-                        5 -> R.color.color_week_friday
-                        6 -> R.color.color_week_saturday
-                        else -> R.color.color_nav_item
-                    }
+                it.findViewById<ConstraintLayout>(R.id.layout).setBackgroundColor(
+                    requireContext().getColor(
+                        when (pos) {
+                            0 -> R.color.color_week_sunday
+                            1 -> R.color.color_week_monday
+                            2 -> R.color.color_week_tuesday
+                            3 -> R.color.color_week_wednesday
+                            4 -> R.color.color_week_thursday
+                            5 -> R.color.color_week_friday
+                            6 -> R.color.color_week_saturday
+                            else -> R.color.color_nav_item
+                        }
+                    )
                 )
                 it.findViewById<TextView>(R.id.tvCh).text = weekDay.getOrNull(pos)?.cn ?: "未知"
                 it.findViewById<TextView>(R.id.tvEn).text = weekDay.getOrNull(pos)?.en ?: "Unknown"

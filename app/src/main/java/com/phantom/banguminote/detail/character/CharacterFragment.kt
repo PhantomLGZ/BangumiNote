@@ -12,7 +12,7 @@ import com.phantom.banguminote.detail.character.related.CharacterRelatedFragment
 import com.phantom.banguminote.detail.character.summary.CharacterSummaryFragment
 import com.phantom.banguminote.databinding.FragmentCharacterBinding
 import com.phantom.banguminote.detail.BaseDetailFragment
-import com.phantom.banguminote.front.calendar.BaseViewPagerAdapter.FragmentData
+import com.phantom.banguminote.base.BaseViewPagerAdapter.FragmentData
 
 class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharacterBinding>() {
 

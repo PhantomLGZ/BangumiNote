@@ -16,6 +16,16 @@ android {
         versionName = "0.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    applicationVariants.all {
+        val variant = this
+        variant.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                val outputFileName = "BangumiNote_${variant.versionName}.apk"
+                println("OutputFileName: $outputFileName")
+                output.outputFileName = outputFileName
+            }
+    }
 
     buildTypes {
         debug {

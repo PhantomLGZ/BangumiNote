@@ -52,10 +52,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             b.searchView.setOnQueryTextListener(onQueryTextListener)
             b.refreshLayout.also {
                 it.setOnRefreshListener {
-                    binding?.refreshLayout?.isRefreshing = true
-                    offset = 0
                     searchReq.keyword = binding?.searchView?.query?.toString() ?: ""
-                    doSearch()
+                    doNewSearch()
                 }
             }
             b.recyclerView.also { rv ->
@@ -79,7 +77,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     it.setOnItemClickListener(onTagItemClickListener)
                 }
             }
-            b.btAdvance.setOnClickListener(onClickListener)
+            b.tbAdvance.setOnCheckedChangeListener { buttonView, isChecked ->
+                binding?.layoutAdvance?.visibility = if (isChecked) View.VISIBLE else View.GONE
+            }
+
             b.btDate.setOnClickListener(onClickListener)
             b.btScore.setOnClickListener(onClickListener)
             b.btRank.setOnClickListener(onClickListener)
@@ -162,9 +163,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 binding?.btRank?.text = getString(R.string.search_range, above, below)
             }
 
-            binding?.refreshLayout?.isRefreshing = true
-            offset = 0
-            doSearch()
+            doNewSearch()
         }
     }
 
@@ -182,18 +181,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val onClickListener = View.OnClickListener { v ->
         when (v) {
-            binding?.btAdvance -> {
-                binding?.layoutAdvance?.also {
-                    if (it.visibility == View.GONE) {
-                        binding?.btAdvance?.text = getString(R.string.search_advance_close)
-                        it.visibility = View.VISIBLE
-                    } else {
-                        binding?.btAdvance?.text = getString(R.string.search_advance)
-                        it.visibility = View.GONE
-                    }
-                }
-            }
-
             binding?.btDate -> {
                 SearchDateDialogFragment { after, before ->
                     binding?.btDate?.text = if (after == null && before == null) {
@@ -353,10 +340,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
-            binding?.refreshLayout?.isRefreshing = true
-            offset = 0
             searchReq.keyword = query ?: ""
-            doSearch()
+            doNewSearch()
             return true
         }
 
@@ -376,6 +361,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             searchReq.filter.tag?.remove(adapter.items[position])
             adapter.removeAt(position)
         }
+
+    private fun doNewSearch() {
+        binding?.tbAdvance?.isChecked = false
+        binding?.refreshLayout?.isRefreshing = true
+        offset = 0
+        doSearch()
+    }
 
     private fun doSearch() {
         viewModel.search(PageReqData(searchReq, limit, offset))

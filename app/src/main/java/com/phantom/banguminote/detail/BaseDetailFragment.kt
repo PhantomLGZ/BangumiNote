@@ -8,7 +8,7 @@ import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.http.BaseViewModel
 import com.phantom.banguminote.data.HttpErrorData
 import com.phantom.banguminote.databinding.LayoutDetailBinding
-import com.phantom.banguminote.front.calendar.BaseViewPagerAdapter
+import com.phantom.banguminote.base.BaseViewPagerAdapter
 
 abstract class BaseDetailFragment<VM : BaseViewModel, T : ViewBinding> : BaseFragment<T>() {
 

@@ -15,7 +15,7 @@ import com.phantom.banguminote.detail.person.data.PersonRelatedData
 import com.phantom.banguminote.detail.person.info.PersonInfoFragment
 import com.phantom.banguminote.detail.person.related.PersonRelatedFragment
 import com.phantom.banguminote.detail.person.summary.PersonSummaryFragment
-import com.phantom.banguminote.front.calendar.BaseViewPagerAdapter.FragmentData
+import com.phantom.banguminote.base.BaseViewPagerAdapter.FragmentData
 
 class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding>() {
 
