@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
-import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.phantom.banguminote.TransparentDividerItemDecoration
 import com.phantom.banguminote.ImageDialogFragment
 import com.phantom.banguminote.ImageDialogFragment.Companion.KEY_IMAGE_URL
@@ -40,10 +39,6 @@ class CalendarAnimeListFragment :
             it.addOnItemChildClickListener(R.id.ivCover, onItemChildClickListener)
         }
         helper = QuickAdapterHelper.Builder(mAdapter)
-            .setTrailingLoadStateAdapter(object : TrailingLoadStateAdapter.OnTrailingListener {
-                override fun onFailRetry() {}
-                override fun onLoad() {}
-            })
             .build()
         viewModel = parentFragment?.let { ViewModelProvider(it)[CalendarViewModel::class.java] }
         viewModel?.apply {

@@ -23,7 +23,7 @@ abstract class BaseDetailFragment<VM : BaseViewModel, T : ViewBinding> : BaseFra
     override fun init() {
         viewModel = assignViewModel()
         viewPageAdapter = BaseViewPagerAdapter(childFragmentManager, lifecycle).also {
-            it.addFragments(assignFragments())
+            it.setFragments(assignFragments())
         }
         mergeBinding = binding?.root?.let { LayoutDetailBinding.bind(it) }
         mergeBinding?.also {
@@ -44,12 +44,13 @@ abstract class BaseDetailFragment<VM : BaseViewModel, T : ViewBinding> : BaseFra
             it.appBarLayout.setExpanded(false)
             it.tabLayout.visibility = View.GONE
         }
-        viewPageAdapter?.fragmentData =
+        viewPageAdapter?.setFragments(
             mutableListOf(BaseViewPagerAdapter.FragmentData(fragment = ErrorFragment().also {
                 it.arguments = Bundle().apply {
                     putParcelable(ErrorFragment.KEY_HTTP_ERROR_DATA, data)
                 }
             }))
+        )
     }
 
 

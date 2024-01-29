@@ -1,6 +1,5 @@
 package com.phantom.banguminote.detail.subject.related
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +12,7 @@ import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.databinding.FragmentSubjectRelatedBinding
 import com.phantom.banguminote.detail.subject.StickyItemDecoration
-import com.phantom.banguminote.detail.subject.SubjectFragment.Companion.KEY_SUBJECT_ID
+import com.phantom.banguminote.detail.subject.SubjectFragment
 import com.phantom.banguminote.detail.subject.SubjectViewModel
 
 class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
@@ -52,9 +51,10 @@ class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
 
     private val onItemClickListener =
         BaseQuickAdapter.OnItemClickListener<RelatedSubjectData> { adapter, view, position ->
-            findNavController().navigate(R.id.action_nav_to_activity_subject, Bundle().also {
-                it.putInt(KEY_SUBJECT_ID, adapter.items[position].id ?: 0)
-            })
+            findNavController().navigate(
+                R.id.action_nav_to_activity_subject,
+                SubjectFragment.createBundle(adapter.items[position].id ?: 0)
+            )
         }
 
 }

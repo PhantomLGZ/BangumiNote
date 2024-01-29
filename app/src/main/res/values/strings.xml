@@ -1,13 +1,48 @@
 <resources>
-    <string name="app_name">追番笔记</string>
+    <string name="app_name">番剧笔记</string>
 
     <string name="fragment_front">首页</string>
     <string name="fragment_home">主页</string>
+    <string name="fragment_search">搜索</string>
     <string name="fragment_me">我的</string>
 
     <string name="activity_subject">栏目</string>
     <string name="activity_character">角色</string>
     <string name="activity_person">人物</string>
+    <string name="activity_search">搜索</string>
+
+    <string name="type_anime">动画</string>
+    <string name="type_book">书籍</string>
+    <string name="type_music">音乐</string>
+    <string name="type_game">游戏</string>
+    <string name="type_real">影剧</string>
+
+    <string name="search_hint">关键字</string>
+    <string name="search_advance">高级</string>
+    <string name="search_advance_close">收起</string>
+
+    <string name="search_sort_match">匹配</string>
+    <string name="search_sort_score">分数</string>
+    <string name="search_sort_heat">热度</string>
+    <string name="search_sort_rank">排名</string>
+
+    <string name="search_range">%s - %s</string>
+    <string name="search_date">日期范围</string>
+    <string name="search_date_set">设置</string>
+    <string name="search_date_remove">移除</string>
+    <string name="search_date_before">%s之前</string>
+    <string name="search_date_after">%s之后</string>
+    <string name="search_score">评分范围</string>
+    <string name="search_score_greater">大于%.1f</string>
+    <string name="search_score_less">小于%.1f</string>
+    <string name="search_rank">排名范围</string>
+    <string name="search_rank_above">高于%s</string>
+    <string name="search_rank_below">低于%s</string>
+    <string name="search_error">设置颠倒</string>
+
+    <string name="search_tag_hint">输入标签名，点击标签移除</string>
+    <string name="search_tag_add">添加</string>
+    <string name="search_tag_error">标签已存在</string>
 
     <string name="subject_rating_score">%.1f</string>
     <string name="subject_rating_total">%d人评分</string>
@@ -40,5 +75,8 @@
     <string name="collection_read">读</string>
     <string name="collection_listen">听</string>
     <string name="collection_play">玩</string>
+
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_submit">确认</string>
 
 </resources>

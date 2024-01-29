@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/content_background"
+    android:clipToPadding="false"
+    android:foreground="?android:selectableItemBackground"
+    android:padding="4dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCover"
+        android:layout_width="80dp"
+        android:layout_height="112dp"
+        android:background="@color/content_background"
+        android:elevation="4dp"
+        android:foreground="?android:selectableItemBackground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_launcher_background" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivType"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:scaleType="centerCrop"
+        android:tint="@color/theme_background_translucent1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@drawable/round_local_movies_24" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="3"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_dark"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_weight="5"
+        app:layout_constraintLeft_toRightOf="@id/ivCover"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivCover"
+        tools:text="标题标题标题标题标题标题" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAirDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_gray_dark2"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        app:layout_constraintRight_toRightOf="@id/tvTitle"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        tools:text="日期" />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:progressTint="@color/rating_star_color"
+        android:secondaryProgressTint="@android:color/transparent"
+        android:stepSize="0.1"
+        app:layout_constraintBottom_toBottomOf="@id/ivCover"
+        app:layout_constraintLeft_toLeftOf="@id/tvTitle"
+        tools:rating="2.75" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:textColor="@color/rating_star_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+        app:layout_constraintStart_toEndOf="@id/ratingBar"
+        app:layout_constraintTop_toTopOf="@id/ratingBar"
+        tools:text="5.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_background"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/search_score"
+            android:textColor="@color/text_light"
+            android:textSize="16sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="32dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvGreater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/search_score_greater" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rbGreater"
+                style="@style/Theme.BangumiNote.RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="10"
+                android:progressBackgroundTint="@color/background_dark_translucent1"
+                android:progressTint="@color/rating_star_color"
+                android:rating="0"
+                android:secondaryProgressTint="@android:color/transparent"
+                android:stepSize="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGreater"
+                tools:rating="6.4" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLess"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/rbGreater"
+                tools:text="@string/search_score_less" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rbLess"
+                style="@style/Theme.BangumiNote.RatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="10"
+                android:progressBackgroundTint="@color/background_dark_translucent1"
+                android:progressTint="@color/rating_star_color"
+                android:rating="10"
+                android:secondaryProgressTint="@android:color/transparent"
+                android:stepSize="0.1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvLess"
+                tools:rating="6.4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/text_dark" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/theme_background"
+                android:text="@string/dialog_submit"
+                android:textColor="@color/text_light" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

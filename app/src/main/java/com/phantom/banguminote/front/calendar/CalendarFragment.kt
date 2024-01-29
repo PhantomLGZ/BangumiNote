@@ -11,7 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.databinding.FragmentCalendarBinding
-import java.util.Calendar
+import java.time.LocalDate
 
 class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
@@ -26,28 +26,30 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
     override fun init() {
         viewPageAdapter = BaseViewPagerAdapter(childFragmentManager, lifecycle).also { adapter ->
-            adapter.fragmentData = mutableListOf(
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 7) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 1) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 2) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 3) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 4) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 5) }
-                }),
-                BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
-                    f.arguments = Bundle().also { it.putInt(KEY_DAY, 6) }
-                }),
+            adapter.setFragments(
+                listOf(
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 7) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 1) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 2) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 3) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 4) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 5) }
+                    }),
+                    BaseViewPagerAdapter.FragmentData(fragment = CalendarAnimeListFragment().also { f ->
+                        f.arguments = Bundle().also { it.putInt(KEY_DAY, 6) }
+                    }),
+                )
             )
         }
         viewModel = ViewModelProvider(this)[CalendarViewModel::class.java]
@@ -64,7 +66,13 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
             TabLayoutMediator(tabLayout, viewPage) { tab, pos ->
                 tab.customView = getTabView(pos)
             }.attach()
-            tabLayout.getTabAt(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1)?.select()
+            tabLayout.getTabAt(
+                when (LocalDate.now().dayOfWeek.value) {
+                    in 1..6 -> LocalDate.now().dayOfWeek.value
+                    7 -> 0
+                    else -> 0
+                }
+            )?.select()
         }
     }
 

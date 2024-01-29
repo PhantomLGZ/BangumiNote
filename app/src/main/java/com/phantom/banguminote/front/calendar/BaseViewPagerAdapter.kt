@@ -14,7 +14,7 @@ class BaseViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
         val fragment: Fragment,
     )
 
-    var fragmentData = mutableListOf<FragmentData>()
+    private var fragmentData = mutableListOf<FragmentData>()
 
     override fun getItemCount(): Int = fragmentData.size
 
@@ -27,6 +27,12 @@ class BaseViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     @SuppressLint("NotifyDataSetChanged")
     fun addFragments(fragments: List<FragmentData>) {
         fragmentData.addAll(fragments)
+        notifyDataSetChanged()
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setFragments(fragments: List<FragmentData>) {
+        fragmentData = fragments.toMutableList()
         notifyDataSetChanged()
     }
 

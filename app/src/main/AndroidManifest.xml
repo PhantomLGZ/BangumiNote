@@ -27,6 +27,7 @@
         <activity android:name=".detail.subject.SubjectActivity" />
         <activity android:name=".detail.character.CharacterActivity" />
         <activity android:name=".detail.person.PersonActivity" />
+        <activity android:name=".search.SearchActivity" />
     </application>
 
 </manifest>

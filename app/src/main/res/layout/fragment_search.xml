@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/content_background"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            app:iconifiedByDefault="false"
+            app:layout_constraintEnd_toStartOf="@id/btAdvance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="@string/search_hint" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btAdvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/theme_background"
+            android:text="@string/search_advance"
+            android:textColor="@color/text_light"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/searchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/searchView"
+            app:layout_constraintTop_toTopOf="@id/searchView" />
+
+        <LinearLayout
+            android:id="@+id/layoutAdvance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/searchView"
+            tools:visibility="visible">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbMatch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/search_sort_match"
+                    android:textColor="@color/color_search_sort_text" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search_sort_score"
+                    android:textColor="@color/color_search_sort_text" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbHeat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search_sort_heat"
+                    android:textColor="@color/color_search_sort_text" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbRank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/search_sort_rank"
+                    android:textColor="@color/color_search_sort_text" />
+
+            </RadioGroup>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="8dp">
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/tbAnime"
+                    style="@style/SearchFilterToggle"
+                    android:checked="true"
+                    android:drawableStart="@drawable/round_local_movies_24"
+                    android:textOff="@string/type_anime"
+                    android:textOn="@string/type_anime" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/tbBook"
+                    style="@style/SearchFilterToggle"
+                    android:checked="true"
+                    android:drawableStart="@drawable/round_book_24"
+                    android:textOff="@string/type_book"
+                    android:textOn="@string/type_book" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/tbGame"
+                    style="@style/SearchFilterToggle"
+                    android:checked="true"
+                    android:drawableStart="@drawable/round_videogame_asset_24"
+                    android:textOff="@string/type_game"
+                    android:textOn="@string/type_game" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/tbMusic"
+                    style="@style/SearchFilterToggle"
+                    android:checked="true"
+                    android:drawableStart="@drawable/round_music_note_24"
+                    android:textOff="@string/type_music"
+                    android:textOn="@string/type_music" />
+
+                <androidx.appcompat.widget.AppCompatToggleButton
+                    android:id="@+id/tbReal"
+                    style="@style/SearchFilterToggle"
+                    android:checked="true"
+                    android:drawableStart="@drawable/round_live_tv_24"
+                    android:textOff="@string/type_real"
+                    android:textOn="@string/type_real" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:backgroundTint="@color/theme_background"
+                android:textColor="@color/text_light"
+                app:cornerRadius="4dp"
+                app:icon="@drawable/round_date_range_24"
+                app:iconGravity="textStart"
+                app:iconTint="@color/content_background"
+                tools:text="20120801 - 20120801" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btScore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/theme_background"
+                    android:textColor="@color/text_light"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/round_bar_chart_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/content_background"
+                    tools:text="3.2 - 9.9" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btRank"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/theme_background"
+                    android:textColor="@color/text_light"
+                    app:cornerRadius="4dp"
+                    app:icon="@drawable/round_trending_up_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/content_background"
+                    tools:text="1000 - 20000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etTag"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/background"
+                    android:layout_weight="1"
+                    android:hint="@string/search_tag_hint" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btTagAdd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/theme_color"
+                    android:text="@string/search_tag_add"
+                    android:textColor="@color/text_light"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                tools:listitem="@layout/item_tag" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchLayout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            tools:listitem="@layout/item_subject" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

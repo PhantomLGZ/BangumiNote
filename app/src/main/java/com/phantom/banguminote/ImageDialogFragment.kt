@@ -7,30 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
+import com.phantom.banguminote.base.BaseDialogFragment
 import com.phantom.banguminote.base.checkHttps
+import com.phantom.banguminote.databinding.DialogImageBinding
 
-class ImageDialogFragment : DialogFragment(R.layout.dialog_image) {
+class ImageDialogFragment : BaseDialogFragment<DialogImageBinding>() {
 
-    override fun onCreateView(
+    override fun inflateViewBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        view?.setOnClickListener(onClickListener)
-        return view
-    }
+        container: ViewGroup?
+    ): DialogImageBinding =
+        DialogImageBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         arguments?.getString(KEY_IMAGE_URL)?.also {
-            Glide.with(view)
-                .load(it.checkHttps())
-                .into(view.findViewById(R.id.ivImage))
+            binding?.ivImage?.also { iv ->
+                Glide.with(view)
+                    .load(it.checkHttps())
+                    .into(iv)
+            }
         }
+        binding?.ivImage?.setOnClickListener(onClickListener)
     }
 
     private val onClickListener = OnClickListener {

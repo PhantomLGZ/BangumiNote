@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_search"
+    app:startDestination="@id/nav_fragment_search">
+
+    <fragment
+        android:id="@+id/nav_fragment_search"
+        android:name="com.phantom.banguminote.search.SearchFragment"
+        android:label="@string/fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+    <action
+        android:id="@+id/action_nav_to_activity_subject"
+        app:destination="@id/nav_activity_subject" />
+
+    <activity
+        android:id="@+id/nav_activity_subject"
+        android:name="com.phantom.banguminote.detail.subject.SubjectActivity"
+        android:label="@string/activity_subject" />
+
+</navigation>

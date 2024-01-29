@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.google.android.flexbox.FlexboxItemDecoration
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -16,6 +17,7 @@ import com.phantom.banguminote.databinding.FragmentSubjectSummaryBinding
 import com.phantom.banguminote.databinding.LayoutDetailSummaryBinding
 import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.SubjectViewModel
+import com.phantom.banguminote.search.SearchActivity
 
 class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
@@ -63,7 +65,9 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
     private val onItemClickListener =
         BaseQuickAdapter.OnItemClickListener<TagsData> { adapter, view, position ->
-            // TODO
-            println("TEST ${adapter.items[position].name}")
+            findNavController().navigate(
+                R.id.action_nav_to_activity_search,
+                SearchActivity.createBundleWithTag(adapter.items[position].name)
+            )
         }
 }

@@ -5,18 +5,26 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.DialogFragment
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.R
 import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.BaseDialogFragment
+import com.phantom.banguminote.databinding.DialogPersonListBinding
 import com.phantom.banguminote.detail.person.PersonFragment
 import kotlinx.parcelize.Parcelize
 
-class PersonDialogFragment : DialogFragment(R.layout.dialog_person_list) {
+class PersonDialogFragment : BaseDialogFragment<DialogPersonListBinding>() {
+
+    override fun inflateViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): DialogPersonListBinding =
+        DialogPersonListBinding.inflate(inflater, container, false)
 
     @Parcelize
     data class DialogPersonData(
@@ -37,7 +45,7 @@ class PersonDialogFragment : DialogFragment(R.layout.dialog_person_list) {
                 }
             }
         }
-        view.findViewById<RecyclerView>(R.id.recyclerView).also { r ->
+        binding?.recyclerView?.also { r ->
             r.layoutManager = GridLayoutManager(context, 3)
             r.adapter = PersonDialogAdapter().also {
                 it.setOnItemClickListener(onItemClickListener)

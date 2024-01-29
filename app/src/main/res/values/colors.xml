@@ -21,12 +21,15 @@
 
     <color name="theme_background">@color/theme_color</color>
     <color name="theme_background_translucent">#AAFF8E99</color>
+    <color name="theme_background_translucent1">#33FF8E99</color>
     <color name="theme_background_light">#FFFDD0D5</color>
     <color name="theme_background_light2">#FFFFEAEC</color>
     <color name="background">#FFE3E3E3</color>
     <color name="content_background">#FFFFFFFF</color>
     <color name="content_background_translucent">#AAFFFFFF</color>
     <color name="background_dark_translucent">#AA000000</color>
+    <color name="background_dark_translucent1">#44000000</color>
+    <color name="background_dark">#FF222222</color>
 
     <color name="rating_bar_color">#FF06B5FF</color>
     <color name="rating_star_color">#FFF9A24D</color>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/theme_background"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/search_rank"
+            android:textColor="@color/text_light"
+            android:textSize="16sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="32dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAbove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/search_rank_above" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etAbove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:gravity="center"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@id/tvAbove"
+                tools:text="10000" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBelow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/etAbove"
+                tools:text="@string/search_rank_below" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etBelow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="32dp"
+                android:gravity="center"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@id/tvBelow"
+                tools:text="1000" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/text_dark" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btSubmit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="@color/theme_background"
+                android:text="@string/dialog_submit"
+                android:textColor="@color/text_light" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

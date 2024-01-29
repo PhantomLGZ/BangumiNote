@@ -2,6 +2,8 @@ package com.phantom.banguminote.base
 
 import android.content.Context
 import android.util.TypedValue
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 fun Float.spToPx(context: Context?): Float =
     context?.let {
@@ -22,6 +24,14 @@ fun Float.dpToPx(context: Context?): Float =
     } ?: 0f
 
 fun String.checkHttps(): String = this.replace("http:", "https:")
+
+val dateFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+fun String.toLocalDate(): LocalDate =
+    LocalDate.parse(this, dateFormatter)
+
+fun LocalDate.toFormattedString(): String =
+    dateFormatter.format(this)
 
 /**
  * copy from hutool

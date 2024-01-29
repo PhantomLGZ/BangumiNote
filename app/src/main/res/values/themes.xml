@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.BangumiNote" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
@@ -24,5 +24,22 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/text_dark2</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SearchFilterToggle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:backgroundTint">@color/color_toggle_background</item>
+        <item name="android:drawableTint">@color/color_toggle</item>
+        <item name="android:padding">6dp</item>
+        <item name="android:textColor">@color/color_toggle</item>
+    </style>
+
+    <style name="Theme.BangumiNote.RatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:progressDrawable">@drawable/rating_bar</item>
+        <item name="android:indeterminateDrawable">@drawable/rating_bar</item>
+        <item name="android:minHeight">32dip</item>
+        <item name="android:maxHeight">32dip</item>
     </style>
 </resources>

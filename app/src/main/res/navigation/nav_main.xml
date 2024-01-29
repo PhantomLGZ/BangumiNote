@@ -2,8 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/nav_fragment_home">
-
+    app:startDestination="@id/nav_fragment_search">
 
     <fragment
         android:id="@+id/nav_fragment_front"
@@ -16,6 +15,12 @@
         android:name="com.phantom.banguminote.home.HomeFragment"
         android:label="@string/fragment_home"
         tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_fragment_search"
+        android:name="com.phantom.banguminote.search.SearchFragment"
+        android:label="@string/fragment_search"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/nav_fragment_me"

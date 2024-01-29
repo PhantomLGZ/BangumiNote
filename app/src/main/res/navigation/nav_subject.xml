@@ -18,7 +18,8 @@
     <activity
         android:id="@+id/nav_activity_subject"
         android:name="com.phantom.banguminote.detail.subject.SubjectActivity"
-        android:label="@string/activity_subject" />
+        android:label="@string/activity_subject"
+        tools:layout="@layout/activity_subject" />
 
     <action
         android:id="@+id/action_nav_to_activity_character"
@@ -27,7 +28,8 @@
     <activity
         android:id="@+id/nav_activity_character"
         android:name="com.phantom.banguminote.detail.character.CharacterActivity"
-        android:label="@string/activity_character" />
+        android:label="@string/activity_character"
+        tools:layout="@layout/activity_character" />
 
     <action
         android:id="@+id/action_nav_to_activity_person"
@@ -36,6 +38,17 @@
     <activity
         android:id="@+id/nav_activity_person"
         android:name="com.phantom.banguminote.detail.person.PersonActivity"
-        android:label="@string/activity_person" />
+        android:label="@string/activity_person"
+        tools:layout="@layout/activity_person" />
+
+    <action
+        android:id="@+id/action_nav_to_activity_search"
+        app:destination="@id/nav_activity_search" />
+
+    <activity
+        android:id="@+id/nav_activity_search"
+        android:name="com.phantom.banguminote.search.SearchActivity"
+        android:label="@string/activity_search"
+        tools:layout="@layout/activity_search" />
 
 </navigation>
