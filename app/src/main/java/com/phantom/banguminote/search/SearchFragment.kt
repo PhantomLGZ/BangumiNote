@@ -105,7 +105,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     }
 
     private fun syncReq() {
-        println("TEST ${viewModel.searchReq.value}")
         viewModel.searchReq.value?.also { req ->
             if (req.keyword.isNotBlank()) {
                 searchReq.keyword = req.keyword

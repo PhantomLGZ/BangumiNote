@@ -101,11 +101,13 @@ class SearchDateDialogFragment(submit: (after: String?, before: String?) -> Unit
             }
 
             binding?.btSubmit -> {
-                if (before?.isAfter(after) == true) {
+                val b = before
+                val a = after
+                if (b != null && a!= null && !b.isAfter(a)) {
+                    showToast(getString(R.string.search_error))
+                } else {
                     submit(after?.toFormattedString(), before?.toFormattedString())
                     dismiss()
-                } else {
-                    showToast(getString(R.string.search_error))
                 }
             }
         }

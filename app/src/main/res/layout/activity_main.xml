@@ -20,12 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/content_background"
-        app:itemTextColor="@color/color_nav_item"
-        app:itemIconTint="@color/color_nav_item"
-        app:itemIconSize="45dp"
-        app:itemRippleColor="@color/item_selected"
         app:itemActiveIndicatorStyle="@null"
+        app:itemIconSize="38dp"
+        app:itemIconTint="@color/color_nav_item"
+        app:itemRippleColor="@color/item_selected"
+        app:itemTextColor="@color/color_nav_item"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/main_bottom_nav"/>
+        app:menu="@menu/main_bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

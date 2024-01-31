@@ -6,10 +6,11 @@
     <color name="theme_color">#FFFF8E99</color>
 
     <color name="text_theme">@color/theme_color</color>
+    <color name="text_theme_translucent">#AAFF8E99</color>
 
     <color name="text_light">#FFFFFFFF</color>
     <color name="text_light2">#FFEEEEEE</color>
-    <color name="text_translucent_light">#66FFFFFF</color>
+    <color name="text_light_translucent">#66FFFFFF</color>
 
     <color name="text_dark">#FF000000</color>
     <color name="text_dark2">#FF222222</color>

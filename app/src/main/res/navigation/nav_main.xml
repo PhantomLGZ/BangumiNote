@@ -43,4 +43,14 @@
         android:name="com.phantom.banguminote.detail.subject.SubjectActivity"
         android:label="@string/activity_subject" />
 
+    <action
+        android:id="@+id/action_nav_to_activity_login"
+        app:destination="@id/nav_activity_login" />
+
+    <activity
+        android:id="@+id/nav_activity_login"
+        android:name="com.phantom.banguminote.me.login.LoginActivity"
+        android:label="@string/activity_login"
+        tools:layout="@layout/activity_login" />
+
 </navigation>

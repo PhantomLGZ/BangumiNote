@@ -13,6 +13,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectPersonData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.front.calendar.CalendarRes
 import com.phantom.banguminote.detail.subject.data.SubjectData
+import com.phantom.banguminote.me.data.UserData
 import com.phantom.banguminote.search.SearchReq
 import com.phantom.banguminote.search.SearchRes
 import retrofit2.Response
@@ -63,5 +64,8 @@ interface IBangumiHttpServer : IHttpServer {
 
     @GET("v0/persons/{person_id}/characters")
     suspend fun personCharacter(@Path("person_id") id: Int): Response<List<PersonCharacterData>>
+
+    @GET("v0/me")
+    suspend fun me(): Response<UserData>
 
 }

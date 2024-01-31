@@ -3,7 +3,7 @@
 
     <item
         android:id="@id/nav_fragment_calendar"
-        android:icon="@drawable/round_deck_50"
+        android:icon="@drawable/round_deck_32"
         android:title="@string/fragment_front" />
     <item
         android:id="@id/nav_fragment_search"
@@ -11,7 +11,7 @@
         android:title="@string/fragment_search" />
     <item
         android:id="@id/nav_fragment_me"
-        android:icon="@drawable/round_person_50"
+        android:icon="@drawable/round_person_32"
         android:title="@string/fragment_me" />
 
 </menu>

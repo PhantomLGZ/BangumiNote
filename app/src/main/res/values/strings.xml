@@ -10,6 +10,7 @@
     <string name="activity_character">角色</string>
     <string name="activity_person">人物</string>
     <string name="activity_search">搜索</string>
+    <string name="activity_login">搜索</string>
 
     <string name="type_anime">动画</string>
     <string name="type_book">书籍</string>
@@ -78,5 +79,13 @@
 
     <string name="dialog_cancel">取消</string>
     <string name="dialog_submit">确认</string>
+
+    <string name="login_email_hint">Email地址</string>
+    <string name="login_password_hint">密码</string>
+    <string name="login_code_hint">验证码</string>
+    <string name="login_submit">登录</string>
+    <string name="auth_error">错误</string>
+
+    <string name="me_name_hint">点击提供授权</string>
 
 </resources>

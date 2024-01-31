@@ -5,14 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
+import com.phantom.banguminote.base.LoadingDialogFragment
+import com.phantom.banguminote.base.dpToPx
+import com.phantom.banguminote.base.getUserToken
+import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.databinding.FragmentMeBinding
+import com.phantom.banguminote.me.data.UserData
+import kotlin.math.roundToInt
 
 class MeFragment : BaseFragment<FragmentMeBinding>() {
 
-    private var viewModel: MeViewModel? = null
+    private val viewModel: MeViewModel by viewModels()
+    private var dialog: LoadingDialogFragment? = null
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -22,20 +34,64 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this)[MeViewModel::class.java]
-        viewModel?.run {
-            error.observe(viewLifecycleOwner) { showToast(it.toString()) }
-            authorizeRes.observe(viewLifecycleOwner) {}
+        viewModel.run {
+            error.observe(viewLifecycleOwner) {
+                dialog?.dismiss()
+                dialog = null
+                showToast(it.toString())
+            }
+            userRes.observe(viewLifecycleOwner) { setUserData(it) }
+        }
+        binding?.ivAvatar?.let { iv ->
+            Glide.with(this)
+                .load(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_acatar_null))
+                .apply(
+                    RequestOptions.bitmapTransform(
+                        RoundedCorners(8f.dpToPx(context).roundToInt())
+                    )
+                )
+                .into(iv)
         }
         binding?.run {
-            btTest.setOnClickListener(onClickListener)
+            layoutMe.setOnClickListener(onClickListener)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding?.also {
+            if (it.tvName.text.isBlank() && context?.getUserToken()?.isNotBlank() == true) {
+                viewModel.me()
+                dialog = LoadingDialogFragment()
+                dialog?.show(childFragmentManager, "")
+            }
+        }
+    }
+
+    private fun setUserData(data: UserData) {
+        binding?.ivAvatar?.let { iv ->
+            Glide.with(this)
+                .load(data.avatar?.medium)
+                .apply(
+                    RequestOptions.bitmapTransform(
+                        RoundedCorners(8f.dpToPx(context).roundToInt())
+                    )
+                )
+                .into(iv)
+        }
+        binding?.tvName?.text = data.nickname
+        binding?.tvId?.text = data.username?.takeIf { it.isNotBlank() } ?: data.id?.toString()
+        context?.setUserName(binding?.tvId?.text?.toString() ?: "")
+        dialog?.dismiss()
+        dialog = null
     }
 
     private val onClickListener = OnClickListener {
         when (it.id) {
-            R.id.btTest -> {
-//                viewModel?.authorize(AuthorizationReq())
+            R.id.layoutMe -> {
+                if (binding?.tvName?.text.isNullOrBlank()) {
+                    findNavController().navigate(R.id.action_nav_to_activity_login)
+                }
             }
         }
     }

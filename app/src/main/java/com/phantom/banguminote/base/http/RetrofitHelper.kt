@@ -6,9 +6,6 @@ import com.google.gson.JsonDeserializer
 import com.phantom.banguminote.BuildConfig
 import com.phantom.banguminote.base.unicodeToString
 import com.phantom.banguminote.data.HttpErrorData
-import com.phantom.banguminote.data.InfoDataType
-import com.phantom.banguminote.data.InfoValueData
-import com.phantom.banguminote.data.ValuesData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.internal.platform.Platform
@@ -41,6 +38,12 @@ object RetrofitHelper {
 
     private val retrofit: Retrofit.Builder = retrofitBuild()
 
+    private var accessToken = ""
+
+    fun setAccessToken(token: String) {
+        accessToken = token
+    }
+
     private fun retrofitBuild(): Retrofit.Builder =
         Retrofit.Builder()
             .client(
@@ -63,6 +66,17 @@ object RetrofitHelper {
                         } else {
                             HttpLoggingInterceptor.Level.NONE
                         }
+                    })
+                    .addInterceptor(Interceptor {
+                        return@Interceptor it.proceed(
+                            if (accessToken.isNotBlank()) {
+                                it.request().newBuilder()
+                                    .header("Authorization", "Bearer $accessToken")
+                                    .build()
+                            } else {
+                                it.request()
+                            }
+                        )
                     })
                     .build()
             )

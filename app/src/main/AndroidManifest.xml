@@ -11,6 +11,7 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:hardwareAccelerated="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BangumiNote"
@@ -28,6 +29,7 @@
         <activity android:name=".detail.character.CharacterActivity" />
         <activity android:name=".detail.person.PersonActivity" />
         <activity android:name=".search.SearchActivity" />
+        <activity android:name=".me.login.LoginActivity" />
     </application>
 
 </manifest>

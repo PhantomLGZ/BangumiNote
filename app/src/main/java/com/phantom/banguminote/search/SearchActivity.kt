@@ -16,7 +16,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
         super.onCreate(savedInstanceState)
         intent.extras?.getString(KEY_TAG)?.also {
             viewModel.searchReq.value = SearchReq(filter = SearchFilter(tag = mutableListOf(it)))
-            println("TEST ${viewModel.searchReq.value}")
         }
     }
 
