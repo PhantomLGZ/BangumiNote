@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.detail.InfoboxAdapter
 import com.phantom.banguminote.R
-import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.data.InfoData

@@ -9,6 +9,7 @@ import com.phantom.banguminote.R
 import com.phantom.banguminote.databinding.FragmentSubjectBinding
 import com.phantom.banguminote.detail.BaseDetailFragment
 import com.phantom.banguminote.base.BaseViewPagerAdapter.FragmentData
+import com.phantom.banguminote.base.getUserName
 import com.phantom.banguminote.detail.subject.character.SubjectCharacterFragment
 import com.phantom.banguminote.detail.subject.collection.SubjectCollectionFragment
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
@@ -17,6 +18,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.info.SubjectInfoFragment
 import com.phantom.banguminote.detail.subject.related.SubjectRelatedFragment
 import com.phantom.banguminote.detail.subject.summary.SubjectSummaryFragment
+import com.phantom.banguminote.me.collection.CollectionItemReq
 
 class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBinding>() {
 
@@ -53,6 +55,9 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
             v.subjectCharacter(id)
             v.subjectRelatedSubjects(id)
             v.subjectPersons(id)
+            context?.getUserName()?.takeIf { it.isNotBlank() }?.also {
+                v.getCollectionInfo(CollectionItemReq(it, id))
+            }
         }
     }
 

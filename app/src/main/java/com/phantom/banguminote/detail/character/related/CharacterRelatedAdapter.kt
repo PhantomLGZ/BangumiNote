@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.phantom.banguminote.R
-import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.detail.character.data.CharacterPersonData
 import com.phantom.banguminote.detail.character.data.CharacterRelatedData
 

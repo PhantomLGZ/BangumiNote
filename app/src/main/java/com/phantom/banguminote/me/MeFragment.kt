@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.tabs.TabLayoutMediator
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.LoadingDialogFragment
@@ -18,12 +19,14 @@ import com.phantom.banguminote.base.dpToPx
 import com.phantom.banguminote.base.getUserToken
 import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.databinding.FragmentMeBinding
+import com.phantom.banguminote.me.collection.CollectionViewPagerAdapter
 import com.phantom.banguminote.me.data.UserData
 import kotlin.math.roundToInt
 
 class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     private val viewModel: MeViewModel by viewModels()
+    private var adapter: CollectionViewPagerAdapter? = null
     private var dialog: LoadingDialogFragment? = null
 
     override fun inflateViewBinding(
@@ -34,6 +37,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        adapter = CollectionViewPagerAdapter(childFragmentManager, lifecycle)
         viewModel.run {
             error.observe(viewLifecycleOwner) {
                 dialog?.dismiss()
@@ -42,18 +46,19 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
             }
             userRes.observe(viewLifecycleOwner) { setUserData(it) }
         }
-        binding?.ivAvatar?.let { iv ->
-            Glide.with(this)
+        binding?.also { b ->
+            Glide.with(this@MeFragment)
                 .load(AppCompatResources.getDrawable(requireContext(), R.drawable.ic_acatar_null))
                 .apply(
-                    RequestOptions.bitmapTransform(
-                        RoundedCorners(8f.dpToPx(context).roundToInt())
-                    )
+                    RequestOptions.bitmapTransform(RoundedCorners(8f.dpToPx(context).roundToInt()))
                 )
-                .into(iv)
-        }
-        binding?.run {
-            layoutMe.setOnClickListener(onClickListener)
+                .into(b.ivAvatar)
+            b.layoutMe.setOnClickListener(onClickListener)
+            b.viewPage.adapter = adapter
+            b.viewPage.isUserInputEnabled = false
+            TabLayoutMediator(b.tabLayout, b.viewPage) { tab, position ->
+                tab.text = adapter?.getSubjectType(position)?.let { getTitle(it) }
+            }.attach()
         }
     }
 
@@ -85,6 +90,16 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         dialog?.dismiss()
         dialog = null
     }
+
+    private fun getTitle(type: Int): String =
+        when (type) {
+            1 -> getString(R.string.type_book)
+            2 -> getString(R.string.type_anime)
+            3 -> getString(R.string.type_music)
+            4 -> getString(R.string.type_game)
+            6 -> getString(R.string.type_real)
+            else -> ""
+        }
 
     private val onClickListener = OnClickListener {
         when (it.id) {

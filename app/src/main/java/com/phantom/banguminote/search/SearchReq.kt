@@ -1,7 +1,7 @@
 package com.phantom.banguminote.search
 
 data class SearchReq(
-    var keyword: String = "",
+    var keyword: String? = null,
     var sort: String = "", // """match" / "score"↓ / "heat"↓ / "rank"↑
     var filter: SearchFilter = SearchFilter(),
 )

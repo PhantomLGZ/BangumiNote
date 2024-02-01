@@ -7,27 +7,68 @@
     android:background="@color/content_background"
     android:clipToPadding="false"
     android:foreground="?android:selectableItemBackground"
-    android:padding="4dp">
+    android:paddingBottom="4dp">
+
+    <LinearLayout
+        android:id="@+id/layoutCollection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/theme_background"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rbMyRate"
+            style="@style/Theme.BangumiNote.RatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:numStars="10"
+            android:progressBackgroundTint="@color/background_dark_translucent1"
+            android:progressTint="@color/rating_star_color3"
+            android:rating="0"
+            android:secondaryProgressTint="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvGreater"
+            tools:rating="8" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:textColor="@color/text_light"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="6 / 13" />
+
+    </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivCover"
         android:layout_width="80dp"
         android:layout_height="112dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@color/content_background"
         android:elevation="4dp"
         android:foreground="?android:selectableItemBackground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutCollection"
         tools:src="@drawable/ic_launcher_background" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivType"
         android:layout_width="112dp"
         android:layout_height="112dp"
+        android:layout_marginEnd="4dp"
         android:scaleType="centerCrop"
         android:tint="@color/theme_background_translucent1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivCover"
         tools:src="@drawable/round_local_movies_24" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -86,5 +127,15 @@
         app:layout_constraintStart_toEndOf="@id/ratingBar"
         app:layout_constraintTop_toTopOf="@id/ratingBar"
         tools:text="5.5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivCover"
+        tools:listitem="@layout/item_tag" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

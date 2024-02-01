@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.phantom.banguminote.R
-import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 
 class SubjectRelatedGroupedAdapter :

@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.R
-import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.databinding.FragmentPersonCharacterBinding

@@ -11,8 +11,9 @@ import com.phantom.banguminote.detail.person.data.PersonRelatedData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectPersonData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
-import com.phantom.banguminote.front.calendar.CalendarRes
+import com.phantom.banguminote.calendar.CalendarRes
 import com.phantom.banguminote.detail.subject.data.SubjectData
+import com.phantom.banguminote.me.collection.CollectionItemRes
 import com.phantom.banguminote.me.data.UserData
 import com.phantom.banguminote.search.SearchReq
 import com.phantom.banguminote.search.SearchRes
@@ -67,5 +68,20 @@ interface IBangumiHttpServer : IHttpServer {
 
     @GET("v0/me")
     suspend fun me(): Response<UserData>
+
+    @GET("v0/users/{username}/collections")
+    suspend fun getCollections(
+        @Path("username") username: String,
+        @Query("subject_type") subjectType: Int,
+        @Query("type") collectionType: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+    ): Response<PageResData<CollectionItemRes>>
+
+    @GET("v0/users/{username}/collections/{subject_id}")
+    suspend fun getCollectionInfo(
+        @Path("username") username: String,
+        @Path("subject_id") subjectId: Int,
+    ): Response<CollectionItemRes>
 
 }

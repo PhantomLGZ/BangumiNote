@@ -1,26 +1,37 @@
 package com.phantom.banguminote.detail.subject.collection
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.chad.library.adapter4.BaseQuickAdapter
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.DefaultValueFormatter
 import com.github.mikephil.charting.formatter.ValueFormatter
+import com.google.android.flexbox.FlexboxItemDecoration
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
+import com.phantom.banguminote.base.TagAdapter
 import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.base.spToPx
 import com.phantom.banguminote.databinding.FragmentSubjectCollectionBinding
 import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.SubjectViewModel
+import com.phantom.banguminote.getCollectionTypeName
+import com.phantom.banguminote.getSubjectActionName
+import com.phantom.banguminote.me.collection.CollectionItemRes
+import com.phantom.banguminote.search.SearchActivity
 import kotlin.math.roundToInt
 
 class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>() {
 
-    private var viewModel: SubjectViewModel? = null
+    private val viewModel: SubjectViewModel by viewModels({ requireParentFragment() })
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -29,22 +40,17 @@ class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>
         FragmentSubjectCollectionBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
-        viewModel?.subjectRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
+        }
+        viewModel.collectionInfoRes.setDataOrObserve(viewLifecycleOwner) {
+            setMyCollectionData(it)
         }
     }
 
     private fun setData(data: SubjectData) {
         binding?.also { b ->
-            val type = when (data.type) {
-                1 -> getString(R.string.collection_read)
-                2 -> getString(R.string.collection_watch)
-                3 -> getString(R.string.collection_listen)
-                4 -> getString(R.string.collection_play)
-                6 -> getString(R.string.collection_watch)
-                else -> ""
-            }
+            val type = context?.getSubjectActionName(data.type)
             b.tvWish.text = getString(R.string.collection_wish, type)
             b.tvWishCount.text = data.collection?.wish.toString()
             b.tvDoing.text = getString(R.string.collection_doing, type)
@@ -58,7 +64,6 @@ class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>
             b.tvScore.text = getString(R.string.subject_rating_score, data.rating?.score ?: 0.0)
             b.tvRatingTotal.text =
                 getString(R.string.subject_rating_total, data.rating?.total ?: 0)
-
 
             b.barChart.also { chart ->
                 chart.setScaleEnabled(false)
@@ -106,5 +111,51 @@ class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>
             }
         }
     }
+
+    private fun setMyCollectionData(data: CollectionItemRes) {
+        binding?.also { b ->
+            b.layoutMyCollection.visibility = View.VISIBLE
+            b.tvMyCollection.text = context?.getCollectionTypeName(data.type, data.subject_type)
+            b.tvEps.visibility = if ((data.subject?.eps ?: 0) == 0) {
+                View.GONE
+            } else {
+                b.tvEps.text = getString(
+                    R.string.collection_eps, data.ep_status, data.subject?.eps
+                )
+                View.VISIBLE
+            }
+            val rate = data.rate?.toFloat() ?: 0f
+            b.rbMyRate.visibility = if (rate == 0f) View.GONE else View.VISIBLE
+            b.rbMyRate.rating = rate
+            b.tvComment.visibility = if (data.comment.isNullOrBlank()) View.GONE else View.VISIBLE
+            b.tvComment.text = data.comment
+            b.rvTag.visibility = if (data.tags.isNullOrEmpty()) View.GONE else View.VISIBLE
+            if (data.tags?.isNotEmpty() == true) {
+                b.rvTag.also { rv ->
+                    rv.layoutManager = FlexboxLayoutManager(context)
+                    rv.addItemDecoration(FlexboxItemDecoration(context).also {
+                        it.setDrawable(
+                            AppCompatResources.getDrawable(
+                                requireContext(),
+                                R.drawable.flexbox_divider
+                            )
+                        )
+                    })
+                    rv.adapter = TagAdapter().also {
+                        it.setOnItemClickListener(onTagItemClickListener)
+                        it.submitList(data.tags)
+                    }
+                }
+            }
+        }
+    }
+
+    private val onTagItemClickListener =
+        BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
+            findNavController().navigate(
+                R.id.action_nav_to_activity_search,
+                SearchActivity.createBundleWithTag(adapter.items[position])
+            )
+        }
 
 }

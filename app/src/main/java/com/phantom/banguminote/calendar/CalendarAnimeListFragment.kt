@@ -1,27 +1,25 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.calendar
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.chad.library.adapter4.loadState.LoadState
-import com.phantom.banguminote.TransparentDividerItemDecoration
-import com.phantom.banguminote.ImageDialogFragment
-import com.phantom.banguminote.ImageDialogFragment.Companion.KEY_IMAGE_URL
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.ImageDialogFragment
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.databinding.FragmentCalendarAnimeListBinding
-import com.phantom.banguminote.front.calendar.CalendarFragment.Companion.KEY_DAY
 import com.phantom.banguminote.detail.subject.SubjectFragment
 
 class CalendarAnimeListFragment :
     BaseFragment<FragmentCalendarAnimeListBinding>() {
 
-    private var viewModel: CalendarViewModel? = null
+    private val viewModel: CalendarViewModel by viewModels({ requireParentFragment() })
     private var day = 0
     private val mAdapter = CalendarAnimeAdapter()
     private lateinit var helper: QuickAdapterHelper
@@ -40,8 +38,7 @@ class CalendarAnimeListFragment :
         }
         helper = QuickAdapterHelper.Builder(mAdapter)
             .build()
-        viewModel = parentFragment?.let { ViewModelProvider(it)[CalendarViewModel::class.java] }
-        viewModel?.apply {
+        viewModel.apply {
             error.observe(viewLifecycleOwner) { binding?.refreshLayout?.isRefreshing = false }
             calendarRes.observe(viewLifecycleOwner) { setCalendarData(it) }
         }
@@ -62,7 +59,7 @@ class CalendarAnimeListFragment :
 
     override fun onResume() {
         super.onResume()
-        viewModel?.calendarRes?.value?.takeIf { it.isNotEmpty() }?.also {
+        viewModel.calendarRes.value?.takeIf { it.isNotEmpty() }?.also {
             setCalendarData(it)
         }
     }
@@ -87,11 +84,18 @@ class CalendarAnimeListFragment :
         BaseQuickAdapter.OnItemChildClickListener<AnimeItemInfo> { adapter, view, position ->
             val url = adapter.items[position].images?.large
             if (url?.isNotBlank() == true) {
-                ImageDialogFragment().also {
-                    it.arguments = Bundle().also { args ->
-                        args.putString(KEY_IMAGE_URL, url)
-                    }
-                }.show(childFragmentManager, "ImageDialog")
+                ImageDialogFragment.createFragment(url)
+                    .show(childFragmentManager, "ImageDialog")
             }
         }
+
+    companion object {
+
+        const val KEY_DAY = "Day"
+
+        fun createFragment(day: Int) =
+            CalendarAnimeListFragment().also { f ->
+                f.arguments = Bundle().also { it.putInt(KEY_DAY, day) }
+            }
+    }
 }

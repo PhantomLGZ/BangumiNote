@@ -1,4 +1,4 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.calendar
 
 import android.view.LayoutInflater
 import android.view.View
@@ -77,7 +77,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
     }
 
     companion object {
-        const val KEY_DAY = "Day"
 
         val weekDay = listOf(
             WeekDayInfo("Sun", "星期日", "日", 7),

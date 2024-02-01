@@ -8,6 +8,8 @@ import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectPersonData
+import com.phantom.banguminote.me.collection.CollectionItemReq
+import com.phantom.banguminote.me.collection.CollectionItemRes
 
 class SubjectViewModel : BaseViewModel() {
 
@@ -17,6 +19,7 @@ class SubjectViewModel : BaseViewModel() {
     val subjectPersonRes = MutableLiveData<List<SubjectPersonData>>()
     val subjectCharacterRes = MutableLiveData<List<SubjectCharacterData>>()
     val subjectRelatedSubjectRes = MutableLiveData<List<RelatedSubjectData>>()
+    val collectionInfoRes = MutableLiveData<CollectionItemRes>()
 
     fun subject(id: Int) {
         requestWithCoroutine(id, subjectRes) { iHttpServer.subject(it) }
@@ -31,7 +34,19 @@ class SubjectViewModel : BaseViewModel() {
     }
 
     fun subjectRelatedSubjects(id: Int) {
-        requestWithCoroutine(id, subjectRelatedSubjectRes) { iHttpServer.subjectRelatedSubjects(it) }
+        requestWithCoroutine(
+            id,
+            subjectRelatedSubjectRes
+        ) { iHttpServer.subjectRelatedSubjects(it) }
+    }
+
+    fun getCollectionInfo(req: CollectionItemReq) {
+        requestWithCoroutine(req, collectionInfoRes) {
+            iHttpServer.getCollectionInfo(
+                it.username,
+                it.subject_id
+            )
+        }
     }
 
 }

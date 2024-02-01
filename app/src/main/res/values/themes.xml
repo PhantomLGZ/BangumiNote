@@ -39,7 +39,7 @@
     <style name="Theme.BangumiNote.RatingBar" parent="Widget.AppCompat.RatingBar">
         <item name="android:progressDrawable">@drawable/rating_bar</item>
         <item name="android:indeterminateDrawable">@drawable/rating_bar</item>
-        <item name="android:minHeight">32dip</item>
-        <item name="android:maxHeight">32dip</item>
+        <item name="android:minHeight">24dip</item>
+        <item name="android:maxHeight">24dip</item>
     </style>
 </resources>

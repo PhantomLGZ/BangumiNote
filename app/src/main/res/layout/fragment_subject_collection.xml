@@ -16,6 +16,83 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/layoutMyCollection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="@color/theme_background_light2"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_background"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvMyCollection"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="想看" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvEps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="6 / 12" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rbMyRate"
+                    style="@style/Theme.BangumiNote.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="8dp"
+                    android:isIndicator="true"
+                    android:numStars="10"
+                    android:progressBackgroundTint="@color/background_dark_translucent1"
+                    android:progressTint="@color/rating_star_color2"
+                    android:rating="0"
+                    android:secondaryProgressTint="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvGreater"
+                    tools:rating="8" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:textColor="@color/text_dark"
+                    android:textSize="14sp"
+                    tools:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:padding="8dp"
+                    tools:listitem="@layout/item_tag" />
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background"

@@ -1,4 +1,4 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.calendar
 
 import com.phantom.banguminote.data.CollectionData
 import com.phantom.banguminote.data.ImageData

@@ -15,10 +15,11 @@ import com.chad.library.adapter4.loadState.LoadState
 import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.google.android.flexbox.FlexboxItemDecoration
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import com.phantom.banguminote.R
-import com.phantom.banguminote.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
+import com.phantom.banguminote.base.ImageDialogFragment
+import com.phantom.banguminote.base.TagAdapter
 import com.phantom.banguminote.data.PageReqData
 import com.phantom.banguminote.data.PageResData
 import com.phantom.banguminote.databinding.FragmentSearchBinding
@@ -31,7 +32,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val viewModel: SearchViewModel by activityViewModels()
     private val mAdapter = SearchAdapter()
-    private val tagAdapter = SearchTagAdapter()
+    private val tagAdapter = TagAdapter()
     private var helper: QuickAdapterHelper? = null
     private val limit = 10
     private var offset = 0
@@ -45,6 +46,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun init() {
         mAdapter.setOnItemClickListener(onItemClickListener)
+        mAdapter.addOnItemChildClickListener(R.id.ivCover, onItemChildClickListener)
         helper = QuickAdapterHelper.Builder(mAdapter)
             .setTrailingLoadStateAdapter(onTrailingListener)
             .build()
@@ -52,7 +54,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             b.searchView.setOnQueryTextListener(onQueryTextListener)
             b.refreshLayout.also {
                 it.setOnRefreshListener {
-                    searchReq.keyword = binding?.searchView?.query?.toString() ?: ""
+                    searchReq.keyword =
+                        binding?.searchView?.query?.toString()?.takeIf { it.isNotBlank() }
                     doNewSearch()
                 }
             }
@@ -62,9 +65,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 rv.addItemDecoration(TransparentDividerItemDecoration.vertical(requireContext()))
             }
             b.rvTag.also { rv ->
-                rv.layoutManager = FlexboxLayoutManager(context).also {
-                    it.justifyContent = JustifyContent.SPACE_AROUND
-                }
+                rv.layoutManager = FlexboxLayoutManager(context)
                 rv.addItemDecoration(FlexboxItemDecoration(context).also {
                     it.setDrawable(
                         AppCompatResources.getDrawable(
@@ -106,7 +107,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun syncReq() {
         viewModel.searchReq.value?.also { req ->
-            if (req.keyword.isNotBlank()) {
+            if (!req.keyword.isNullOrBlank()) {
                 searchReq.keyword = req.keyword
                 binding?.searchView?.setQuery(req.keyword, false)
             }
@@ -339,7 +340,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val onQueryTextListener = object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
-            searchReq.keyword = query ?: ""
+            searchReq.keyword = query?.takeIf { it.isNotBlank() }
             doNewSearch()
             return true
         }
@@ -353,6 +354,15 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 R.id.action_nav_to_activity_subject,
                 SubjectFragment.createBundle(adapter.items[position].id)
             )
+        }
+
+    private val onItemChildClickListener =
+        BaseQuickAdapter.OnItemChildClickListener<SearchRes> { adapter, view, position ->
+            val url = adapter.items[position].image
+            if (url?.isNotBlank() == true) {
+                ImageDialogFragment.createFragment(url)
+                    .show(childFragmentManager, "ImageDialog")
+            }
         }
 
     private val onTagItemClickListener =

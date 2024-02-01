@@ -1,4 +1,4 @@
-package com.phantom.banguminote
+package com.phantom.banguminote.base
 
 import android.graphics.Bitmap
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool

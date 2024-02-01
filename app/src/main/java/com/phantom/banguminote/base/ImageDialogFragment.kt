@@ -1,4 +1,4 @@
-package com.phantom.banguminote
+package com.phantom.banguminote.base
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,8 +8,6 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.phantom.banguminote.base.BaseDialogFragment
-import com.phantom.banguminote.base.checkHttps
 import com.phantom.banguminote.databinding.DialogImageBinding
 
 class ImageDialogFragment : BaseDialogFragment<DialogImageBinding>() {
@@ -39,5 +37,13 @@ class ImageDialogFragment : BaseDialogFragment<DialogImageBinding>() {
 
     companion object {
         const val KEY_IMAGE_URL = "KEY_IMAGE_URL"
+
+        fun createFragment(url: String): ImageDialogFragment =
+            ImageDialogFragment().also {
+                it.arguments = Bundle().also { args ->
+                    args.putString(KEY_IMAGE_URL, url)
+                }
+            }
+
     }
 }

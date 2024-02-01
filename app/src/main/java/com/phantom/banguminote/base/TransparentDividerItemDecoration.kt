@@ -1,8 +1,9 @@
-package com.phantom.banguminote
+package com.phantom.banguminote.base
 
 import android.content.Context
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.phantom.banguminote.R
 
 class TransparentDividerItemDecoration(context: Context, orientation: Int = VERTICAL) :
     DividerItemDecoration(context, orientation) {

@@ -2,6 +2,7 @@
     <string name="app_name">番剧笔记</string>
 
     <string name="fragment_front">首页</string>
+    <string name="fragment_calendar">放送</string>
     <string name="fragment_home">主页</string>
     <string name="fragment_search">搜索</string>
     <string name="fragment_me">我的</string>
@@ -10,7 +11,7 @@
     <string name="activity_character">角色</string>
     <string name="activity_person">人物</string>
     <string name="activity_search">搜索</string>
-    <string name="activity_login">搜索</string>
+    <string name="activity_login">授权</string>
 
     <string name="type_anime">动画</string>
     <string name="type_book">书籍</string>
@@ -76,6 +77,8 @@
     <string name="collection_read">读</string>
     <string name="collection_listen">听</string>
     <string name="collection_play">玩</string>
+
+    <string name="collection_eps">%d / %d</string>
 
     <string name="dialog_cancel">取消</string>
     <string name="dialog_submit">确认</string>

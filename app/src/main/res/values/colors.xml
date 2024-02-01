@@ -34,7 +34,8 @@
 
     <color name="rating_bar_color">#FF06B5FF</color>
     <color name="rating_star_color">#FFF9A24D</color>
-    <color name="rating_star_color2">#FF00BF</color>
+    <color name="rating_star_color2">@color/theme_color</color>
+    <color name="rating_star_color3">#FFFFFFFF</color>
 
     <color name="wish_background">#FF5C4AFF</color>
     <color name="wish_background_light">#BAB3FF</color>

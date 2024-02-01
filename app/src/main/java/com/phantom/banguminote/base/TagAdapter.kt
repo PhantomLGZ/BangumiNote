@@ -1,4 +1,4 @@
-package com.phantom.banguminote.search
+package com.phantom.banguminote.base
 
 import android.content.Context
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.phantom.banguminote.R
 
-class SearchTagAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
+class TagAdapter : BaseQuickAdapter<String, QuickViewHolder>() {
 
     override fun onCreateViewHolder(
         context: Context,

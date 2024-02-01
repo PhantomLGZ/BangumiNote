@@ -1,4 +1,4 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.calendar
 
 import android.content.Context
 import android.view.ViewGroup

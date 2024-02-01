@@ -30,8 +30,8 @@
 
     <fragment
         android:id="@+id/nav_fragment_calendar"
-        android:name="com.phantom.banguminote.front.calendar.CalendarFragment"
-        android:label="临时首页"
+        android:name="com.phantom.banguminote.calendar.CalendarFragment"
+        android:label="@string/fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <action
@@ -52,5 +52,15 @@
         android:name="com.phantom.banguminote.me.login.LoginActivity"
         android:label="@string/activity_login"
         tools:layout="@layout/activity_login" />
+
+    <action
+        android:id="@+id/action_nav_to_activity_search"
+        app:destination="@id/nav_activity_search" />
+
+    <activity
+        android:id="@+id/nav_activity_search"
+        android:name="com.phantom.banguminote.search.SearchActivity"
+        android:label="@string/activity_search"
+        tools:layout="@layout/activity_search" />
 
 </navigation>

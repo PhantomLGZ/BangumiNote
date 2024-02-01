@@ -1,6 +1,5 @@
-package com.phantom.banguminote.front.calendar
+package com.phantom.banguminote.calendar
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
@@ -12,16 +11,11 @@ class CalendarViewPagerAdapter(manager: FragmentManager, lifecycle: Lifecycle) :
     override fun getItemCount(): Int = 7
 
     override fun createFragment(position: Int): Fragment =
-        CalendarAnimeListFragment().also { f ->
-            f.arguments = Bundle().also {
-                it.putInt(
-                    CalendarFragment.KEY_DAY,
-                    when (position) {
-                        0 -> 7
-                        else -> position
-                    }
-                )
+        CalendarAnimeListFragment.createFragment(
+            when (position) {
+                0 -> 7
+                else -> position
             }
-        }
+        )
 
 }
