@@ -12,10 +12,6 @@
 + 收藏列表
 
 ## 截图
-<img src="screenshot/Screenshot_20240202_0.png" width="31%">
-<img src="screenshot/Screenshot_20240202_1.png" width="31%">
-<img src="screenshot/Screenshot_20240202_2.png" width="31%">
-<img src="screenshot/Screenshot_20240202_3.png" width="31%">
-<img src="screenshot/Screenshot_20240202_4.png" width="31%">
-<img src="screenshot/Screenshot_20240202_5.png" width="31%">
+<img src="screenshot/Screenshot_20240202_0.png" width="31%"><img src="screenshot/Screenshot_20240202_1.png" width="31%"><img src="screenshot/Screenshot_20240202_2.png" width="31%">
+<img src="screenshot/Screenshot_20240202_3.png" width="31%"><img src="screenshot/Screenshot_20240202_4.png" width="31%"><img src="screenshot/Screenshot_20240202_5.png" width="31%">
 <img src="screenshot/Screenshot_20240202_6.png" width="31%">
