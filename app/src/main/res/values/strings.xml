@@ -27,6 +27,7 @@
     <string name="search_sort_score">分数</string>
     <string name="search_sort_heat">热度</string>
     <string name="search_sort_rank">排名</string>
+    <string name="search_nsfw">NSFW</string>
 
     <string name="search_range">%s - %s</string>
     <string name="search_date">日期范围</string>

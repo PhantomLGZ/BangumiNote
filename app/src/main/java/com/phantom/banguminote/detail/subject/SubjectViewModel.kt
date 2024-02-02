@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.phantom.banguminote.IBangumiHttpServer
 import com.phantom.banguminote.base.http.BaseViewModel
 import com.phantom.banguminote.base.http.RetrofitHelper
+import com.phantom.banguminote.data.HttpErrorData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectData
@@ -20,6 +21,8 @@ class SubjectViewModel : BaseViewModel() {
     val subjectCharacterRes = MutableLiveData<List<SubjectCharacterData>>()
     val subjectRelatedSubjectRes = MutableLiveData<List<RelatedSubjectData>>()
     val collectionInfoRes = MutableLiveData<CollectionItemRes>()
+
+    val collectionHttpError = MutableLiveData<HttpErrorData>()
 
     fun subject(id: Int) {
         requestWithCoroutine(id, subjectRes) { iHttpServer.subject(it) }
@@ -41,12 +44,11 @@ class SubjectViewModel : BaseViewModel() {
     }
 
     fun getCollectionInfo(req: CollectionItemReq) {
-        requestWithCoroutine(req, collectionInfoRes) {
-            iHttpServer.getCollectionInfo(
-                it.username,
-                it.subject_id
-            )
-        }
+        requestWithCoroutine(
+            req = req,
+            mutableLiveData = collectionInfoRes,
+            httpErrorLiveData = collectionHttpError
+        ) { iHttpServer.getCollectionInfo(it.username, it.subject_id) }
     }
 
 }

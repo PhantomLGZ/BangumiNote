@@ -1,8 +1,11 @@
 package com.phantom.banguminote.search
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.CompoundButton
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.SearchView
@@ -16,10 +19,11 @@ import com.chad.library.adapter4.loadState.trailing.TrailingLoadStateAdapter
 import com.google.android.flexbox.FlexboxItemDecoration
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.phantom.banguminote.R
-import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.ImageDialogFragment
 import com.phantom.banguminote.base.TagAdapter
+import com.phantom.banguminote.base.TransparentDividerItemDecoration
+import com.phantom.banguminote.base.getUserToken
 import com.phantom.banguminote.data.PageReqData
 import com.phantom.banguminote.data.PageResData
 import com.phantom.banguminote.databinding.FragmentSearchBinding
@@ -37,6 +41,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val limit = 10
     private var offset = 0
     private val searchReq = SearchReq()
+    private var translateHeight = 0
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -78,8 +83,36 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     it.setOnItemClickListener(onTagItemClickListener)
                 }
             }
+            binding?.layoutAdvance?.viewTreeObserver?.also {
+                it.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+                    override fun onGlobalLayout() {
+                        binding?.layoutAdvance?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+                        translateHeight = binding?.layoutAdvance?.measuredHeight ?: 0
+                        binding?.layoutAdvance?.visibility = View.GONE
+                        binding?.layoutAdvance?.translationY =
+                            -translateHeight.toFloat()
+                    }
+                })
+            }
             b.tbAdvance.setOnCheckedChangeListener { buttonView, isChecked ->
-                binding?.layoutAdvance?.visibility = if (isChecked) View.VISIBLE else View.GONE
+                binding?.layoutAdvance?.animate()
+                    ?.translationY(if (isChecked) 0f else -translateHeight.toFloat())
+                    ?.setDuration(100)
+                    ?.setListener(object : AnimatorListenerAdapter() {
+                        override fun onAnimationStart(animation: Animator) {
+                            if (isChecked) {
+                                binding?.layoutAdvance?.visibility = View.VISIBLE
+                            }
+                        }
+
+                        override fun onAnimationEnd(animation: Animator) {
+                            if (isChecked) {
+                                translateHeight = binding?.layoutAdvance?.measuredHeight ?: 0
+                            } else {
+                                binding?.layoutAdvance?.visibility = View.GONE
+                            }
+                        }
+                    })
             }
 
             b.btDate.setOnClickListener(onClickListener)
@@ -97,6 +130,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             b.tbGame.setOnCheckedChangeListener(onTypeCheckedChangeListener)
             b.tbMusic.setOnCheckedChangeListener(onTypeCheckedChangeListener)
             b.tbReal.setOnCheckedChangeListener(onTypeCheckedChangeListener)
+
+            b.tbNSFW.setOnCheckedChangeListener { buttonView, isChecked ->
+                searchReq.filter.nsfw = isChecked
+            }
         }
         viewModel.also { v ->
             v.error.observe(viewLifecycleOwner) { showToast(it.message) }
@@ -105,66 +142,89 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         syncReq()
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding?.tbNSFW?.visibility = if (context?.getUserToken().isNullOrBlank()) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+        syncFilterView()
+    }
+
     private fun syncReq() {
         viewModel.searchReq.value?.also { req ->
             if (!req.keyword.isNullOrBlank()) {
                 searchReq.keyword = req.keyword
-                binding?.searchView?.setQuery(req.keyword, false)
             }
             searchReq.sort = req.sort
-            when (req.sort) {
-                "", "match" -> binding?.rbMatch?.isChecked = true
-                "score" -> binding?.rbScore?.isChecked = true
-                "heat" -> binding?.rbHeat?.isChecked = true
-                "rank" -> binding?.rbRank?.isChecked = true
-            }
-            req.filter.type?.also {
-                req.filter.type = it
-                val list = mutableListOf(1, 2, 3, 4, 6)
-                list.removeAll(it)
-                list.forEach {
-                    when (it) {
-                        getTypeNum(binding?.tbBook) -> binding?.tbBook?.isChecked = false
-                        getTypeNum(binding?.tbAnime) -> binding?.tbAnime?.isChecked = false
-                        getTypeNum(binding?.tbMusic) -> binding?.tbMusic?.isChecked = false
-                        getTypeNum(binding?.tbGame) -> binding?.tbGame?.isChecked = false
-                        getTypeNum(binding?.tbReal) -> binding?.tbReal?.isChecked = false
-                    }
-                }
-            }
-            req.filter.tag?.also {
-                val list = mutableListOf<String>()
-                list.addAll(it)
-                searchReq.filter.tag = it
-                tagAdapter.submitList(list)
-            }
-            req.filter.air_date?.also {
-                searchReq.filter.air_date = it
-                val after = it.find { it.contains(">=") }
-                    ?.replace(">=", "") ?: ""
-                val before = it.find { it.contains("<=") }
-                    ?.replace("<=", "") ?: ""
-                binding?.btDate?.text = getString(R.string.search_range, after, before)
-            }
-            req.filter.rating?.also {
-                searchReq.filter.rating = it
-                val greater = it.find { it.contains(">=") }
-                    ?.replace(">=", "") ?: ""
-                val less = it.find { it.contains("<=") }
-                    ?.replace("<=", "") ?: ""
-                binding?.btScore?.text = getString(R.string.search_range, greater, less)
-            }
-            req.filter.rank?.also {
-                searchReq.filter.rank = it
-                val above = it.find { it.contains("<=") }
-                    ?.replace("<=", "") ?: ""
-                val below = it.find { it.contains(">=") }
-                    ?.replace(">=", "") ?: ""
-                binding?.btRank?.text = getString(R.string.search_range, above, below)
-            }
+            req.filter.type?.also { types -> searchReq.filter.type = types }
+            req.filter.tag?.also { searchReq.filter.tag = it }
+            req.filter.air_date?.also { searchReq.filter.air_date = it }
+            req.filter.rating?.also { searchReq.filter.rating = it }
+            req.filter.rank?.also { searchReq.filter.rank = it }
 
             doNewSearch()
         }
+    }
+
+    private fun syncFilterView() {
+        binding?.searchView?.setQuery(searchReq.keyword ?: "", false)
+        binding?.tbAdvance?.isChecked = false
+
+        when (searchReq.sort) {
+            "", "match" -> binding?.rbMatch?.isChecked = true
+            "score" -> binding?.rbScore?.isChecked = true
+            "heat" -> binding?.rbHeat?.isChecked = true
+            "rank" -> binding?.rbRank?.isChecked = true
+        }
+
+        val list = mutableListOf(1, 2, 3, 4, 6)
+        val types = searchReq.filter.type
+        if (types.isNullOrEmpty()) {
+            binding?.tbBook?.isChecked = true
+            binding?.tbAnime?.isChecked = true
+            binding?.tbMusic?.isChecked = true
+            binding?.tbGame?.isChecked = true
+            binding?.tbReal?.isChecked = true
+        } else {
+            list.removeAll(types)
+            list.forEach {
+                when (it) {
+                    getTypeNum(binding?.tbBook) -> binding?.tbBook?.isChecked = false
+                    getTypeNum(binding?.tbAnime) -> binding?.tbAnime?.isChecked = false
+                    getTypeNum(binding?.tbMusic) -> binding?.tbMusic?.isChecked = false
+                    getTypeNum(binding?.tbGame) -> binding?.tbGame?.isChecked = false
+                    getTypeNum(binding?.tbReal) -> binding?.tbReal?.isChecked = false
+                }
+            }
+        }
+
+        tagAdapter.submitList(searchReq.filter.tag)
+
+        val after = searchReq.filter.air_date
+            ?.find { it.contains(">=") }
+            ?.replace(">=", "") ?: ""
+        val before = searchReq.filter.air_date
+            ?.find { it.contains("<=") }
+            ?.replace("<=", "") ?: ""
+        binding?.btDate?.text = getString(R.string.search_range, after, before)
+
+        val greater = searchReq.filter.rating
+            ?.find { it.contains(">=") }
+            ?.replace(">=", "") ?: ""
+        val less = searchReq.filter.rating
+            ?.find { it.contains("<=") }
+            ?.replace("<=", "") ?: ""
+        binding?.btScore?.text = getString(R.string.search_range, greater, less)
+
+        val above = searchReq.filter.rank
+            ?.find { it.contains("<=") }
+            ?.replace("<=", "") ?: ""
+        val below = searchReq.filter.rank
+            ?.find { it.contains(">=") }
+            ?.replace(">=", "") ?: ""
+        binding?.btRank?.text = getString(R.string.search_range, above, below)
     }
 
     private fun setData(data: PageResData<SearchRes>) {

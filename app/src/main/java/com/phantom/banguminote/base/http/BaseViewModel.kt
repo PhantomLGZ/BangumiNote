@@ -20,6 +20,7 @@ abstract class BaseViewModel : ViewModel() {
         req: REQ,
         mutableLiveData: MutableLiveData<DATA>,
         errorLiveData: MutableLiveData<Exception> = error,
+        httpErrorLiveData: MutableLiveData<HttpErrorData> = httpError,
         requestFunc: suspend (REQ) -> Response<DATA>
     ) {
         viewModelScope.launch {
@@ -31,9 +32,11 @@ abstract class BaseViewModel : ViewModel() {
                     is ViewModelResult.Success -> {
                         mutableLiveData.postValue(result.data)
                     }
+
                     is ViewModelResult.HttpError -> {
-                        httpError.postValue(result.data)
+                        httpErrorLiveData.postValue(result.data)
                     }
+
                     is ViewModelResult.Error -> {
                         Log.e("Net", result.exception.stackTraceToString())
                         errorLiveData.postValue(result.exception)
@@ -57,8 +60,12 @@ abstract class BaseViewModel : ViewModel() {
             ViewModelResult.Success(res.body())
         else
             try {
-                ViewModelResult.HttpError(RetrofitHelper.errorGson.fromJson(res.errorBody()?.string(), HttpErrorData::class.java))
-            } catch (e : Exception) {
+                ViewModelResult.HttpError(
+                    RetrofitHelper.errorGson.fromJson(
+                        res.errorBody()?.string(), HttpErrorData::class.java
+                    )
+                )
+            } catch (e: Exception) {
                 ViewModelResult.Error(IOException("code:${res.code()} msg:${res.message()}"))
             }
     }
