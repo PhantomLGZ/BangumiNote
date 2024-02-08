@@ -12,6 +12,7 @@
     <string name="activity_person">人物</string>
     <string name="activity_search">搜索</string>
     <string name="activity_login">授权</string>
+    <string name="activity_related_web">相关链接</string>
 
     <string name="type_anime">动画</string>
     <string name="type_book">书籍</string>
@@ -55,15 +56,18 @@
     <string name="subject_collection">收藏</string>
     <string name="subject_character">角色</string>
     <string name="subject_related">相关</string>
+    <string name="subject_web">链接</string>
 
     <string name="character_info">信息</string>
     <string name="character_summary">简介</string>
     <string name="character_related">相关</string>
+    <string name="character_web">链接</string>
 
     <string name="person_info">信息</string>
     <string name="person_summary">简介</string>
     <string name="person_related">相关</string>
     <string name="person_character">角色</string>
+    <string name="person_web">链接</string>
 
     <string name="info_ori_name">原名</string>
     <string name="info_person_hint">相关人物</string>
@@ -91,5 +95,10 @@
     <string name="auth_error">错误</string>
 
     <string name="me_name_hint">点击提供授权</string>
+
+    <string name="web_bangumi">Bangumi 番组计划</string>
+    <string name="web_pixiv">Pixiv</string>
+    <string name="web_mikanime">蜜柑计划</string>
+    <string name="web_dmhy">動漫花園</string>
 
 </resources>

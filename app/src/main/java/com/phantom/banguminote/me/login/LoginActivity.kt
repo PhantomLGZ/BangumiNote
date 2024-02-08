@@ -64,7 +64,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     return super.shouldOverrideUrlLoading(view, request)
                 }
             }
+            wv.loadUrl(url)
         }
-            .loadUrl(url)
     }
 }

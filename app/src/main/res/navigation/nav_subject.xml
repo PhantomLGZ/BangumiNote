@@ -51,4 +51,14 @@
         android:label="@string/activity_search"
         tools:layout="@layout/activity_search" />
 
+    <action
+        android:id="@+id/action_nav_to_activity_related_web"
+        app:destination="@id/nav_activity_related_web" />
+
+    <activity
+        android:id="@+id/nav_activity_related_web"
+        android:name="com.phantom.banguminote.detail.web.RelatedWebViewActivity"
+        android:label="@string/activity_related_web"
+        tools:layout="@layout/activity_web_view" />
+
 </navigation>

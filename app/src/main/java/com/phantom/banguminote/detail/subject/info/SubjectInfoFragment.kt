@@ -3,7 +3,7 @@ package com.phantom.banguminote.detail.subject.info
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.detail.InfoboxAdapter
@@ -20,7 +20,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectPersonData
 
 class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
 
-    private var viewModel: SubjectViewModel? = null
+    private val viewModel: SubjectViewModel by viewModels({ requireParentFragment() })
     private val adapter = InfoboxAdapter<SubjectPersonData>()
 
     override fun inflateViewBinding(
@@ -30,8 +30,7 @@ class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
         FragmentSubjectInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
-        viewModel?.subjectRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
             it.infobox?.also { it1 -> setData(it1) }
         }
         binding?.recyclerView?.also { rv ->
@@ -53,7 +52,7 @@ class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
                 key = getString(R.string.info_ori_name),
                 value = null,
                 actualValue = InfoValueData(
-                    value = viewModel?.subjectRes?.value?.name,
+                    value = viewModel.subjectRes.value?.name,
                     values = null,
                     type = InfoDataType.SINGLE
                 )
@@ -62,7 +61,7 @@ class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
             .map {
                 InfoboxAdapter.InfoboxData<SubjectPersonData>(it, null)
             }
-        viewModel?.subjectPersonRes?.setDataOrObserve(viewLifecycleOwner) { persons ->
+        viewModel.subjectPersonRes.setDataOrObserve(viewLifecycleOwner) { persons ->
             persons.sortedBy { it.relation }
                 .groupBy { it.relation }
                 .forEach { map ->

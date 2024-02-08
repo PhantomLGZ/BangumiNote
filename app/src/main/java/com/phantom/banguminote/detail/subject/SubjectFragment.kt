@@ -18,6 +18,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.info.SubjectInfoFragment
 import com.phantom.banguminote.detail.subject.related.SubjectRelatedFragment
 import com.phantom.banguminote.detail.subject.summary.SubjectSummaryFragment
+import com.phantom.banguminote.detail.subject.web.SubjectRelatedWebFragment
 import com.phantom.banguminote.me.collection.CollectionItemReq
 
 class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBinding>() {
@@ -38,6 +39,7 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
             FragmentData(getString(R.string.subject_collection), SubjectCollectionFragment()),
             FragmentData(getString(R.string.subject_character), SubjectCharacterFragment()),
             FragmentData(getString(R.string.subject_related), SubjectRelatedFragment()),
+            FragmentData(getString(R.string.subject_web), SubjectRelatedWebFragment()),
         )
 
     override fun init() {
@@ -47,6 +49,8 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
             it.tabLayout.selectTab(it.tabLayout.getTabAt(2))
         }
         viewModel?.also { v ->
+            v.id.value = id
+
             v.subjectRes.observe(viewLifecycleOwner) { setSubjectBaseData(it) }
             v.subjectCharacterRes.observe(viewLifecycleOwner) { setCharacterData(it) }
             v.subjectRelatedSubjectRes.observe(viewLifecycleOwner) { setRelatedSubjectData(it) }

@@ -13,6 +13,7 @@ import com.phantom.banguminote.detail.character.summary.CharacterSummaryFragment
 import com.phantom.banguminote.databinding.FragmentCharacterBinding
 import com.phantom.banguminote.detail.BaseDetailFragment
 import com.phantom.banguminote.base.BaseViewPagerAdapter.FragmentData
+import com.phantom.banguminote.detail.character.web.CharacterRelatedWebFragment
 
 class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharacterBinding>() {
 
@@ -30,6 +31,7 @@ class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharact
             FragmentData(getString(R.string.character_info), CharacterInfoFragment()),
             FragmentData(getString(R.string.character_summary), CharacterSummaryFragment()),
             FragmentData(getString(R.string.character_related), CharacterRelatedFragment()),
+            FragmentData(getString(R.string.character_web), CharacterRelatedWebFragment()),
         )
 
     override fun init() {
@@ -39,6 +41,7 @@ class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharact
             it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
         }
         viewModel?.also { v ->
+            v.id.value = id
             v.characterRes.observe(viewLifecycleOwner) { setData(it) }
 
             v.character(id)

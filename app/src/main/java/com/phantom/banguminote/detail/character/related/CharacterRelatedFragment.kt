@@ -2,7 +2,7 @@ package com.phantom.banguminote.detail.character.related
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
@@ -19,7 +19,7 @@ import com.phantom.banguminote.detail.subject.SubjectFragment
 
 class CharacterRelatedFragment : BaseFragment<FragmentCharacterRelatedBinding>() {
 
-    private var viewModel: CharacterViewModel? = null
+    private val viewModel: CharacterViewModel by viewModels({ requireParentFragment() })
     private val adapter = CharacterRelatedAdapter()
 
     override fun inflateViewBinding(
@@ -29,7 +29,6 @@ class CharacterRelatedFragment : BaseFragment<FragmentCharacterRelatedBinding>()
         FragmentCharacterRelatedBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[CharacterViewModel::class.java] }
         adapter.mOnItemClickListener = onActorItemClickListener
         adapter.setOnItemClickListener(onItemClickListener)
         binding?.recyclerView?.also {
@@ -38,13 +37,13 @@ class CharacterRelatedFragment : BaseFragment<FragmentCharacterRelatedBinding>()
             it.addItemDecoration(TransparentDividerItemDecoration.vertical(requireContext()))
             it.addItemDecoration(TransparentDividerItemDecoration.horizontal(requireContext()))
         }
-        viewModel?.characterRelatedRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.characterRelatedRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
         }
     }
 
     private fun setData(data: List<CharacterRelatedData>) {
-        viewModel?.characterPersonRes?.setDataOrObserve(viewLifecycleOwner) { list ->
+        viewModel.characterPersonRes.setDataOrObserve(viewLifecycleOwner) { list ->
             list.groupBy { it.subject_id }
                 .forEach { map ->
                     data.findLast { it.id == map.key }

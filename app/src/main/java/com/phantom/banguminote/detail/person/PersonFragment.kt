@@ -16,6 +16,7 @@ import com.phantom.banguminote.detail.person.info.PersonInfoFragment
 import com.phantom.banguminote.detail.person.related.PersonRelatedFragment
 import com.phantom.banguminote.detail.person.summary.PersonSummaryFragment
 import com.phantom.banguminote.base.BaseViewPagerAdapter.FragmentData
+import com.phantom.banguminote.detail.person.web.PersonRelatedWebFragment
 
 class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding>() {
 
@@ -34,6 +35,7 @@ class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding
             FragmentData(getString(R.string.person_summary), PersonSummaryFragment()),
             FragmentData(getString(R.string.person_related), PersonRelatedFragment()),
             FragmentData(getString(R.string.person_character), PersonCharacterFragment()),
+            FragmentData(getString(R.string.person_web), PersonRelatedWebFragment()),
         )
 
     override fun init() {
@@ -43,6 +45,7 @@ class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding
             it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
         }
         viewModel?.also { v ->
+            v.id.value = id
             v.personRes.observe(viewLifecycleOwner) { setData(it) }
             v.personRelatedRes.observe(viewLifecycleOwner) { setRelatedData(it) }
             v.personCharacterRes.observe(viewLifecycleOwner) { setCharacterData(it) }

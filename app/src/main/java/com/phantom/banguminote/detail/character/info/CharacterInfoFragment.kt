@@ -2,7 +2,7 @@ package com.phantom.banguminote.detail.character.info
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.detail.InfoboxAdapter
@@ -17,7 +17,7 @@ import com.phantom.banguminote.databinding.FragmentCharacterInfoBinding
 
 class CharacterInfoFragment : BaseFragment<FragmentCharacterInfoBinding>() {
 
-    private var viewModel: CharacterViewModel? = null
+    private val viewModel: CharacterViewModel by viewModels({ requireParentFragment() })
     private val adapter = InfoboxAdapter<Nothing>()
 
     override fun inflateViewBinding(
@@ -27,10 +27,7 @@ class CharacterInfoFragment : BaseFragment<FragmentCharacterInfoBinding>() {
         FragmentCharacterInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let {
-            ViewModelProvider(it)[CharacterViewModel::class.java]
-        }
-        viewModel?.characterRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.characterRes.setDataOrObserve(viewLifecycleOwner) {
             it.infobox?.let { it1 -> setData(it1) }
         }
         binding?.recyclerView?.also { rv ->
@@ -52,7 +49,7 @@ class CharacterInfoFragment : BaseFragment<FragmentCharacterInfoBinding>() {
                 key = getString(R.string.info_ori_name),
                 value = null,
                 actualValue = InfoValueData(
-                    value = viewModel?.characterRes?.value?.name,
+                    value = viewModel.characterRes.value?.name,
                     values = null,
                     type = InfoDataType.SINGLE
                 )

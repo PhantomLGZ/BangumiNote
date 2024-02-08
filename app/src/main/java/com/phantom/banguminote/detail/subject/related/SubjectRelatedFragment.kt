@@ -2,7 +2,7 @@ package com.phantom.banguminote.detail.subject.related
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
@@ -17,7 +17,7 @@ import com.phantom.banguminote.detail.subject.SubjectViewModel
 
 class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
 
-    private var viewModel: SubjectViewModel? = null
+    private val viewModel: SubjectViewModel by viewModels({ requireParentFragment() })
     private val adapter = SubjectRelatedGroupedAdapter()
 
     override fun inflateViewBinding(
@@ -27,7 +27,6 @@ class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
         FragmentSubjectRelatedBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
         adapter.mOnItemClickListener = onItemClickListener
         binding?.recyclerView?.also {
             it.adapter = adapter
@@ -36,7 +35,7 @@ class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
                 adapter.items[pos].first
             })
         }
-        viewModel?.subjectRelatedSubjectRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.subjectRelatedSubjectRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
         }
     }

@@ -2,7 +2,7 @@ package com.phantom.banguminote.detail.person.related
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
@@ -17,7 +17,7 @@ import com.phantom.banguminote.detail.subject.SubjectFragment
 
 class PersonRelatedFragment : BaseFragment<FragmentPersonRelatedBinding>() {
 
-    private var viewModel: PersonViewModel? = null
+    private val viewModel: PersonViewModel by viewModels({ requireParentFragment() })
     private val adapter = PersonRelatedAdapter()
 
     override fun inflateViewBinding(
@@ -27,7 +27,6 @@ class PersonRelatedFragment : BaseFragment<FragmentPersonRelatedBinding>() {
         FragmentPersonRelatedBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[PersonViewModel::class.java] }
         adapter.setOnItemClickListener(onItemClickListener)
         binding?.recyclerView?.also {
             it.adapter = adapter
@@ -35,7 +34,7 @@ class PersonRelatedFragment : BaseFragment<FragmentPersonRelatedBinding>() {
             it.addItemDecoration(TransparentDividerItemDecoration.vertical(requireContext()))
             it.addItemDecoration(TransparentDividerItemDecoration.horizontal(requireContext()))
         }
-        viewModel?.personRelatedRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.personRelatedRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
         }
     }

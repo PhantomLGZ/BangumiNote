@@ -2,7 +2,7 @@ package com.phantom.banguminote.detail.person.info
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
@@ -17,7 +17,7 @@ import com.phantom.banguminote.detail.person.PersonViewModel
 
 class PersonInfoFragment : BaseFragment<FragmentPersonInfoBinding>() {
 
-    private var viewModel: PersonViewModel? = null
+    private val viewModel: PersonViewModel by viewModels({ requireParentFragment() })
     private val adapter = InfoboxAdapter<Nothing>()
 
     override fun inflateViewBinding(
@@ -27,10 +27,7 @@ class PersonInfoFragment : BaseFragment<FragmentPersonInfoBinding>() {
         FragmentPersonInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let {
-            ViewModelProvider(it)[PersonViewModel::class.java]
-        }
-        viewModel?.personRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.personRes.setDataOrObserve(viewLifecycleOwner) {
             it.infobox?.let { it1 -> setData(it1) }
         }
         binding?.recyclerView?.also { rv ->
@@ -52,7 +49,7 @@ class PersonInfoFragment : BaseFragment<FragmentPersonInfoBinding>() {
                 key = getString(R.string.info_ori_name),
                 value = null,
                 actualValue = InfoValueData(
-                    value = viewModel?.personRes?.value?.name,
+                    value = viewModel.personRes.value?.name,
                     values = null,
                     type = InfoDataType.SINGLE
                 )

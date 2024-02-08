@@ -36,12 +36,38 @@ object RetrofitHelper {
         .create()
 
     private val retrofit: Retrofit.Builder = retrofitBuild()
+    private val dnsRetrofit: Retrofit.Builder = dnsRetrofitBuild()
 
     private var accessToken = ""
 
     fun setAccessToken(token: String) {
         accessToken = token
     }
+
+    private fun dnsRetrofitBuild(): Retrofit.Builder =
+        Retrofit.Builder()
+            .client(
+                OkHttpClient.Builder()
+                    .addNetworkInterceptor(Interceptor {
+                        val requestBuilder = it.request().newBuilder()
+                        requestBuilder
+                            .header("Accept", "application/dns-json")
+                        it.proceed(requestBuilder.build())
+                    })
+                    .addInterceptor(HttpLoggingInterceptor {
+                        Platform.get().log(it.unicodeToString())
+                    }.also {
+                        it.level = if (BuildConfig.DEBUG) {
+                            HttpLoggingInterceptor.Level.BODY
+                        } else {
+                            HttpLoggingInterceptor.Level.NONE
+                        }
+                    })
+                    .build()
+            )
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://1.0.0.1/")
 
     private fun retrofitBuild(): Retrofit.Builder =
         Retrofit.Builder()
@@ -83,6 +109,10 @@ object RetrofitHelper {
             .addConverterFactory(GsonConverterFactory.create())
 
     fun getRetrofit(): Retrofit.Builder = retrofit
+
+    fun <T : IHttpServer> getDnsServer(server: Class<T>): T {
+        return dnsRetrofit.build().create(server)
+    }
 
     fun <T : IHttpServer> getHttpServer(server: Class<T>): T {
         return retrofit

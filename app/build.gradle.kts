@@ -81,7 +81,10 @@ dependencies {
     implementation("com.squareup.retrofit2:adapter-rxjava2:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-scalars:$retrofit2Version")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    val okhttpVersion = "4.12.0"
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    implementation("com.squareup.okhttp3:okhttp-dnsoverhttps:$okhttpVersion")
+    implementation("com.squareup.okhttp3:okhttp-urlconnection:$okhttpVersion")
 
     implementation("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.4")
     implementation("com.github.bumptech.glide:glide:4.16.0")

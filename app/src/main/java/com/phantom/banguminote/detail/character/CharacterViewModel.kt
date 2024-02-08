@@ -12,6 +12,7 @@ class CharacterViewModel : BaseViewModel() {
 
     private val iHttpServer = RetrofitHelper.getHttpServer(IBangumiHttpServer::class.java)
 
+    val id = MutableLiveData<Int>()
     val characterRes = MutableLiveData<CharacterData>()
     val characterRelatedRes = MutableLiveData<List<CharacterRelatedData>>()
     val characterPersonRes = MutableLiveData<List<CharacterPersonData>>()

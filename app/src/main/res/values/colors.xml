@@ -7,6 +7,9 @@
 
     <color name="text_theme">@color/theme_color</color>
     <color name="text_theme_translucent">#AAFF8E99</color>
+    <color name="text_pixiv">#FF0096FA</color>
+    <color name="text_mikan">#FFFAAA3B</color>
+    <color name="text_dmhy">#FF224477</color>
 
     <color name="text_light">#FFFFFFFF</color>
     <color name="text_light2">#FFEEEEEE</color>

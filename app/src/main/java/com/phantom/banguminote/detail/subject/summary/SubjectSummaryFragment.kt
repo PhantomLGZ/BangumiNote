@@ -3,7 +3,7 @@ package com.phantom.banguminote.detail.subject.summary
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.google.android.flexbox.FlexboxItemDecoration
@@ -21,7 +21,7 @@ import com.phantom.banguminote.search.SearchActivity
 
 class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
-    private var viewModel: SubjectViewModel? = null
+    private val viewModel: SubjectViewModel by viewModels({ requireParentFragment() })
     private var mergeBinding: LayoutDetailSummaryBinding? = null
 
     override fun inflateViewBinding(
@@ -31,8 +31,7 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
         FragmentSubjectSummaryBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel = parentFragment?.let { ViewModelProvider(it)[SubjectViewModel::class.java] }
-        viewModel?.subjectRes?.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
         }
         mergeBinding = binding?.root?.let { LayoutDetailSummaryBinding.bind(it) }
