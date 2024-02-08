@@ -91,6 +91,7 @@ dependencies {
     annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.22")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    implementation("org.conscrypt:conscrypt-android:2.5.2")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
