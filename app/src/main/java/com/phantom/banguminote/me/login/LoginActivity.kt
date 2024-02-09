@@ -9,9 +9,12 @@ import androidx.activity.viewModels
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseActivity
 import com.phantom.banguminote.base.LoadingDialogFragment
+import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.base.setUserToken
 import com.phantom.banguminote.databinding.ActivityLoginBinding
 import com.phantom.banguminote.me.login.data.AccessTokenReq
+import com.phantom.banguminote.me.login.data.CLIENT_ID
+import com.phantom.banguminote.me.login.data.REDIRECT_URI
 import kotlin.random.Random
 
 
@@ -20,7 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private val randomState = Random.Default.nextInt()
     private val viewModel: LoginViewModel by viewModels()
     private val url =
-        "https://bgm.tv/oauth/authorize?client_id=bgm2897659da10d90152&redirect_uri=https%3A%2F%2Fphantom&response_type=code&scope=&state=${randomState}"
+        "https://bgm.tv/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=&state=${randomState}"
     private val dialog = LoadingDialogFragment()
 
     override fun inflateViewBinding(): ActivityLoginBinding =
@@ -31,6 +34,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
         super.onCreate(savedInstanceState)
         viewModel.accessTokenRes.observe(this) {
             setUserToken(it.access_token)
+            setUserName("")
             dialog.dismiss()
             finish()
         }
@@ -45,7 +49,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
                     view: WebView?,
                     request: WebResourceRequest?
                 ): Boolean {
-                    if (request?.url?.toString()?.startsWith("https://phantom") == true) {
+                    if (request?.url?.toString()?.startsWith(REDIRECT_URI) == true) {
                         val code = request.url.getQueryParameter("code") ?: ""
                         val state = request.url.getQueryParameter("state")?.toInt()
                         if (state == randomState) {

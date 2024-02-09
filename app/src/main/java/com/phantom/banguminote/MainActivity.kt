@@ -7,6 +7,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.phantom.banguminote.base.BaseActivity
 import com.phantom.banguminote.base.getUserToken
 import com.phantom.banguminote.base.http.RetrofitHelper
+import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.base.setUserToken
 import com.phantom.banguminote.databinding.ActivityMainBinding
 import com.phantom.banguminote.me.login.LoginViewModel
@@ -35,6 +36,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             v.error.observe(this) { showToast(it.message) }
             v.tokenStatusRes.observe(this) { checkToken(it) }
             v.accessTokenRes.observe(this) { refreshToken(it) }
+            v.refreshTokenError.observe(this) { clearToken() }
+            v.refreshTokenHttpError.observe(this) { clearToken() }
 
             if (getUserToken().isNotBlank()) {
                 v.tokenStatus()
@@ -59,6 +62,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private fun refreshToken(res: AccessTokenRes) {
         setUserToken(res.refresh_token)
+    }
+
+    private fun clearToken() {
+        setUserToken("")
+        setUserName("")
     }
 
 }

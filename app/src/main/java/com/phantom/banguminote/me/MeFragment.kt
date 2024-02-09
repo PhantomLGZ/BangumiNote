@@ -16,6 +16,7 @@ import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.LoadingDialogFragment
 import com.phantom.banguminote.base.dpToPx
+import com.phantom.banguminote.base.getUserName
 import com.phantom.banguminote.base.getUserToken
 import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.databinding.FragmentMeBinding
@@ -65,10 +66,25 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     override fun onResume() {
         super.onResume()
         binding?.also {
-            if (it.tvName.text.isBlank() && context?.getUserToken()?.isNotBlank() == true) {
+            if (context?.getUserName().isNullOrBlank()
+                && !context?.getUserToken().isNullOrBlank()
+            ) {
                 viewModel.me()
                 dialog = LoadingDialogFragment()
                 dialog?.show(childFragmentManager, "")
+            } else {
+                binding?.ivAvatar?.let { iv ->
+                    Glide.with(this)
+                        .load(
+                            AppCompatResources.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_acatar_null
+                            )
+                        )
+                        .into(iv)
+                }
+                binding?.tvName?.text = ""
+                binding?.tvId?.text = ""
             }
         }
     }
@@ -104,9 +120,9 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     private val onClickListener = OnClickListener {
         when (it.id) {
             R.id.layoutMe -> {
-                if (binding?.tvName?.text.isNullOrBlank()) {
-                    findNavController().navigate(R.id.action_nav_to_activity_login)
-                }
+//                if (binding?.tvName?.text.isNullOrBlank()) {
+                findNavController().navigate(R.id.action_nav_to_activity_login)
+//                }
             }
         }
     }
