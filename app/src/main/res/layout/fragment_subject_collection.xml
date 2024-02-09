@@ -21,6 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:background="@color/theme_background_light2"
+                android:elevation="2dp"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -35,13 +36,23 @@
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvMyCollection"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:textColor="@color/text_light"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         tools:text="想看" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvCollectionDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/text_light2"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        tools:text="2024-02-09  01:21" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tvEps"
@@ -60,16 +71,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="8dp"
+                    android:layout_marginVertical="8dp"
                     android:isIndicator="true"
                     android:numStars="10"
                     android:progressBackgroundTint="@color/background_dark_translucent1"
                     android:progressTint="@color/rating_star_color2"
                     android:rating="0"
                     android:secondaryProgressTint="@android:color/transparent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvGreater"
                     tools:rating="8" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -79,7 +87,7 @@
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
                     android:textColor="@color/text_dark"
-                    android:textSize="14sp"
+                    android:textSize="15sp"
                     tools:text="测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -87,7 +95,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:padding="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:paddingHorizontal="8dp"
                     tools:listitem="@layout/item_tag" />
 
             </LinearLayout>
@@ -98,8 +107,7 @@
                 android:background="@color/background"
                 android:baselineAligned="false"
                 android:elevation="2dp"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -222,65 +230,73 @@
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@color/theme_background"
-                android:padding="8dp">
-
-                <androidx.appcompat.widget.AppCompatRatingBar
-                    android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleIndicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:isIndicator="true"
-                    android:numStars="10"
-                    android:progressTint="@color/content_background"
-                    android:secondaryProgressTint="@android:color/transparent"
-                    android:stepSize="0.1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:rating="6.4" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvScore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="4dp"
-                    android:textColor="@color/text_light"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toStartOf="@id/tvRatingTotal"
-                    app:layout_constraintHorizontal_chainStyle="packed"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ratingBar"
-                    tools:text="8.5" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvRatingTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="4dp"
-                    android:textColor="@color/text_light2"
-                    android:textSize="18sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tvScore"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tvScore"
-                    tools:text="(156人评分)" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/barChart"
-                android:layout_width="match_parent"
-                android:layout_height="320dp"
+                android:layout_marginBottom="32dp"
                 android:background="@color/theme_background_light2"
-                android:clipToPadding="false"
                 android:elevation="2dp"
-                android:padding="8dp" />
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/theme_background"
+                    android:padding="8dp">
+
+                    <androidx.appcompat.widget.AppCompatRatingBar
+                        android:id="@+id/ratingBar"
+                        style="?android:attr/ratingBarStyleIndicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:isIndicator="true"
+                        android:numStars="10"
+                        android:progressTint="@color/content_background"
+                        android:secondaryProgressTint="@android:color/transparent"
+                        android:stepSize="0.1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:rating="6.4" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="4dp"
+                        android:textColor="@color/text_light"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@id/tvRatingTotal"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/ratingBar"
+                        tools:text="8.5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvRatingTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="4dp"
+                        android:textColor="@color/text_light2"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tvScore"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvScore"
+                        tools:text="(156人评分)" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/barChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:clipToPadding="false"
+                    android:padding="8dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/content_background"
     android:clipToPadding="false"
+    android:elevation="2dp"
     android:foreground="?android:selectableItemBackground"
     android:padding="4dp">
 

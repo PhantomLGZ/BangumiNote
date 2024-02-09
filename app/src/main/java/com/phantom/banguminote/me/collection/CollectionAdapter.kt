@@ -13,6 +13,7 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.checkHttps
 import com.phantom.banguminote.base.TagAdapter
+import com.phantom.banguminote.base.reformatDate
 
 class CollectionAdapter : BaseQuickAdapter<CollectionItemRes, QuickViewHolder>() {
 
@@ -29,9 +30,11 @@ class CollectionAdapter : BaseQuickAdapter<CollectionItemRes, QuickViewHolder>()
         item: CollectionItemRes?
     ) {
         holder.also { h ->
-            h.setVisible(R.id.rbMyRate, (item?.rate ?: 0) != 0)
+            val rateVisible = (item?.rate ?: 0) != 0
+            val epsVisible = (item?.ep_status ?: 0) != 0 || (item?.subject?.eps ?: 0) != 0
+            h.setVisible(R.id.rbMyRate, rateVisible)
             h.getView<AppCompatRatingBar>(R.id.rbMyRate).rating = item?.rate?.toFloat() ?: 0f
-            h.setVisible(R.id.tvEps, (item?.subject?.eps ?: 0) != 0)
+            h.setVisible(R.id.tvEps, epsVisible)
             h.setText(
                 R.id.tvEps,
                 context.getString(
@@ -40,6 +43,8 @@ class CollectionAdapter : BaseQuickAdapter<CollectionItemRes, QuickViewHolder>()
                     item?.subject?.eps ?: 0
                 )
             )
+            h.setGone(R.id.layoutCollection, !rateVisible && !epsVisible)
+            h.setText(R.id.tvCollectionDate, item?.updated_at?.reformatDate())
             item?.subject?.images?.common?.checkHttps()?.also { url ->
                 Glide.with(context).load(url).into(h.getView(R.id.ivCover))
             }

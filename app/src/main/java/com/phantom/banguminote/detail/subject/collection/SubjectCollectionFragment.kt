@@ -19,6 +19,7 @@ import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.TagAdapter
 import com.phantom.banguminote.base.http.setDataOrObserve
+import com.phantom.banguminote.base.reformatDate
 import com.phantom.banguminote.base.spToPx
 import com.phantom.banguminote.databinding.FragmentSubjectCollectionBinding
 import com.phantom.banguminote.detail.subject.data.SubjectData
@@ -127,6 +128,7 @@ class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>
             val rate = data.rate?.toFloat() ?: 0f
             b.rbMyRate.visibility = if (rate == 0f) View.GONE else View.VISIBLE
             b.rbMyRate.rating = rate
+            b.tvCollectionDate.text = data.updated_at?.reformatDate()
             b.tvComment.visibility = if (data.comment.isNullOrBlank()) View.GONE else View.VISIBLE
             b.tvComment.text = data.comment
             b.rvTag.visibility = if (data.tags.isNullOrEmpty()) View.GONE else View.VISIBLE

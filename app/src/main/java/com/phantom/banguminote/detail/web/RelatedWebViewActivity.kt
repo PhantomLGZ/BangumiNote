@@ -3,6 +3,7 @@ package com.phantom.banguminote.detail.web
 import android.annotation.SuppressLint
 import android.net.http.SslError
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.webkit.SslErrorHandler
 import android.webkit.WebChromeClient
@@ -78,7 +79,7 @@ class RelatedWebViewActivity : BaseActivity<ActivityWebViewBinding>() {
                             ByteArrayInputStream("".toByteArray())
                         )
                     }
-
+                    Log.i("RelatedWeb", "Load Url ${webViewRequest.url}")
                     if (webViewRequest.url.contains("www.pixiv.net")
                         || webViewRequest.url.contains(".pximg.net")
                     ) {

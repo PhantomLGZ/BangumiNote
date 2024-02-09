@@ -10,7 +10,7 @@ fun Int.getBangumiPersonUrl(): String =
     "https://bgm.tv/person/${this}"
 
 fun String.getPixivUrl(): String =
-    "https://www.pixiv.net/tags/${this}"
+    "https://www.pixiv.net/tags/${this}/artworks?s_mode=s_tag"
 
 fun String.getMikanUrl(): String =
     "https://mikanime.tv/Home/Search?searchstr=${this}"

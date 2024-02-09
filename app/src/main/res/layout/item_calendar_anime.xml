@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipToPadding="false"
     android:background="@color/content_background"
+    android:clipToPadding="false"
+    android:elevation="2dp"
     android:foreground="?android:selectableItemBackground"
     android:padding="4dp">
 
@@ -13,9 +14,9 @@
         android:id="@+id/ivCover"
         android:layout_width="80dp"
         android:layout_height="112dp"
+        android:background="@color/content_background"
         android:elevation="4dp"
         android:foreground="?android:selectableItemBackground"
-        android:background="@color/content_background"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_launcher_background" />
@@ -71,8 +72,8 @@
         android:clickable="false"
         android:isIndicator="true"
         android:numStars="5"
-        android:secondaryProgressTint="@android:color/transparent"
         android:progressTint="@color/rating_star_color"
+        android:secondaryProgressTint="@android:color/transparent"
         android:stepSize="0.1"
         app:layout_constraintBottom_toBottomOf="@id/ivCover"
         app:layout_constraintLeft_toLeftOf="@id/tvTitle"

@@ -22,7 +22,7 @@ import com.phantom.banguminote.search.SearchActivity
 class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
 
     private val viewModel: SubjectViewModel by viewModels({ requireParentFragment() })
-    private var mergeBinding: LayoutDetailSummaryBinding? = null
+    private var includeBinding: LayoutDetailSummaryBinding? = null
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -34,11 +34,11 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
         viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)
         }
-        mergeBinding = binding?.root?.let { LayoutDetailSummaryBinding.bind(it) }
+        includeBinding = binding?.root?.let { LayoutDetailSummaryBinding.bind(it) }
     }
 
     private fun setData(data: SubjectData) {
-        mergeBinding?.also { b ->
+        includeBinding?.also { b ->
             b.tvSummary.text = data.summary
         }
         binding?.also { b ->
