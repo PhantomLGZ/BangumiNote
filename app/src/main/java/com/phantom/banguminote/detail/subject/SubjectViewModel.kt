@@ -5,10 +5,14 @@ import com.phantom.banguminote.IBangumiHttpServer
 import com.phantom.banguminote.base.http.BaseViewModel
 import com.phantom.banguminote.base.http.RetrofitHelper
 import com.phantom.banguminote.data.HttpErrorData
+import com.phantom.banguminote.data.PageReqData
+import com.phantom.banguminote.data.PageResData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectPersonData
+import com.phantom.banguminote.detail.subject.episode.EpisodeReq
+import com.phantom.banguminote.detail.subject.episode.EpisodeData
 import com.phantom.banguminote.me.collection.CollectionItemReq
 import com.phantom.banguminote.me.collection.CollectionItemRes
 
@@ -23,6 +27,7 @@ class SubjectViewModel : BaseViewModel() {
     val subjectCharacterRes = MutableLiveData<List<SubjectCharacterData>>()
     val subjectRelatedSubjectRes = MutableLiveData<List<RelatedSubjectData>>()
     val collectionInfoRes = MutableLiveData<CollectionItemRes>()
+    val episodeRes = MutableLiveData<PageResData<EpisodeData>>()
 
     val collectionHttpError = MutableLiveData<HttpErrorData>()
 
@@ -51,6 +56,17 @@ class SubjectViewModel : BaseViewModel() {
             mutableLiveData = collectionInfoRes,
             httpErrorLiveData = collectionHttpError
         ) { iHttpServer.getCollectionInfo(it.username, it.subject_id) }
+    }
+
+    fun getEpisode(req: PageReqData<EpisodeReq>) {
+        requestWithCoroutine(req, episodeRes) {
+            iHttpServer.episodes(
+                it.req.subject_id,
+                it.req.type,
+                it.limit,
+                it.offset
+            )
+        }
     }
 
 }

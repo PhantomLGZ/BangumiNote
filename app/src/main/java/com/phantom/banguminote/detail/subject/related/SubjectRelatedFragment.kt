@@ -11,7 +11,7 @@ import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.databinding.FragmentSubjectRelatedBinding
-import com.phantom.banguminote.detail.subject.StickyItemDecoration
+import com.phantom.banguminote.detail.StickyItemDecoration
 import com.phantom.banguminote.detail.subject.SubjectFragment
 import com.phantom.banguminote.detail.subject.SubjectViewModel
 
@@ -31,9 +31,12 @@ class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
         binding?.recyclerView?.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(context)
-            it.addItemDecoration(StickyItemDecoration(requireContext()) { pos ->
-                adapter.items[pos].first
-            })
+            it.addItemDecoration(StickyItemDecoration(
+                requireContext(),
+                { pos ->
+                    adapter.items[pos].first
+                }
+            ))
         }
         viewModel.subjectRelatedSubjectRes.setDataOrObserve(viewLifecycleOwner) {
             setData(it)

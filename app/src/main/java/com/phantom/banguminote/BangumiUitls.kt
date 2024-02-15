@@ -22,3 +22,25 @@ fun Context.getSubjectActionName(subjectType: Int?) =
         6 -> getString(R.string.collection_watch)
         else -> ""
     }
+
+fun Context.getSubjectType(type: Int): String =
+    when (type) {
+        1 -> getString(R.string.type_book)
+        2 -> getString(R.string.type_anime)
+        3 -> getString(R.string.type_music)
+        4 -> getString(R.string.type_game)
+        6 -> getString(R.string.type_real)
+        else -> ""
+    }
+
+fun Context.getEpisodeTypeName(type: Int?) =
+    when (type) {
+        0 -> getString(R.string.episode_type_main)
+        1 -> getString(R.string.episode_type_sp)
+        2 -> getString(R.string.episode_type_op)
+        3 -> getString(R.string.episode_type_ed)
+        4 -> getString(R.string.episode_type_pv)
+        5 -> getString(R.string.episode_type_mad)
+        6 -> getString(R.string.episode_type_other)
+        else -> ""
+    }

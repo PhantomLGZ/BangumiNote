@@ -15,6 +15,7 @@ import com.phantom.banguminote.detail.subject.collection.SubjectCollectionFragme
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectData
+import com.phantom.banguminote.detail.subject.episode.EpisodeListFragment
 import com.phantom.banguminote.detail.subject.info.SubjectInfoFragment
 import com.phantom.banguminote.detail.subject.related.SubjectRelatedFragment
 import com.phantom.banguminote.detail.subject.summary.SubjectSummaryFragment
@@ -37,6 +38,7 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
             FragmentData(getString(R.string.subject_info), SubjectInfoFragment()),
             FragmentData(getString(R.string.subject_summary), SubjectSummaryFragment()),
             FragmentData(getString(R.string.subject_collection), SubjectCollectionFragment()),
+            FragmentData(getString(R.string.subject_episode), EpisodeListFragment()),
             FragmentData(getString(R.string.subject_character), SubjectCharacterFragment()),
             FragmentData(getString(R.string.subject_related), SubjectRelatedFragment()),
             FragmentData(getString(R.string.subject_web), SubjectRelatedWebFragment()),
@@ -50,7 +52,7 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
         }
         viewModel?.also { v ->
             v.id.value = id
-
+            v.error.observe(viewLifecycleOwner) { showToast(it.message) }
             v.subjectRes.observe(viewLifecycleOwner) { setSubjectBaseData(it) }
             v.subjectCharacterRes.observe(viewLifecycleOwner) { setCharacterData(it) }
             v.subjectRelatedSubjectRes.observe(viewLifecycleOwner) { setRelatedSubjectData(it) }
@@ -67,6 +69,9 @@ class SubjectFragment : BaseDetailFragment<SubjectViewModel, FragmentSubjectBind
 
     private fun setSubjectBaseData(data: SubjectData) {
         mergeBinding?.also { b ->
+            if ((data.eps ?: 0) == 0 && (data.volumes ?: 0) == 0) {
+                viewPageAdapter?.remove(getString(R.string.subject_episode))
+            }
             b.toolbar.title =
                 "${(data.platform)?.let { p -> "$p " }} ${data.name_cn?.takeIf { it.isNotBlank() } ?: data.name}"
             Glide.with(this)

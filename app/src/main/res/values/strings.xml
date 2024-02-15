@@ -54,6 +54,7 @@
     <string name="subject_info">信息</string>
     <string name="subject_summary">简介</string>
     <string name="subject_collection">收藏</string>
+    <string name="subject_episode">章节</string>
     <string name="subject_character">角色</string>
     <string name="subject_related">相关</string>
     <string name="subject_web">链接</string>
@@ -100,5 +101,14 @@
     <string name="web_pixiv">Pixiv</string>
     <string name="web_mikanime">蜜柑计划</string>
     <string name="web_dmhy">動漫花園</string>
+
+    <string name="episode_info">首播: %s  /  时长: %s</string>
+    <string name="episode_type_main">本篇</string>
+    <string name="episode_type_sp">特别篇</string>
+    <string name="episode_type_op">片头</string>
+    <string name="episode_type_ed">片尾</string>
+    <string name="episode_type_pv">预告</string>
+    <string name="episode_type_mad">MAD</string>
+    <string name="episode_type_other">其他</string>
 
 </resources>

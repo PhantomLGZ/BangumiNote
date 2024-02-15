@@ -20,6 +20,7 @@ import com.phantom.banguminote.base.getUserName
 import com.phantom.banguminote.base.getUserToken
 import com.phantom.banguminote.base.setUserName
 import com.phantom.banguminote.databinding.FragmentMeBinding
+import com.phantom.banguminote.getSubjectType
 import com.phantom.banguminote.me.collection.CollectionViewPagerAdapter
 import com.phantom.banguminote.me.data.UserData
 import kotlin.math.roundToInt
@@ -29,6 +30,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     private val viewModel: MeViewModel by viewModels()
     private var adapter: CollectionViewPagerAdapter? = null
     private var dialog: LoadingDialogFragment? = null
+    private var nowToken = ""
 
     override fun inflateViewBinding(
         inflater: LayoutInflater,
@@ -58,7 +60,9 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
             b.viewPage.adapter = adapter
             b.viewPage.isUserInputEnabled = false
             TabLayoutMediator(b.tabLayout, b.viewPage) { tab, position ->
-                tab.text = adapter?.getSubjectType(position)?.let { getTitle(it) }
+                tab.text = adapter?.getSubjectType(position)?.let {
+                    requireContext().getSubjectType(it)
+                }
             }.attach()
         }
     }
@@ -66,13 +70,14 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     override fun onResume() {
         super.onResume()
         binding?.also {
-            if (context?.getUserName().isNullOrBlank()
-                && !context?.getUserToken().isNullOrBlank()
+            if ((!context?.getUserToken().isNullOrBlank()
+                        && binding?.tvName?.text.isNullOrBlank())
+                || context?.getUserToken() != nowToken
             ) {
                 viewModel.me()
                 dialog = LoadingDialogFragment()
                 dialog?.show(childFragmentManager, "")
-            } else {
+            } else if (context?.getUserName().isNullOrBlank()) {
                 binding?.ivAvatar?.let { iv ->
                     Glide.with(this)
                         .load(
@@ -90,6 +95,7 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
     }
 
     private fun setUserData(data: UserData) {
+        nowToken = context?.getUserToken() ?: ""
         binding?.ivAvatar?.let { iv ->
             Glide.with(this)
                 .load(data.avatar?.medium)
@@ -106,16 +112,6 @@ class MeFragment : BaseFragment<FragmentMeBinding>() {
         dialog?.dismiss()
         dialog = null
     }
-
-    private fun getTitle(type: Int): String =
-        when (type) {
-            1 -> getString(R.string.type_book)
-            2 -> getString(R.string.type_anime)
-            3 -> getString(R.string.type_music)
-            4 -> getString(R.string.type_game)
-            6 -> getString(R.string.type_real)
-            else -> ""
-        }
 
     private val onClickListener = OnClickListener {
         when (it.id) {

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:id="@+id/llFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:elevation="2dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeMain"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_main"
+            android:textOn="@string/episode_type_main" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeSp"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_sp"
+            android:textOn="@string/episode_type_sp" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeOp"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_op"
+            android:textOn="@string/episode_type_op" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeEd"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_ed"
+            android:textOn="@string/episode_type_ed" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodePv"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_pv"
+            android:textOn="@string/episode_type_pv" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeMad"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_mad"
+            android:textOn="@string/episode_type_mad"
+            android:visibility="gone" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbEpisodeOther"
+            style="@style/EpisodeFilterToggle"
+            android:checked="true"
+            android:textOff="@string/episode_type_other"
+            android:textOn="@string/episode_type_other" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llFilter"
+        tools:listitem="@layout/item_episode" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

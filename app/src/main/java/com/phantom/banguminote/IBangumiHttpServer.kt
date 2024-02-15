@@ -13,6 +13,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectPersonData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.calendar.CalendarRes
 import com.phantom.banguminote.detail.subject.data.SubjectData
+import com.phantom.banguminote.detail.subject.episode.EpisodeData
 import com.phantom.banguminote.me.collection.CollectionItemRes
 import com.phantom.banguminote.me.data.UserData
 import com.phantom.banguminote.search.SearchReq
@@ -47,6 +48,14 @@ interface IBangumiHttpServer : IHttpServer {
 
     @GET("v0/subjects/{subject_id}/subjects")
     suspend fun subjectRelatedSubjects(@Path("subject_id") id: Int): Response<List<RelatedSubjectData>>
+
+    @GET("v0/episodes")
+    suspend fun episodes(
+        @Query("subject_id") subjectId: Int,
+        @Query("type") type: Int,
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+    ): Response<PageResData<EpisodeData>>
 
     @GET("v0/characters/{character_id}")
     suspend fun character(@Path("character_id") id: Int): Response<CharacterData>

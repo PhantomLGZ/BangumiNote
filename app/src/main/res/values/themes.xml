@@ -36,6 +36,20 @@
         <item name="android:textColor">@color/color_toggle</item>
     </style>
 
+    <style name="EpisodeFilterToggle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@color/color_toggle_background</item>
+        <item name="android:backgroundTint">@color/color_toggle_background</item>
+        <item name="android:textColor">@color/color_toggle</item>
+        <item name="android:foreground">?android:selectableItemBackground</item>
+    </style>
+
     <style name="Theme.BangumiNote.RatingBar" parent="Widget.AppCompat.RatingBar">
         <item name="android:progressDrawable">@drawable/rating_bar</item>
         <item name="android:indeterminateDrawable">@drawable/rating_bar</item>
@@ -45,12 +59,12 @@
 
     <style name="Theme.BangumiNote.RelatedWebButton" parent="Widget.Material3.Button">
         <item name="android:layout_width">match_parent</item>
-        <item name = "android:layout_height">wrap_content</item>
-        <item name = "android:layout_marginHorizontal">16dp</item>
-        <item name = "android:layout_marginVertical">6dp</item>
-        <item name = "android:backgroundTint">@color/content_background</item>
-        <item name = "cornerRadius">8dp</item>
-        <item name = "iconGravity">textStart</item>
-        <item name = "iconTint">@null</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">16dp</item>
+        <item name="android:layout_marginVertical">6dp</item>
+        <item name="android:backgroundTint">@color/content_background</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconTint">@null</item>
     </style>
 </resources>
