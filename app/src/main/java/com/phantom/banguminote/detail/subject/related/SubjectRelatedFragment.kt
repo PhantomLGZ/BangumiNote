@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.databinding.FragmentSubjectRelatedBinding
 import com.phantom.banguminote.detail.StickyItemDecoration
@@ -38,9 +37,7 @@ class SubjectRelatedFragment : BaseFragment<FragmentSubjectRelatedBinding>() {
                 }
             ))
         }
-        viewModel.subjectRelatedSubjectRes.setDataOrObserve(viewLifecycleOwner) {
-            setData(it)
-        }
+        viewModel.subjectRelatedSubjectRes.observe(viewLifecycleOwner) { setData(it) }
     }
 
     private fun setData(data: List<RelatedSubjectData>) {

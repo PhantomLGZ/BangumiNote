@@ -18,7 +18,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
 import com.phantom.banguminote.base.TagAdapter
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.base.reformatDate
 import com.phantom.banguminote.base.spToPx
 import com.phantom.banguminote.databinding.FragmentSubjectCollectionBinding
@@ -41,10 +40,10 @@ class SubjectCollectionFragment : BaseFragment<FragmentSubjectCollectionBinding>
         FragmentSubjectCollectionBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.subjectRes.observe(viewLifecycleOwner) {
             setData(it)
         }
-        viewModel.collectionInfoRes.setDataOrObserve(viewLifecycleOwner) {
+        viewModel.collectionInfoRes.observe(viewLifecycleOwner) {
             setMyCollectionData(it)
         }
     }

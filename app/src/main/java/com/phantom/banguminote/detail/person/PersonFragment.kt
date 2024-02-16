@@ -41,9 +41,7 @@ class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding
     override fun init() {
         val id = activity?.intent?.extras?.getInt(KEY_PERSON_ID) ?: 0
         super.init()
-        mergeBinding?.also {
-            it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
-        }
+        resetTabSelect()
         viewModel?.also { v ->
             v.id.value = id
             v.personRes.observe(viewLifecycleOwner) { setData(it) }
@@ -53,6 +51,12 @@ class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding
             v.person(id)
             v.personRelated(id)
             v.personCharacter(id)
+        }
+    }
+
+    private fun resetTabSelect() {
+        mergeBinding?.also {
+            it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
         }
     }
 
@@ -68,12 +72,14 @@ class PersonFragment : BaseDetailFragment<PersonViewModel, FragmentPersonBinding
     private fun setRelatedData(data: List<PersonRelatedData>) {
         if (data.isEmpty()) {
             viewPageAdapter?.remove(getString(R.string.person_related))
+            resetTabSelect()
         }
     }
 
     private fun setCharacterData(data: List<PersonCharacterData>) {
         if (data.isEmpty()) {
             viewPageAdapter?.remove(getString(R.string.person_character))
+            resetTabSelect()
         }
     }
 

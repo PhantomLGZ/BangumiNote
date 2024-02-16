@@ -10,7 +10,7 @@ fun Context.getCollectionTypeName(type: Int?, subjectType: Int?): String =
         3 -> getString(R.string.collection_doing, getSubjectActionName(subjectType))
         4 -> getString(R.string.collection_on_hold)
         5 -> getString(R.string.collection_dropped)
-        else -> ""
+        else -> getString(R.string.collection_null)
     }
 
 fun Context.getSubjectActionName(subjectType: Int?) =

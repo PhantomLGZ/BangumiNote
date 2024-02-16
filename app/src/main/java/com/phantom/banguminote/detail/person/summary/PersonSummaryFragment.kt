@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.databinding.FragmentPersonSummaryBinding
 import com.phantom.banguminote.databinding.LayoutDetailSummaryBinding
 import com.phantom.banguminote.detail.person.PersonViewModel
@@ -22,9 +21,7 @@ class PersonSummaryFragment : BaseFragment<FragmentPersonSummaryBinding>() {
         FragmentPersonSummaryBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.personRes.setDataOrObserve(viewLifecycleOwner) {
-            setData(it)
-        }
+        viewModel.personRes.observe(viewLifecycleOwner) { setData(it) }
         mergeBinding = binding?.root?.let { LayoutDetailSummaryBinding.bind(it) }
     }
 

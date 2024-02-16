@@ -26,6 +26,7 @@
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/shape_gradient_background"
                 android:scaleType="fitCenter"
+                app:contentScrim="?attr/colorPrimary"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.6"
                 tools:src="@drawable/ic_launcher_background" />

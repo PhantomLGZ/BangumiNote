@@ -8,7 +8,6 @@ import com.phantom.banguminote.R
 import com.phantom.banguminote.detail.InfoboxAdapter
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.detail.character.CharacterViewModel
 import com.phantom.banguminote.data.InfoData
 import com.phantom.banguminote.data.InfoDataType
@@ -27,8 +26,8 @@ class CharacterInfoFragment : BaseFragment<FragmentCharacterInfoBinding>() {
         FragmentCharacterInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.characterRes.setDataOrObserve(viewLifecycleOwner) {
-            it.infobox?.let { it1 -> setData(it1) }
+        viewModel.characterRes.observe(viewLifecycleOwner) { data ->
+            data.infobox?.let { setData(it) }
         }
         binding?.recyclerView?.also { rv ->
             rv.addItemDecoration(TransparentDividerItemDecoration(requireContext()))

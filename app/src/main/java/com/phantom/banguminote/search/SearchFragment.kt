@@ -83,7 +83,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     it.setOnItemClickListener(onTagItemClickListener)
                 }
             }
-            binding?.layoutAdvance?.viewTreeObserver?.also {
+            b.layoutAdvance.viewTreeObserver?.also {
                 it.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
                         binding?.layoutAdvance?.viewTreeObserver?.removeOnGlobalLayoutListener(this)

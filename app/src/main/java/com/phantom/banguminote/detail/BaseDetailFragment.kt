@@ -5,10 +5,10 @@ import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.phantom.banguminote.base.BaseFragment
+import com.phantom.banguminote.base.BaseViewPagerAdapter
 import com.phantom.banguminote.base.http.BaseViewModel
 import com.phantom.banguminote.data.HttpErrorData
 import com.phantom.banguminote.databinding.LayoutDetailBinding
-import com.phantom.banguminote.base.BaseViewPagerAdapter
 
 abstract class BaseDetailFragment<VM : BaseViewModel, T : ViewBinding> : BaseFragment<T>() {
 
@@ -52,6 +52,5 @@ abstract class BaseDetailFragment<VM : BaseViewModel, T : ViewBinding> : BaseFra
             }))
         )
     }
-
 
 }

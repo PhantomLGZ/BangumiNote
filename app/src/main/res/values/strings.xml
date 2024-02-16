@@ -73,6 +73,7 @@
     <string name="info_ori_name">原名</string>
     <string name="info_person_hint">相关人物</string>
 
+    <string name="collection_null">未收藏</string>
     <string name="collection_wish">想%s</string>
     <string name="collection_doing">在%s</string>
     <string name="collection_collect">%s过</string>
@@ -85,6 +86,12 @@
     <string name="collection_play">玩</string>
 
     <string name="collection_eps">%d / %d</string>
+
+    <string name="collection_info">收藏</string>
+
+    <string name="collection_comment_hint">请输入评论</string>
+    <string name="collection_comment_limit">%d / %d</string>
+    <string name="collection_error_comment_exceeded">评论超出字数限制</string>
 
     <string name="dialog_cancel">取消</string>
     <string name="dialog_submit">确认</string>

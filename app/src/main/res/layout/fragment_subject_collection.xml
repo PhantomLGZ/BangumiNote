@@ -293,6 +293,7 @@
                     android:id="@+id/barChart"
                     android:layout_width="match_parent"
                     android:layout_height="320dp"
+                    android:background="@color/theme_background_light2"
                     android:clipToPadding="false"
                     android:padding="8dp" />
 

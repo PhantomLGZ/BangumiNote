@@ -7,6 +7,7 @@ import com.phantom.banguminote.base.http.RetrofitHelper
 import com.phantom.banguminote.data.HttpErrorData
 import com.phantom.banguminote.data.PageReqData
 import com.phantom.banguminote.data.PageResData
+import com.phantom.banguminote.detail.subject.collection.ModifyCollectionReq
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectData
@@ -28,6 +29,7 @@ class SubjectViewModel : BaseViewModel() {
     val subjectRelatedSubjectRes = MutableLiveData<List<RelatedSubjectData>>()
     val collectionInfoRes = MutableLiveData<CollectionItemRes>()
     val episodeRes = MutableLiveData<PageResData<EpisodeData>>()
+    val modifyCollectionRes = MutableLiveData<Unit>()
 
     val collectionHttpError = MutableLiveData<HttpErrorData>()
 
@@ -66,6 +68,12 @@ class SubjectViewModel : BaseViewModel() {
                 it.limit,
                 it.offset
             )
+        }
+    }
+
+    fun modifyCollection(subjectId: Int, req: ModifyCollectionReq) {
+        requestWithCoroutine(req, modifyCollectionRes) {
+            iHttpServer.modifyCollection(subjectId, it)
         }
     }
 

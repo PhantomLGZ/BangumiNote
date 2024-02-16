@@ -12,6 +12,7 @@ import com.phantom.banguminote.detail.subject.data.SubjectCharacterData
 import com.phantom.banguminote.detail.subject.data.SubjectPersonData
 import com.phantom.banguminote.detail.subject.data.RelatedSubjectData
 import com.phantom.banguminote.calendar.CalendarRes
+import com.phantom.banguminote.detail.subject.collection.ModifyCollectionReq
 import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.episode.EpisodeData
 import com.phantom.banguminote.me.collection.CollectionItemRes
@@ -92,5 +93,11 @@ interface IBangumiHttpServer : IHttpServer {
         @Path("username") username: String,
         @Path("subject_id") subjectId: Int,
     ): Response<CollectionItemRes>
+
+    @POST("v0/users/-/collections/{subject_id}")
+    suspend fun modifyCollection(
+        @Path("subject_id") subjectId: Int,
+        @Body req: ModifyCollectionReq
+    ): Response<Unit>
 
 }

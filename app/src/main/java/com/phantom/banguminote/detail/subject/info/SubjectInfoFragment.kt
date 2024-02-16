@@ -10,7 +10,6 @@ import com.phantom.banguminote.detail.InfoboxAdapter
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.data.InfoData
 import com.phantom.banguminote.data.InfoDataType
 import com.phantom.banguminote.data.InfoValueData
@@ -30,8 +29,8 @@ class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
         FragmentSubjectInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
-            it.infobox?.also { it1 -> setData(it1) }
+        viewModel.subjectRes.observe(viewLifecycleOwner) { data ->
+            data.infobox?.also { setData(it) }
         }
         binding?.recyclerView?.also { rv ->
             rv.addItemDecoration(TransparentDividerItemDecoration(requireContext()))
@@ -61,7 +60,7 @@ class SubjectInfoFragment : BaseFragment<FragmentSubjectInfoBinding>() {
             .map {
                 InfoboxAdapter.InfoboxData<SubjectPersonData>(it, null)
             }
-        viewModel.subjectPersonRes.setDataOrObserve(viewLifecycleOwner) { persons ->
+        viewModel.subjectPersonRes.observe(viewLifecycleOwner) { persons ->
             persons.sortedBy { it.relation }
                 .groupBy { it.relation }
                 .forEach { map ->

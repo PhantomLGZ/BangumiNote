@@ -19,11 +19,13 @@
     <color name="text_dark2">#FF222222</color>
     <color name="text_gray_dark">#FF666666</color>
     <color name="text_gray_dark2">#FF888888</color>
+    <color name="text_error">#FFFF5722</color>
 
     <color name="item_selected">@color/theme_color</color>
     <color name="item_not_selected">#FF222222</color>
 
     <color name="theme_background">@color/theme_color</color>
+    <color name="theme_background1">#FFFF6E7C</color>
     <color name="theme_background_translucent">#AAFF8E99</color>
     <color name="theme_background_translucent1">#33FF8E99</color>
     <color name="theme_background_light">#FFFDD0D5</color>

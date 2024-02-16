@@ -37,9 +37,7 @@ class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharact
     override fun init() {
         val id = activity?.intent?.extras?.getInt(KEY_CHARACTER_ID) ?: 0
         super.init()
-        mergeBinding?.also {
-            it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
-        }
+        resetTabSelect()
         viewModel?.also { v ->
             v.id.value = id
             v.characterRes.observe(viewLifecycleOwner) { setData(it) }
@@ -47,6 +45,12 @@ class CharacterFragment : BaseDetailFragment<CharacterViewModel, FragmentCharact
             v.character(id)
             v.characterRelated(id)
             v.characterPerson(id)
+        }
+    }
+
+    private fun resetTabSelect() {
+        mergeBinding?.also {
+            it.tabLayout.selectTab(it.tabLayout.getTabAt(1))
         }
     }
 

@@ -9,7 +9,6 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.databinding.FragmentPersonRelatedBinding
 import com.phantom.banguminote.detail.person.PersonViewModel
 import com.phantom.banguminote.detail.person.data.PersonRelatedData
@@ -34,9 +33,7 @@ class PersonRelatedFragment : BaseFragment<FragmentPersonRelatedBinding>() {
             it.addItemDecoration(TransparentDividerItemDecoration.vertical(requireContext()))
             it.addItemDecoration(TransparentDividerItemDecoration.horizontal(requireContext()))
         }
-        viewModel.personRelatedRes.setDataOrObserve(viewLifecycleOwner) {
-            setData(it)
-        }
+        viewModel.personRelatedRes.observe(viewLifecycleOwner) { setData(it) }
     }
 
     private fun setData(data: List<PersonRelatedData>) {

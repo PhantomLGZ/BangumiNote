@@ -76,12 +76,13 @@ object RetrofitHelper {
                     .addNetworkInterceptor(Interceptor {
                         val requestBuilder = it.request().newBuilder()
                         requestBuilder
-                            .header("Content-Type", "application/json; charset=utf-8")
+                                .header("Content-Type", "application/json; charset=UTF-8")
                             .header(
                                 "User-Agent",
                                 "Phantom/BangumiNote/${BuildConfig.VERSION_NAME} (Android) (https://github.com/PhantomLGZ/BangumiNote)"
                             )
-                        it.proceed(requestBuilder.build())
+                        val res = it.proceed(requestBuilder.build())
+                        res
                     })
                     .addInterceptor(HttpLoggingInterceptor {
                         Platform.get().log(it.unicodeToString())

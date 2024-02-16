@@ -9,7 +9,6 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.detail.character.CharacterViewModel
 import com.phantom.banguminote.detail.character.data.CharacterPersonData
 import com.phantom.banguminote.detail.character.data.CharacterRelatedData
@@ -37,13 +36,11 @@ class CharacterRelatedFragment : BaseFragment<FragmentCharacterRelatedBinding>()
             it.addItemDecoration(TransparentDividerItemDecoration.vertical(requireContext()))
             it.addItemDecoration(TransparentDividerItemDecoration.horizontal(requireContext()))
         }
-        viewModel.characterRelatedRes.setDataOrObserve(viewLifecycleOwner) {
-            setData(it)
-        }
+        viewModel.characterRelatedRes.observe(viewLifecycleOwner) { setData(it) }
     }
 
     private fun setData(data: List<CharacterRelatedData>) {
-        viewModel.characterPersonRes.setDataOrObserve(viewLifecycleOwner) { list ->
+        viewModel.characterPersonRes.observe(viewLifecycleOwner) { list ->
             list.groupBy { it.subject_id }
                 .forEach { map ->
                     data.findLast { it.id == map.key }

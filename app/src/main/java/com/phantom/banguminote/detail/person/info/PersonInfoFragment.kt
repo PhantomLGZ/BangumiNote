@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.TransparentDividerItemDecoration
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.data.InfoData
 import com.phantom.banguminote.data.InfoDataType
 import com.phantom.banguminote.data.InfoValueData
@@ -27,8 +26,8 @@ class PersonInfoFragment : BaseFragment<FragmentPersonInfoBinding>() {
         FragmentPersonInfoBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.personRes.setDataOrObserve(viewLifecycleOwner) {
-            it.infobox?.let { it1 -> setData(it1) }
+        viewModel.personRes.observe(viewLifecycleOwner) { data ->
+            data.infobox?.let { setData(it) }
         }
         binding?.recyclerView?.also { rv ->
             rv.addItemDecoration(TransparentDividerItemDecoration(requireContext()))

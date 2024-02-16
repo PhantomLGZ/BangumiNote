@@ -11,7 +11,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.BaseFragment
-import com.phantom.banguminote.base.http.setDataOrObserve
 import com.phantom.banguminote.data.TagsData
 import com.phantom.banguminote.databinding.FragmentSubjectSummaryBinding
 import com.phantom.banguminote.databinding.LayoutDetailSummaryBinding
@@ -31,9 +30,7 @@ class SubjectSummaryFragment : BaseFragment<FragmentSubjectSummaryBinding>() {
         FragmentSubjectSummaryBinding.inflate(inflater, container, false)
 
     override fun init() {
-        viewModel.subjectRes.setDataOrObserve(viewLifecycleOwner) {
-            setData(it)
-        }
+        viewModel.subjectRes.observe(viewLifecycleOwner) { setData(it) }
         includeBinding = binding?.root?.let { LayoutDetailSummaryBinding.bind(it) }
     }
 

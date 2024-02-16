@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
     <include layout="@layout/layout_detail" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fbCollection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_margin="32dp"
+        android:animateLayoutChanges="true"
+        android:backgroundTint="@color/theme_background"
+        android:contentDescription="@string/collection_info"
+        android:elevation="4dp"
+        android:translationY="-96dp"
+        android:visibility="gone"
+        app:layout_anchor="@id/appBarLayout"
+        app:layout_anchorGravity="bottom|right|end"
+        app:shapeAppearanceOverlay="@style/FloatingActionButton_Round"
+        app:srcCompat="@drawable/round_add_24"
+        app:tint="@color/content_background" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
