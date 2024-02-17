@@ -22,7 +22,7 @@
 
     <string name="search_hint">关键字</string>
     <string name="search_advance">高级</string>
-    <string name="search_advance_close">收起</string>
+    <string name="search_advance_search">搜索</string>
 
     <string name="search_sort_match">匹配</string>
     <string name="search_sort_score">分数</string>

@@ -39,7 +39,7 @@
                 android:checked="false"
                 android:textColor="@color/text_light"
                 android:textOff="@string/search_advance"
-                android:textOn="@string/search_advance_close"
+                android:textOn="@string/search_advance_search"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 

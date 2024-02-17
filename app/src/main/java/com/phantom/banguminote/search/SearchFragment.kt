@@ -95,6 +95,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                 })
             }
             b.tbAdvance.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (!isChecked) {
+                    doNewSearch()
+                }
                 binding?.layoutAdvance?.animate()
                     ?.translationY(if (isChecked) 0f else -translateHeight.toFloat())
                     ?.setDuration(100)
@@ -200,7 +203,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
             }
         }
 
-        tagAdapter.submitList(searchReq.filter.tag)
+        tagAdapter.submitList(searchReq.filter.tag?.toMutableList())
 
         val after = searchReq.filter.air_date
             ?.find { it.contains(">=") }
@@ -426,8 +429,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
 
     private val onTagItemClickListener =
-        BaseQuickAdapter.OnItemClickListener { adapter, view, position ->
-            searchReq.filter.tag?.remove(adapter.items[position])
+        BaseQuickAdapter.OnItemClickListener<String> { adapter, view, position ->
+            searchReq.filter.tag?.removeIf { it == adapter.items[position] }
             adapter.removeAt(position)
         }
 
