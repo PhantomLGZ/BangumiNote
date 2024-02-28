@@ -23,7 +23,7 @@ class LoginViewModel : BaseViewModel() {
             req,
             accessTokenRes,
             refreshTokenError,
-            httpErrorLiveData = refreshTokenHttpError
+            refreshTokenHttpError
         ) { authorizationHttpServer.accessToken(it) }
     }
 
@@ -31,7 +31,8 @@ class LoginViewModel : BaseViewModel() {
         requestWithCoroutine(
             "",
             tokenStatusRes,
-            httpErrorLiveData = refreshTokenHttpError
+            refreshTokenError,
+            refreshTokenHttpError
         ) { authorizationHttpServer.tokenStatus() }
     }
 
