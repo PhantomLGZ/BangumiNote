@@ -67,6 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     private fun clearToken() {
         setUserToken("")
         setUserName("")
+        showToast(getString(R.string.token_clear))
     }
 
 }

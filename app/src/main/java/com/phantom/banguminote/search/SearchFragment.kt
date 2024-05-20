@@ -94,29 +94,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
                     }
                 })
             }
-            b.tbAdvance.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (!isChecked) {
-                    doNewSearch()
-                }
-                binding?.layoutAdvance?.animate()
-                    ?.translationY(if (isChecked) 0f else -translateHeight.toFloat())
-                    ?.setDuration(100)
-                    ?.setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationStart(animation: Animator) {
-                            if (isChecked) {
-                                binding?.layoutAdvance?.visibility = View.VISIBLE
-                            }
-                        }
-
-                        override fun onAnimationEnd(animation: Animator) {
-                            if (isChecked) {
-                                translateHeight = binding?.layoutAdvance?.measuredHeight ?: 0
-                            } else {
-                                binding?.layoutAdvance?.visibility = View.GONE
-                            }
-                        }
-                    })
-            }
+            b.btSearch.setOnClickListener(onClickListener)
+            b.btAdvance.setOnClickListener(onClickListener)
 
             b.btDate.setOnClickListener(onClickListener)
             b.btScore.setOnClickListener(onClickListener)
@@ -173,7 +152,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private fun syncFilterView() {
         binding?.searchView?.setQuery(searchReq.keyword ?: "", false)
-        binding?.tbAdvance?.isChecked = false
+        binding?.btAdvance?.isChecked = false
 
         when (searchReq.sort) {
             "", "match" -> binding?.rbMatch?.isChecked = true
@@ -244,6 +223,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     private val onClickListener = View.OnClickListener { v ->
         when (v) {
+            binding?.btSearch -> {
+                doNewSearch()
+            }
+
+            binding?.btAdvance -> {
+                animateAdvancePanel()
+            }
+
             binding?.btDate -> {
                 SearchDateDialogFragment { after, before ->
                     binding?.btDate?.text = if (after == null && before == null) {
@@ -435,10 +422,39 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
         }
 
     private fun doNewSearch() {
-        binding?.tbAdvance?.isChecked = false
+        searchReq.keyword = binding?.searchView?.query?.toString()?.takeIf { it.isNotBlank() }
+        if (binding?.btAdvance?.isChecked == true) {
+            binding?.btAdvance?.isChecked = false
+            animateAdvancePanel()
+        }
         binding?.refreshLayout?.isRefreshing = true
         offset = 0
         doSearch()
+    }
+
+    private fun animateAdvancePanel() {
+        binding?.let { b ->
+            val isChecked = b.btAdvance.isChecked
+            println()
+            b.layoutAdvance.animate()
+                ?.translationY(if (isChecked) 0f else -translateHeight.toFloat())
+                ?.setDuration(100)
+                ?.setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationStart(animation: Animator) {
+                        if (isChecked) {
+                            binding?.layoutAdvance?.visibility = View.VISIBLE
+                        }
+                    }
+
+                    override fun onAnimationEnd(animation: Animator) {
+                        if (isChecked) {
+                            translateHeight = binding?.layoutAdvance?.measuredHeight ?: 0
+                        } else {
+                            binding?.layoutAdvance?.visibility = View.GONE
+                        }
+                    }
+                })
+        }
     }
 
     private fun doSearch() {

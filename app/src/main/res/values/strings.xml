@@ -118,4 +118,6 @@
     <string name="episode_type_mad">MAD</string>
     <string name="episode_type_other">其他</string>
 
+    <string name="token_clear">Token已清除</string>
+
 </resources>

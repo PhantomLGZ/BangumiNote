@@ -31,17 +31,55 @@
                 app:iconifiedByDefault="false"
                 app:queryHint="@string/search_hint" />
 
-            <androidx.appcompat.widget.AppCompatToggleButton
-                android:id="@+id/tbAdvance"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/theme_background"
-                android:checked="false"
-                android:textColor="@color/text_light"
-                android:textOff="@string/search_advance"
-                android:textOn="@string/search_advance_search"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="4dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:icon="@drawable/round_search_24"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toStartOf="@id/btAdvance"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Round.Left" />
+
+                <FrameLayout
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="@color/theme_background_light"
+                    app:layout_constraintBottom_toBottomOf="@id/btSearch"
+                    app:layout_constraintStart_toEndOf="@id/btSearch"
+                    app:layout_constraintTop_toTopOf="@id/btSearch" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btAdvance"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="4dp"
+                    android:layout_marginStart="1dp"
+                    android:checkable="true"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    app:icon="@drawable/drawable_advance_search"
+                    app:iconGravity="textStart"
+                    app:iconPadding="0dp"
+                    app:iconSize="24dp"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btSearch"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Round.Right"
+                    app:toggleCheckedStateOnClick="true" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
