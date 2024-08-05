@@ -7,7 +7,7 @@
 的API，一些功能暂无API支持如评论列表。整体布局和交互设计参考[Material Design](https://m3.material.io/)
 更符合原生安卓应用的表现。
 
-已完成API所提供大部分功能（比如目录我自己没用过，没去处理）。
+已完成API所提供大部分功能（比如目录我自己没用过，没去处理），目前个人使用中并未发现Bug且接口提供功能皆实现，版本0.0.3或为最终版本。
 
 ## 功能
 
@@ -21,6 +21,6 @@
 
 ## 截图
 
-<img src="screenshot/Screenshot_20240202_0.png" width="31%"><img src="screenshot/Screenshot_20240217_1.png" width="31%"><img src="screenshot/Screenshot_20240217_2.png" width="31%">
+<img src="screenshot/Screenshot_20240202_0.png" width="31%"><img src="screenshot/Screenshot_20240805_1.png" width="31%"><img src="screenshot/Screenshot_20240217_2.png" width="31%">
 <img src="screenshot/Screenshot_20240217_3.png" width="31%"><img src="screenshot/Screenshot_20240217_4.png" width="31%"><img src="screenshot/Screenshot_20240217_5.png" width="31%">
 <img src="screenshot/Screenshot_20240217_6.png" width="31%"><img src="screenshot/Screenshot_20240217_7.png" width="31%"><img src="screenshot/Screenshot_20240217_8.png" width="31%">
