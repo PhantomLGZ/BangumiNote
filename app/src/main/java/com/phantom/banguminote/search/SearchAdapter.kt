@@ -27,8 +27,8 @@ class SearchAdapter : BaseQuickAdapter<SearchRes, QuickViewHolder>() {
             h.setText(R.id.tvTitle, item?.name_cn?.takeIf { it.isNotBlank() } ?: item?.name)
             h.setText(R.id.tvAirDate, item?.date)
             h.getView<AppCompatRatingBar>(R.id.ratingBar).rating =
-                ((item?.score ?: 0.0) / 2.0).toFloat()
-            h.setText(R.id.tvScore, "%.1f".format(item?.score ?: 0.0))
+                ((item?.rating?.score ?: 0.0) / 2.0).toFloat()
+            h.setText(R.id.tvScore, "%.1f".format(item?.rating?.score ?: 0.0))
             h.setImageDrawable(
                 R.id.ivType,
                 AppCompatResources.getDrawable(

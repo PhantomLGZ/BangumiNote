@@ -1,5 +1,6 @@
 package com.phantom.banguminote.search
 
+import com.phantom.banguminote.data.RatingData
 import com.phantom.banguminote.data.TagsData
 
 data class SearchRes(
@@ -11,6 +12,5 @@ data class SearchRes(
     val name: String?,
     val name_cn: String?,
     val tags: List<TagsData>?,
-    val score: Double?,
-    val rank: Int?,
+    val rating: RatingData?,
 )
