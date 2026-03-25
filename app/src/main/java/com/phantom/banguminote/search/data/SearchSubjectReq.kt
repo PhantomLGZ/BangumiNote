@@ -1,12 +1,12 @@
-package com.phantom.banguminote.search
+package com.phantom.banguminote.search.data
 
-data class SearchReq(
+data class SearchSubjectReq(
     var keyword: String? = null,
     var sort: String = "", // """match" / "score"↓ / "heat"↓ / "rank"↑
-    var filter: SearchFilter = SearchFilter(),
+    var filter: SearchSubjectFilter = SearchSubjectFilter(),
 )
 
-data class SearchFilter(
+data class SearchSubjectFilter(
     var type: MutableList<Int>? = null,
     var tag: MutableList<String>? = null,
     var air_date: List<String>? = null,

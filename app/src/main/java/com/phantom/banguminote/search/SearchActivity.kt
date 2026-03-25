@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.phantom.banguminote.base.BaseActivity
 import com.phantom.banguminote.databinding.ActivitySearchBinding
+import com.phantom.banguminote.search.data.SearchSubjectFilter
+import com.phantom.banguminote.search.data.SearchSubjectReq
 
 class SearchActivity : BaseActivity<ActivitySearchBinding>() {
 
@@ -15,7 +17,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         intent.extras?.getString(KEY_TAG)?.also {
-            viewModel.searchReq.value = SearchReq(filter = SearchFilter(tag = mutableListOf(it)))
+            viewModel.searchSubjectReq =
+                SearchSubjectReq(filter = SearchSubjectFilter(tag = mutableListOf(it)))
         }
     }
 

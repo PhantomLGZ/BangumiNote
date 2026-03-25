@@ -2,6 +2,7 @@ package com.phantom.banguminote.detail.character.data
 
 import com.phantom.banguminote.data.ImageData
 import com.phantom.banguminote.data.InfoData
+import com.phantom.banguminote.data.StatData
 
 data class CharacterData(
     val id: Int?,
@@ -16,5 +17,6 @@ data class CharacterData(
     val birth_year: Int?,
     val birth_mon: Int?,
     val birth_day: Int?,
-    val stat: CharacterStatData?,
+    val stat: StatData?,
+    val nsfw: Boolean?,
 )

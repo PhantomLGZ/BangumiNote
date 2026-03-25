@@ -9,8 +9,9 @@ import com.chad.library.adapter4.BaseQuickAdapter
 import com.chad.library.adapter4.viewholder.QuickViewHolder
 import com.phantom.banguminote.R
 import com.phantom.banguminote.base.checkHttps
+import com.phantom.banguminote.search.data.SearchSubjectRes
 
-class SearchAdapter : BaseQuickAdapter<SearchRes, QuickViewHolder>() {
+class SearchSubjectAdapter : BaseQuickAdapter<SearchSubjectRes, QuickViewHolder>() {
 
     override fun onCreateViewHolder(
         context: Context,
@@ -19,7 +20,7 @@ class SearchAdapter : BaseQuickAdapter<SearchRes, QuickViewHolder>() {
     ): QuickViewHolder =
         QuickViewHolder(R.layout.item_subject, parent)
 
-    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: SearchRes?) {
+    override fun onBindViewHolder(holder: QuickViewHolder, position: Int, item: SearchSubjectRes?) {
         holder.also { h ->
             item?.image?.checkHttps()?.also { url ->
                 Glide.with(context).load(url).into(h.getView(R.id.ivCover))

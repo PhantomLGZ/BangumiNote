@@ -17,8 +17,10 @@ import com.phantom.banguminote.detail.subject.data.SubjectData
 import com.phantom.banguminote.detail.subject.episode.EpisodeData
 import com.phantom.banguminote.me.collection.CollectionItemRes
 import com.phantom.banguminote.me.data.UserData
-import com.phantom.banguminote.search.SearchReq
-import com.phantom.banguminote.search.SearchRes
+import com.phantom.banguminote.search.data.SearchCharacterReq
+import com.phantom.banguminote.search.data.SearchPersonReq
+import com.phantom.banguminote.search.data.SearchSubjectReq
+import com.phantom.banguminote.search.data.SearchSubjectRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -32,11 +34,11 @@ interface IBangumiHttpServer : IHttpServer {
     suspend fun calendar(): Response<List<CalendarRes>>
 
     @POST("v0/search/subjects")
-    suspend fun search(
+    suspend fun searchSubject(
         @Query("limit") limit: Int,
         @Query("offset") offset: Int,
-        @Body req: SearchReq
-    ): Response<PageResData<SearchRes>>
+        @Body req: SearchSubjectReq
+    ): Response<PageResData<SearchSubjectRes>>
 
     @GET("v0/subjects/{subject_id}")
     suspend fun subject(@Path("subject_id") id: Int): Response<SubjectData>
@@ -58,6 +60,13 @@ interface IBangumiHttpServer : IHttpServer {
         @Query("offset") offset: Int,
     ): Response<PageResData<EpisodeData>>
 
+    @POST("v0/search/characters")
+    suspend fun searchCharacter(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Body req: SearchCharacterReq
+    ): Response<PageResData<CharacterData>>
+
     @GET("v0/characters/{character_id}")
     suspend fun character(@Path("character_id") id: Int): Response<CharacterData>
 
@@ -66,6 +75,13 @@ interface IBangumiHttpServer : IHttpServer {
 
     @GET("v0/characters/{character_id}/persons")
     suspend fun characterPersons(@Path("character_id") id: Int): Response<List<CharacterPersonData>>
+
+    @POST("v0/search/persons")
+    suspend fun searchPerson(
+        @Query("limit") limit: Int,
+        @Query("offset") offset: Int,
+        @Body req: SearchPersonReq
+    ): Response<PageResData<PersonData>>
 
     @GET("v0/persons/{person_id}")
     suspend fun person(@Path("person_id") id: Int): Response<PersonData>

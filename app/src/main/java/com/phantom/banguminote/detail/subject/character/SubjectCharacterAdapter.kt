@@ -27,7 +27,7 @@ class SubjectCharacterAdapter : BaseQuickAdapter<SubjectCharacterData, QuickView
                 .transform(CutOffLogo())
                 .into(h.getView(R.id.ivImage))
             h.setText(R.id.tvName, item?.name)
-            h.setText(R.id.tvActor, item?.actors?.map { it.name }?.joinToString(" / "))
+            h.setText(R.id.tvActor, item?.actors?.mapNotNull { it.name }?.joinToString(" / "))
         }
     }
 

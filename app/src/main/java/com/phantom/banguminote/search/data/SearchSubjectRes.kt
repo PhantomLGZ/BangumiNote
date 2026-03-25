@@ -1,9 +1,9 @@
-package com.phantom.banguminote.search
+package com.phantom.banguminote.search.data
 
 import com.phantom.banguminote.data.RatingData
 import com.phantom.banguminote.data.TagsData
 
-data class SearchRes(
+data class SearchSubjectRes(
     val id: Int?,
     val type: Int?,
     val date: String?,

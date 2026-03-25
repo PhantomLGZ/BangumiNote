@@ -48,12 +48,12 @@ object PixivWebViewNetworkHandler {
             ?.let { client.newCall(newRequest).execute() }
             ?.let {
                 WebResourceResponse(
-                    it.body?.contentType()?.let { "${it.type}/${it.subtype}" },
-                    it.body?.contentType()?.charset(Charset.defaultCharset())?.name(),
+                    it.body.contentType()?.let { "${it.type}/${it.subtype}" },
+                    it.body.contentType()?.charset(Charset.defaultCharset())?.name(),
                     it.code,
                     "OK",
                     it.headers.toMap(),
-                    it.body?.byteStream()
+                    it.body.byteStream()
                 )
             }
 

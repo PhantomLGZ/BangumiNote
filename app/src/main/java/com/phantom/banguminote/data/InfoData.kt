@@ -23,10 +23,12 @@ data class InfoData(
                             val jsonArray = json.asJsonArray
                             values = jsonArray.map {
                                 if (it.isJsonObject) {
-                                    ValuesData(it.asJsonObject.get("v").asString)
+                                    ValuesData(
+                                        it.asJsonObject.get("k").asString,
+                                        it.asJsonObject.get("v").asString)
                                 } else {
                                     type = InfoDataType.UNKNOWN
-                                    ValuesData("")
+                                    ValuesData()
                                 }
                             }
                         } else {
@@ -60,5 +62,6 @@ enum class InfoDataType {
 }
 
 data class ValuesData(
-    val v: String
+    val k: String? = null,
+    val v: String? = null,
 )

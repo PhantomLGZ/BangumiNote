@@ -7,7 +7,7 @@
     <string name="fragment_search">搜索</string>
     <string name="fragment_me">我的</string>
 
-    <string name="activity_subject">栏目</string>
+    <string name="activity_subject">作品</string>
     <string name="activity_character">角色</string>
     <string name="activity_person">人物</string>
     <string name="activity_search">搜索</string>
@@ -20,9 +20,23 @@
     <string name="type_game">游戏</string>
     <string name="type_real">影剧</string>
 
+    <string name="type_person_artist">艺术家</string>
+    <string name="type_person_director">导演</string>
+    <string name="type_person_seiyu">声优</string>
+    <string name="type_person_actor">演员</string>
+    <string name="type_person_producer">制作人员</string>
+    <string name="type_person_illustrator">绘师</string>
+    <string name="type_person_mangaka">漫画家</string>
+    <string name="type_person_writer">作家</string>
+
     <string name="search_hint">关键字</string>
     <string name="search_advance">高级</string>
     <string name="search_advance_search">搜索</string>
+    <string name="search_advance_none">无高级选项</string>
+
+    <string name="search_advance_subject">作品</string>
+    <string name="search_advance_character">角色</string>
+    <string name="search_advance_person">人物</string>
 
     <string name="search_sort_match">匹配</string>
     <string name="search_sort_score">分数</string>

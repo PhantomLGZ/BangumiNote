@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="8dp">
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbArtist"
+            style="@style/SearchFilterToggle"
+            android:layout_width="wrap_content"
+            android:checked="false"
+            android:textOff="@string/type_person_artist"
+            android:textOn="@string/type_person_artist" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbDirector"
+            style="@style/SearchFilterToggle"
+            android:layout_width="wrap_content"
+            android:checked="false"
+            android:textOff="@string/type_person_director"
+            android:textOn="@string/type_person_director" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbSeiyu"
+            style="@style/SearchFilterToggle"
+            android:layout_width="wrap_content"
+            android:checked="false"
+            android:textOff="@string/type_person_seiyu"
+            android:textOn="@string/type_person_seiyu" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbActor"
+            style="@style/SearchFilterToggle"
+            android:layout_width="wrap_content"
+            android:checked="false"
+            android:textOff="@string/type_person_actor"
+            android:textOn="@string/type_person_actor" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbProducer"
+            style="@style/SearchFilterToggle"
+            android:layout_width="wrap_content"
+            android:checked="false"
+            android:textOff="@string/type_person_producer"
+            android:textOn="@string/type_person_producer" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbIllustrator"
+            style="@style/SearchFilterToggle"
+            android:checked="false"
+            android:textOff="@string/type_person_illustrator"
+            android:textOn="@string/type_person_illustrator" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbMangaka"
+            style="@style/SearchFilterToggle"
+            android:checked="false"
+            android:textOff="@string/type_person_mangaka"
+            android:textOn="@string/type_person_mangaka" />
+
+        <androidx.appcompat.widget.AppCompatToggleButton
+            android:id="@+id/tbWriter"
+            style="@style/SearchFilterToggle"
+            android:checked="false"
+            android:textOff="@string/type_person_writer"
+            android:textOn="@string/type_person_writer" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tbArtist,tbDirector,tbSeiyu,tbActor,tbProducer,tbIllustrator,tbMangaka,tbWriter"
+            app:flow_maxElementsWrap="5"
+            app:flow_wrapMode="aligned"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+</LinearLayout>

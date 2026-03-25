@@ -44,6 +44,24 @@
         android:label="@string/activity_subject" />
 
     <action
+        android:id="@+id/action_nav_to_activity_character"
+        app:destination="@id/nav_activity_character" />
+
+    <activity
+        android:id="@+id/nav_activity_character"
+        android:name="com.phantom.banguminote.detail.character.CharacterActivity"
+        android:label="@string/activity_character" />
+
+    <action
+        android:id="@+id/action_nav_to_activity_person"
+        app:destination="@id/nav_activity_person" />
+
+    <activity
+        android:id="@+id/nav_activity_person"
+        android:name="com.phantom.banguminote.detail.person.PersonActivity"
+        android:label="@string/activity_character" />
+
+    <action
         android:id="@+id/action_nav_to_activity_login"
         app:destination="@id/nav_activity_login" />
 
