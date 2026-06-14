@@ -58,8 +58,8 @@ class EpisodeListFragment : BaseFragment<FragmentEpisodeListBinding>() {
                         requireContext().getEpisodeTypeName(mAdapter.getItem(it)?.type)
                     },
                     {
-                        val nowType = mAdapter.getItem(it)?.type
-                        val preType = mAdapter.getItem(it - 1)?.type
+                        val nowType = mAdapter.getItemOrNull(it)?.type
+                        val preType = mAdapter.getItemOrNull(it - 1)?.type
                         it == 0 || (nowType != null && preType != null && nowType != preType)
                     },
                     { mAdapter.itemCount > 0 }

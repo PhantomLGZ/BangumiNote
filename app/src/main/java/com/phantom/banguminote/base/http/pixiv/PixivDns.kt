@@ -29,6 +29,9 @@ object PixivDns : Dns {
             "210.140.139.130",
             "210.140.139.131"
         )
+        put(map, "bangumi.tv", "178.79.181.137", "199.59.149.205")
+        put(map, "bgm.tv", "104.26.8.23", "104.26.9.23", "172.67.73.67")
+        put(map, "phantom", "127.0.0.1")
         builtInHosts = map
 
         val builder = DnsOverHttps.Builder()

@@ -1,6 +1,7 @@
 package com.phantom.banguminote.base.http.pixiv
 
 import android.webkit.WebResourceResponse
+import android.webkit.WebView
 import com.phantom.banguminote.base.http.WebkitCookieManagerProxy
 import com.phantom.banguminote.base.requestinspectorwebview.WebViewRequest
 import okhttp3.ConnectionSpec
@@ -14,7 +15,6 @@ import okhttp3.internal.tls.OkHostnameVerifier
 import java.net.CookieManager
 import java.nio.charset.Charset
 import java.security.KeyStore
-import java.util.Arrays
 import java.util.Collections
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
@@ -24,7 +24,7 @@ object PixivWebViewNetworkHandler {
     private val cookieManagerProxy = getCookieManager()
     private val client = makeClient()
 
-    operator fun invoke(webResourceRequest: WebViewRequest?): WebResourceResponse? {
+    operator fun invoke(webResourceRequest: WebViewRequest?, view: WebView? = null): WebResourceResponse? {
 
         var url = webResourceRequest?.url.toString()
         if (url == "https://www.pixiv.net/ajax/login?lang=zh") {
@@ -47,14 +47,27 @@ object PixivWebViewNetworkHandler {
         val response = newRequest
             ?.let { client.newCall(newRequest).execute() }
             ?.let {
-                WebResourceResponse(
-                    it.body.contentType()?.let { "${it.type}/${it.subtype}" },
-                    it.body.contentType()?.charset(Charset.defaultCharset())?.name(),
-                    it.code,
-                    "OK",
-                    it.headers.toMap(),
-                    it.body.byteStream()
-                )
+                val redirect = it.header("Location")
+                if (redirect.isNullOrEmpty()) {
+                    WebResourceResponse(
+                        it.body.contentType()?.let { "${it.type}/${it.subtype}" },
+                        it.body.contentType()?.charset(Charset.defaultCharset())?.name(),
+                        if (it.code == 302) 200 else it.code,
+                        "OK",
+                        it.headers.toMap(),
+                        it.body.byteStream()
+                    )
+                } else {
+                    view?.post { view.loadUrl(redirect) }
+                    WebResourceResponse(
+                        "text/plain",
+                        "UTF-8",
+                        200,
+                        "OK",
+                        it.headers.toMap(),
+                        it.body.byteStream()
+                    )
+                }
             }
 
         return response
@@ -62,9 +75,15 @@ object PixivWebViewNetworkHandler {
 
     private fun makeClient(): OkHttpClient {
         return OkHttpClient.Builder()
+            .followRedirects(false)
+            .followSslRedirects(false)
             .sslSocketFactory(PixivSSLSocketFactory(), getTrustManager())
             .hostnameVerifier { hostname, session ->
-                if (hostname.contains("pixiv") || hostname.contains("pximg")) {
+                if (hostname.contains("pixiv")
+                    || hostname.contains("pximg")
+                    || hostname.contains("bgm")
+                    || hostname.contains("bangumi")
+                ) {
                     true
                 } else {
                     OkHostnameVerifier.verify(hostname, session)
@@ -83,7 +102,7 @@ object PixivWebViewNetworkHandler {
         trustManagerFactory.init(null as KeyStore?)
         val trustManagers = trustManagerFactory.trustManagers
         check(!(trustManagers.size != 1 || trustManagers[0] !is X509TrustManager)) {
-            "Unexpected default trust managers:" + Arrays.toString(trustManagers)
+            "Unexpected default trust managers:" + trustManagers.contentToString()
         }
         return trustManagers[0] as X509TrustManager
     }
